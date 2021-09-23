@@ -1,27 +1,9 @@
-# The Perfect Mentor
+# Where Is My Colleague?
 
 ## TEAM:
 
-- xx | xx@gmail.com
-- xx | xx@gmail.com
-- xx | xx@gmail.com
-- xx | xx@gmail.com
-- xx | xx@gmail.com
-
-## Project description:
-
-Develop a mobile app that allows you to find your ideal mentor.
-
-## Technology stack:
-
-**Back End:** nodejs + express + mongodb + JWT
-**Front End:** React Native + Redux
-
-## API
-
-**1) SEED:** `npm run seed`
-**2) START:** `npm start`
-
-## FRONT
-
-**1) START:** `npm start`
+- Adrián Colunga | adriann212@gmail.com
+- Alejandro Udot | alexxudot@gmail.com
+- Augusto Rosello | arosellofrias@gmail.com
+- Ignacio Rodríguez | igrodriguez.ar@gmail.com
+- Juan Francisco Pagés | jfranciscopages@gmail.com
