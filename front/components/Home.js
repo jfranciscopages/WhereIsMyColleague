@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUsers } from "../store/usersReducer";
+import { setUsersByTitle, setUsers } from "../store/usersReducer";
 import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Input } from "react-native-elements";
@@ -9,24 +9,22 @@ import Icon from "react-native-vector-icons/FontAwesome";
 export default function Home() {
   const [searchedUsers, setSearchedUsers] = useState([]);
   const dispatch = useDispatch();
+  const usersByTitle = useSelector((state) => state.usersByTitle);
+  const allUsers = useSelector((state) => state.allUsers);
 
-  useEffect(() => {
+   useEffect(() => {
     dispatch(setUsers());
-  }, []);
-
-  const users = useSelector((state) => state.users);
+  }, []); 
 
   const handleChangeSearchBar = (value) => {
     console.log(value);
-    /*  setSearchedUsers([]);
-    if (value.length > 3) {
-      for (let i = 0; i < users.length; i++) {
-        if (users[i].firstName.includes(value)) {
-          setSearchedUsers(() => [...searchedUsers, users[i]]);
-        }
-      }
-    } */
-    dispatch(setUsers(value));
+    if (value.length < 3) {
+      return
+    }
+    else {
+      dispatch(setUsersByTitle(value));
+
+    }
   };
   console.log(searchedUsers);
   return (
@@ -34,7 +32,8 @@ export default function Home() {
       <View style={styles.header}>
         <View>
           <Text>Welcome to</Text>
-          {console.log(`Muestra los Users`, users)}
+          {console.log("ALL USERS ==>", allUsers)}
+          {console.log(`USER BY TITLE ==>`, usersByTitle)}
           <Image style={styles.img} source={require("../assets/logo-G.png")} />
         </View>
       </View>
