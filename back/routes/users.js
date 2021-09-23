@@ -25,9 +25,6 @@ router.get(`/search/:name`, (req, res, next) => {
         lastName: {
           [Op.iLike]: `%${name}%`,
         },
-        email: {
-          [Op.iLike]: `%${name}%`,
-        },
       },
     },
   })

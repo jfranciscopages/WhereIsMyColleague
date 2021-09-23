@@ -5,20 +5,30 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const setUsers = createAsyncThunk("USERS", (value) => {
+export const setUsersByTitle = createAsyncThunk("USERSBYTITLE", (value) => {
   return axios
     .get(`http://localhost:3001/api/users/search/${value}`)
     .then((r) => {
-      console.log(`dasddasd`, r.data);
       return r.data;
     });
 });
 
-export const usersReducer = createReducer([], {
+export const usersByTitleReducer = createReducer([], {
+  [setUsersByTitle.fulfilled]: (state, action) => action.payload,
+});
+
+export const setUsers = createAsyncThunk("USERS", () => {
+  return axios
+    .get(`http://localhost:3001/api/users/getAll`)
+    .then((r) => {
+      return r.data;
+    });
+});
+export const setUsersReducer = createReducer([], {
   [setUsers.fulfilled]: (state, action) => action.payload,
 });
 
-export const deleteUser = createAction("DELETE_USER");
+/* export const deleteUser = createAction("DELETE_USER"); */
 
 /* const usersReducer = createReducer([], {
     [setUsers]: (state, { payload: users}) => {
