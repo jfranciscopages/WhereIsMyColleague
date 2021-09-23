@@ -3,27 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUsersByTitle, setUsers } from "../store/usersReducer";
 import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { Input, ListItem, Avatar } from "react-native-elements";
 
-export default function Home() {
+
+export default function Home({ navigation }) {
   const [searchedUsers, setSearchedUsers] = useState([]);
   const dispatch = useDispatch();
   const usersByTitle = useSelector((state) => state.usersByTitle);
   const allUsers = useSelector((state) => state.allUsers);
 
-   useEffect(() => {
+  useEffect(() => {
     dispatch(setUsers());
-  }, []); 
+  }, []);
 
   const handleChangeSearchBar = (value) => {
     console.log(value);
     if (value.length < 3) {
-      return
-    }
-    else {
+      return;
+    } else {
       dispatch(setUsersByTitle(value));
-
     }
   };
   console.log(searchedUsers);
@@ -46,6 +45,24 @@ export default function Home() {
           />
         </View>
       </View>
+      <View style={styles.users}>
+        {usersByTitle.map((user) => (
+          <ListItem bottomDivider>
+            <Avatar
+              rounded
+              source={{
+                uri: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+              }}
+            />
+            <ListItem.Content>
+              <ListItem.Title onPress={() => navigation.navigate("userdetail")}>
+                {user.firstName}
+              </ListItem.Title>
+              <ListItem.Subtitle>{user.lastName}</ListItem.Subtitle>
+            </ListItem.Content>
+          </ListItem>
+        ))}
+      </View>
     </SafeAreaView>
   );
 }
@@ -55,8 +72,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     backgroundColor: "white",
-    // alignItems: "center",
-    // marginTop: 80,
   },
   img: {
     width: 200,
@@ -69,22 +84,8 @@ const styles = StyleSheet.create({
   },
   search: {
     marginTop: 30,
-    // flexDirection: 'row',
-    // alignItems: 'center'
   },
-  // searchContainer: {
-  //   // height: 50,
-  //   // backgroundColor: "light",
-  //   // borderRadius: 10,
-  //   // flex: 1,
-  //   // flexDirection: "row",
-  //   // alignItems: "center",
-  // },
-  // input: {
-  //   fontSize: 18,
-  //   fontWeight: "bold",
-  //   // borderRadius: 5,
-  //   // borderWidth: 1,
-  //   // padding: 5,
-  // },
+  users: {
+    marginTop: 30,
+  },
 });
