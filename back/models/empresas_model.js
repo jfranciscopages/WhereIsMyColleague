@@ -2,8 +2,8 @@ const Sequelize = require(`sequelize`);
 const db = require("../db/db");
 
 //-- User Model
-class empresas_model extends Sequelize.Model {}
-empresas_model.init(
+class Empresas_model extends Sequelize.Model {}
+Empresas_model.init(
   {
     address: {
       type: Sequelize.STRING,
@@ -21,4 +21,4 @@ empresas_model.init(
   { sequelize: db, modelName: "empresas_model" }
 );
 
-module.exports = empresas_model;
+module.exports = Empresas_model;

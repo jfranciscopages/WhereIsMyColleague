@@ -22,15 +22,19 @@ User_Profile.init(
       type: Sequelize.STRING,
       allowNull: false,
     },
-    fullName: {
+    firstName: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    address: {
+    lastName: {
       type: Sequelize.STRING,
       allowNull: false,
     },
     country: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    city: {
       type: Sequelize.STRING,
       allowNull: false,
     },
