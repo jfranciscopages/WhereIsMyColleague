@@ -1,22 +1,40 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUsers } from "../store/usersReducer";
 import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
-import axios from "axios";
 
 export default function Home() {
+  const [searchedUsers, setSearchedUsers] = useState([]);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/search")
-      .then((data) => console.log(data));
+    dispatch(setUsers());
   }, []);
 
+  const users = useSelector((state) => state.users);
+
+  const handleChangeSearchBar = (value) => {
+    console.log(value);
+    /*  setSearchedUsers([]);
+    if (value.length > 3) {
+      for (let i = 0; i < users.length; i++) {
+        if (users[i].firstName.includes(value)) {
+          setSearchedUsers(() => [...searchedUsers, users[i]]);
+        }
+      }
+    } */
+    dispatch(setUsers(value));
+  };
+  console.log(searchedUsers);
   return (
     <SafeAreaView style={styles.homeView}>
       <View style={styles.header}>
         <View>
           <Text>Welcome to</Text>
+          {console.log(`Muestra los Users`, users)}
           <Image style={styles.img} source={require("../assets/logo-G.png")} />
         </View>
       </View>
@@ -25,6 +43,7 @@ export default function Home() {
           <Input
             placeholder="Search by name"
             leftIcon={<Icon name="user" size={24} color="black" />}
+            onChangeText={(e) => handleChangeSearchBar(e)}
           />
         </View>
       </View>

@@ -1,20 +1,33 @@
 import {
-    createAction,
-    createReducer,
-    createAsyncThunk,
+  createAction,
+  createReducer,
+  createAsyncThunk,
 } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const setUsers = createAction("SET_USERS");
+export const setUsers = createAsyncThunk("USERS", (value) => {
+  return axios
+    .get(`http://localhost:3001/api/users/search/${value}`)
+    .then((r) => {
+      console.log(`dasddasd`, r.data);
+      return r.data;
+    });
+});
 
-export const deleteUser = createAction('DELETE_USER')
+export const usersReducer = createReducer([], {
+  [setUsers.fulfilled]: (state, action) => action.payload,
+});
 
-const usersReducer = createReducer([], {
-    [setUsers]: (state, { payload: users }) => {
+export const deleteUser = createAction("DELETE_USER");
+
+/* const usersReducer = createReducer([], {
+    [setUsers]: (state, { payload: users}) => {
         return users;
     },
     [deleteUser]: (state, { payload: users }) => {
         return state.filter((user) => user.id !== users);
     }
-});
-
-export default usersReducer;
+}); */
+/* const registerReducer = createReducer([], {
+  [setUsers.fulfilled]: (state, action) => action.payload,
+}); */
