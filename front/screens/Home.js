@@ -29,7 +29,7 @@ export default function Home({ navigation }) {
             }}
             style={styles.img}
           />
-          <Text style={styles.text}>Where Is My Colleague</Text>
+          <Text style={styles.text}>Where Is My Colleague?</Text>
         </View>
       </View>
       <View style={styles.search}>
