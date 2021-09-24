@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input, ListItem, Avatar } from "react-native-elements";
-import SearchBar from "./SearchBar/searchBar";
+import SearchBar from "../components/SearchBar/searchBar";
 
 export default function Home({ navigation }) {
   const dispatch = useDispatch();
