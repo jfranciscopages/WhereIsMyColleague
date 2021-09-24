@@ -36,6 +36,15 @@ router.get(`/search/:name`, (req, res, next) => {
     .catch((err) => next(err));
 });
 
+router.get(`/search/id/:id`,(req, res, next)=>{
+  const id = req.params.id;
+  User_Profile.findByPk(id)
+  .then(data=>{
+    res.status(200).send(data)
+  })
+  .catch((err)=>next(err))
+})
+
 router.post("/create", (req, res, next) => {
   console.log(req.body);
   User.create({

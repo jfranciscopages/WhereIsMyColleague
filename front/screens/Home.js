@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUsers } from "../store/usersReducer";
+import { setUsersByTitle, setUsers, setSingleUser } from "../store/usersReducer";
 import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ListItem, Avatar } from "react-native-elements";
@@ -50,7 +50,8 @@ export default function Home({ navigation }) {
                 <ListItem.Content>
                   <ListItem.Title
                     onPress={() => {
-                      navigation.navigate("Prueba");
+                      dispatch(setSingleUser(user.id))
+                      navigation.navigate("userdetail")
                     }}
                   >
                     {user.firstName}
