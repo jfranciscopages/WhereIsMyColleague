@@ -6,9 +6,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input, ListItem, Avatar } from "react-native-elements";
 
-
 export default function Home({ navigation }) {
   const [searchedUsers, setSearchedUsers] = useState([]);
+  const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
   const usersByTitle = useSelector((state) => state.usersByTitle);
   const allUsers = useSelector((state) => state.allUsers);
@@ -19,6 +19,7 @@ export default function Home({ navigation }) {
 
   const handleChangeSearchBar = (value) => {
     console.log(value);
+    setInputValue(value);
     if (value.length < 3) {
       return;
     } else {
@@ -33,6 +34,7 @@ export default function Home({ navigation }) {
           <Text>Welcome to</Text>
           {console.log("ALL USERS ==>", allUsers)}
           {console.log(`USER BY TITLE ==>`, usersByTitle)}
+          {console.log("INPUT VALUE==>", inputValue)}
           <Image style={styles.img} source={require("../assets/logo-G.png")} />
         </View>
       </View>
@@ -46,22 +48,37 @@ export default function Home({ navigation }) {
         </View>
       </View>
       <View style={styles.users}>
-        {usersByTitle.map((user) => (
+        {inputValue.length > 2 ? (
+          usersByTitle.length > 0 && inputValue.length > 2 ? (
+            usersByTitle.map((user) => (
+              <ListItem bottomDivider>
+                {console.log("user===>", user)}
+                <Avatar
+                  rounded
+                  source={{
+                    uri: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+                  }}
+                />
+                <ListItem.Content>
+                  <ListItem.Title
+                    onPress={() => navigation.navigate("userdetail")}
+                  >
+                    {user.firstName}
+                  </ListItem.Title>
+                  <ListItem.Subtitle>{user.lastName}</ListItem.Subtitle>
+                </ListItem.Content>
+              </ListItem>
+            ))
+          ) : (
+            <ListItem bottomDivider>
+              <Text>"No hay match"</Text>
+            </ListItem>
+          )
+        ) : (
           <ListItem bottomDivider>
-            <Avatar
-              rounded
-              source={{
-                uri: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-              }}
-            />
-            <ListItem.Content>
-              <ListItem.Title onPress={() => navigation.navigate("userdetail")}>
-                {user.firstName}
-              </ListItem.Title>
-              <ListItem.Subtitle>{user.lastName}</ListItem.Subtitle>
-            </ListItem.Content>
+            <Text>"Haz una busquedad"</Text>
           </ListItem>
-        ))}
+        )}
       </View>
     </SafeAreaView>
   );
