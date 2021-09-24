@@ -56,7 +56,7 @@ export default function Home({ navigation }) {
                 <Avatar
                   rounded
                   source={{
-                    uri: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+                    uri: `${user.avatar}`,
                   }}
                 />
                 <ListItem.Content>
@@ -76,7 +76,7 @@ export default function Home({ navigation }) {
           )
         ) : (
           <ListItem bottomDivider>
-            <Text>"Haz una busquedad"</Text>
+            <Text>"Haz una busqueda"</Text>
           </ListItem>
         )}
       </View>
