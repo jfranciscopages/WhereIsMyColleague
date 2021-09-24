@@ -5,7 +5,7 @@ const { User_Profile } = require("./models/index");
 const name = faker.name.findName();
 let altosUsers = [];
 
-for (let i = 0; i <= 20; i++) {
+for (let i = 0; i <= 60; i++) {
   altosUsers.push({
     email: faker.internet.email(name),
     password: 1234,

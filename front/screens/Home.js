@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUsersByTitle, setUsers, setSingleUser } from "../store/usersReducer";
 import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { Input, ListItem, Avatar } from "react-native-elements";
+import { ListItem, Avatar } from "react-native-elements";
 import SearchBar from "../components/SearchBar/searchBar";
 
 export default function Home({ navigation }) {
@@ -21,21 +20,19 @@ export default function Home({ navigation }) {
     <SafeAreaView style={styles.homeView}>
       <View style={styles.header}>
         <View>
-          <Text>Welcome to</Text>
           {console.log("ALL USERS ==>", allUsers)}
           {console.log(`USER BY TITLE ==>`, usersByTitle)}
           {console.log("INPUT VALUE==>", inputValue)}
-          <Image style={styles.img} source={require("../assets/logo-G.png")} />
+          <Image
+            source={{
+              uri: `https://secure.meetupstatic.com/photos/event/6/e/2/5/clean_488248197.jpeg`,
+            }}
+            style={styles.img}
+          />
+          <Text style={styles.text}>Where Is My Colleague</Text>
         </View>
       </View>
       <View style={styles.search}>
-        {/*   <View style={styles.searchContainer}>
-          <Input
-            placeholder="Search by name"
-            leftIcon={<Icon name="user" size={24} color="black" />}
-            onChangeText={(e) => handleChangeSearchBar(e)}
-          />
-        </View> */}
         <SearchBar />
       </View>
       <View style={styles.users}>
@@ -68,11 +65,7 @@ export default function Home({ navigation }) {
               <Text>"No hay match"</Text>
             </ListItem>
           )
-        ) : (
-          <ListItem bottomDivider>
-            <Text>"Haz una busqueda"</Text>
-          </ListItem>
-        )}
+        ) : null}
       </View>
     </SafeAreaView>
   );
@@ -85,8 +78,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   img: {
-    width: 200,
-    height: 50,
+    resizeMode: "contain",
+    width: "160px",
+    height: "100px",
   },
   header: {
     marginTop: 30,
@@ -97,8 +91,10 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   users: {
-    marginTop: 30,
+    marginTop: 10,
     backgroundColor: "yellowgreen",
   },
-  text: {},
+  text: {
+    fontWeight: "bold",
+  },
 });
