@@ -1,58 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import {
+  VStack,
+  HStack,
+  Avatar,
+  Image,
+  Text,
+  NativeBaseProvider,
+  Center,
+} from "native-base";
 import { useDispatch, useSelector } from "react-redux";
-import { setUsersByTitle, setUsers, setSingleUser } from "../store/usersReducer";
-import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { Input, ListItem, Avatar } from "react-native-elements";
-import SearchBar from "../components/SearchBar/searchBar";
+import { StyleSheet,  View,  Button, TextInput } from "react-native";
+import faker from "faker"
 
-export default function UserDetails({ navigation }){
-
-    const singleUser = useSelector((state) => state.singleUser);
-    return(
-        <SafeAreaView style={styles.homeView}>
-            {console.log("singleUser==>", singleUser)}
-            <View /* style={styles.header} */>
-            <ListItem.Title  style={styles.fistName}>{/* <Text style={styles.generic}>name</Text> */}{singleUser.firstName}</ListItem.Title>
-            <ListItem.Subtitle>{singleUser.lastName}</ListItem.Subtitle>
-            
-            </View>
-        </SafeAreaView>
-       
-    )
+function Nuevo() {
+  const singleUser = useSelector((state) => state.singleUser);
+  return (
+    <View>
+    {singleUser.id ?
+      <VStack m={4} space={4} border={1} borderRadius="lg">
+      {console.log("singleUSer==>", singleUser)}
+      <HStack alignItems="center" px={4} pt={4}>
+        <Avatar
+          borderWidth={1}
+          source={{
+            uri: `${singleUser.avatar}`,
+          }}
+        />
+        <VStack ml={2} space={2}>
+          <Text fontSize="lg" bold underline>
+            {singleUser.firstName}
+          </Text>
+          <Text>{singleUser.lastName}</Text>
+        </VStack>
+      </HStack>
+      <Image
+        w="100%"
+        height={72}
+        source={{
+          uri: `http://lorempixel.com/400/400/city/gray/`,
+        }}
+        alt="NativeBase logo"
+      ></Image>
+      <VStack px={4} pb={4}>
+        <Text>
+        <Text bold>{singleUser.firstName}</Text> works in <Text bold>{singleUser.city}</Text> , {singleUser.country}. 
+        </Text>
+      </VStack>
+    </VStack> :
+  <Text>"LOADING.."</Text> }
+  
+  </View>
+  );
 }
 
-const styles = StyleSheet.create({
-    homeView: {
-      flex: 1,
-      paddingHorizontal: 20,
-      backgroundColor: "white",
-    },
-    img: {
-      width: 200,
-      height: 50,
-    },
-    header: {
-      marginTop: 30,
-      flexDirection: "row",
-      justifyContent: "center",
-    },
-    search: {
-      marginTop: 30,
-    },
-    users: {
-      marginTop: 30,
-      backgroundColor: "yellowgreen",
-    },
-    text: {},
-    fistName: {
-        fontSize:55
-    },
-    lasName:{
-        fontSize:25 
-    },
-    generic:{
-        fontSize:20
-    }
-  });
+export default Nuevo;

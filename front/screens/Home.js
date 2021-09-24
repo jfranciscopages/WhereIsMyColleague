@@ -51,7 +51,7 @@ export default function Home({ navigation }) {
                   <ListItem.Title
                     onPress={() => {
                       dispatch(setSingleUser(user.id))
-                      navigation.navigate("userdetail")
+                      navigation.navigate("UserDetails")
                     }}
                   >
                     {user.firstName}
