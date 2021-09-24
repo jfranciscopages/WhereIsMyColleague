@@ -5,28 +5,18 @@ import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input, ListItem, Avatar } from "react-native-elements";
+import SearchBar from "./SearchBar/searchBar";
 
 export default function Home({ navigation }) {
-  const [searchedUsers, setSearchedUsers] = useState([]);
-  const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
   const usersByTitle = useSelector((state) => state.usersByTitle);
   const allUsers = useSelector((state) => state.allUsers);
+  const inputValue = useSelector((state) => state.searchValue);
 
   useEffect(() => {
     dispatch(setUsers());
   }, []);
 
-  const handleChangeSearchBar = (value) => {
-    console.log(value);
-    setInputValue(value);
-    if (value.length < 3) {
-      return;
-    } else {
-      dispatch(setUsersByTitle(value));
-    }
-  };
-  console.log(searchedUsers);
   return (
     <SafeAreaView style={styles.homeView}>
       <View style={styles.header}>
@@ -39,13 +29,14 @@ export default function Home({ navigation }) {
         </View>
       </View>
       <View style={styles.search}>
-        <View style={styles.searchContainer}>
+        {/*   <View style={styles.searchContainer}>
           <Input
             placeholder="Search by name"
             leftIcon={<Icon name="user" size={24} color="black" />}
             onChangeText={(e) => handleChangeSearchBar(e)}
           />
-        </View>
+        </View> */}
+        <SearchBar />
       </View>
       <View style={styles.users}>
         {inputValue.length > 2 ? (
@@ -97,12 +88,14 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 30,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   search: {
     marginTop: 30,
   },
   users: {
     marginTop: 30,
+    backgroundColor: "yellowgreen",
   },
+  text: {},
 });
