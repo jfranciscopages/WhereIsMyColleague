@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
-import { usersByTitleReducer, setUsersReducer } from "./usersReducer";
+import { usersByTitleReducer, setUsersReducer, setSingleUserReducer } from "./usersReducer";
 import { searchValueReducer } from "./searchbar/searchValue";
 import empresasReducer from "./empresasReducer";
 
@@ -12,6 +12,7 @@ const store = configureStore({
     usersByTitle: usersByTitleReducer,
     empresas: empresasReducer,
     searchValue: searchValueReducer,
+    singleUser: setSingleUserReducer
   },
 });
 

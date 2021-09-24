@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUsersByTitle, setUsers } from "../store/usersReducer";
+import { setUsersByTitle, setUsers, setSingleUser } from "../store/usersReducer";
 import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -42,7 +42,7 @@ export default function Home({ navigation }) {
         {inputValue.length > 2 ? (
           usersByTitle.length > 0 && inputValue.length > 2 ? (
             usersByTitle.map((user) => (
-              <ListItem bottomDivider>
+              <ListItem bottomDivider key={user.id}>
                 {console.log("user===>", user)}
                 <Avatar
                   rounded
@@ -52,7 +52,10 @@ export default function Home({ navigation }) {
                 />
                 <ListItem.Content>
                   <ListItem.Title
-                    onPress={() => navigation.navigate("userdetail")}
+                    onPress={() => {
+                      dispatch(setSingleUser(user.id))
+                      navigation.navigate("userdetail")
+                    }}
                   >
                     {user.firstName}
                   </ListItem.Title>

@@ -28,6 +28,18 @@ export const setUsersReducer = createReducer([], {
   [setUsers.fulfilled]: (state, action) => action.payload,
 });
 
+export const setSingleUser = createAsyncThunk("SINGLEUSER", (id) => {
+  return axios
+    .get(`http://localhost:3001/api/users/search/id/${id}`)
+    .then((r) => {
+      return r.data;
+    });
+});
+export const setSingleUserReducer = createReducer({}, {
+  [setSingleUser.fulfilled]: (state, action) => action.payload,
+});
+
+
 /* export const deleteUser = createAction("DELETE_USER"); */
 
 /* const usersReducer = createReducer([], {
