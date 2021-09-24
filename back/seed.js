@@ -14,6 +14,7 @@ for (let i = 0; i <= 20; i++) {
     country: faker.address.country(),
     city: faker.address.city(),
     phone: faker.phone.phoneNumber(),
+    avatar: faker.internet.avatar(),
   });
 }
 

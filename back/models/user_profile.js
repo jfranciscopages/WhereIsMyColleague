@@ -42,6 +42,10 @@ User_Profile.init(
       type: Sequelize.STRING,
       allowNull: false,
     },
+    avatar: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
   },
   { sequelize: db, modelName: "user_profile" }
 );
