@@ -27,6 +27,10 @@ router.get(`/search/:name`, (req, res, next) => {
         },
       },
     },
+    order: [
+      ["firstName", "ASC"],
+      ["lastName", "ASC"],
+    ],
   })
     .then((users) => res.status(200).json(users))
     .catch((err) => next(err));
