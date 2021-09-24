@@ -15,7 +15,7 @@ export default function Home({ navigation }) {
   useEffect(() => {
     dispatch(setUsers());
   }, []);
-
+  
   return (
     <SafeAreaView style={styles.homeView}>
       <View style={styles.header}>
