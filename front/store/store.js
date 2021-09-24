@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import { usersByTitleReducer, setUsersReducer } from "./usersReducer";
+import { searchValueReducer } from "./searchbar/searchValue";
 import empresasReducer from "./empresasReducer";
 
 const store = configureStore({
@@ -9,7 +10,8 @@ const store = configureStore({
     //Aca irian los reducer de cada estado que necesitemos
     allUsers: setUsersReducer,
     usersByTitle: usersByTitleReducer,
-    empresas: empresasReducer
+    empresas: empresasReducer,
+    searchValue: searchValueReducer,
   },
 });
 
