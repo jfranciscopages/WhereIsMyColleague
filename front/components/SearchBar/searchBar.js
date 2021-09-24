@@ -38,7 +38,7 @@ function SearchBar() {
     <VStack space={5} width="100%">
       <VStack width="100%" space={5} alignItems="center">
         <Input
-          placeholder="Search People Places"
+          placeholder="Search Colleagues"
           width="100%"
           borderRadius="4"
           py="3"
@@ -72,12 +72,4 @@ function SearchBar() {
   );
 }
 
-export default function () {
-  return (
-    <NativeBaseProvider>
-      <Center flex={1} px="2">
-        <SearchBar />
-      </Center>
-    </NativeBaseProvider>
-  );
-}
+export default SearchBar;
