@@ -5,11 +5,11 @@ const db = require("../db/db");
 class User_Profile extends Sequelize.Model {}
 User_Profile.init(
   {
-    access: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      defaultValue: "user",
-    },
+    // access: {
+    //   type: Sequelize.STRING,
+    //   allowNull: false,
+    //   defaultValue: "user",
+    // },
     email: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -18,7 +18,7 @@ User_Profile.init(
         isEmail: true,
       },
     },
-    password: {
+     password: {
       type: Sequelize.STRING,
       allowNull: false,
     },
@@ -38,14 +38,16 @@ User_Profile.init(
       type: Sequelize.STRING,
       allowNull: false,
     },
-    phone: {
-      type: Sequelize.STRING,
-      allowNull: false,
+    // phone: {
+    //   type: Sequelize.STRING,
+    //   allowNull: false,
+    // },
+    latitude: {
+      type: Sequelize.FLOAT,
     },
-    avatar: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
+    longitude: {
+      type: Sequelize.FLOAT
+    }
   },
   { sequelize: db, modelName: "user_profile" }
 );

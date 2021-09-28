@@ -5,51 +5,42 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
+import expoLocalHost from "../localHost";
+
 export const setUsersByTitle = createAsyncThunk("USERSBYTITLE", (value) => {
   return axios
-    .get(`http://localhost:3001/api/users/search/${value}`)
+    .get(`http://${expoLocalHost}/api/users/search/${value}`)
     .then((r) => {
       return r.data;
     });
-});
-
-export const usersByTitleReducer = createReducer([], {
-  [setUsersByTitle.fulfilled]: (state, action) => action.payload,
 });
 
 export const setUsers = createAsyncThunk("USERS", () => {
-  return axios
-    .get(`http://localhost:3001/api/users/getAll`)
-    .then((r) => {
-      return r.data;
-    });
-});
-export const setUsersReducer = createReducer([], {
-  [setUsers.fulfilled]: (state, action) => action.payload,
+  return axios.get(`http://${expoLocalHost}/api/users/getAll`).then((r) => {
+    return r.data;
+  });
 });
 
-export const setSingleUser = createAsyncThunk("SINGLEUSER", (id) => {
-  return axios
-    .get(`http://localhost:3001/api/users/search/id/${id}`)
-    .then((r) => {
-      return r.data;
-    });
-});
-export const setSingleUserReducer = createReducer({}, {
-  [setSingleUser.fulfilled]: (state, action) => action.payload,
+export const userById = createAsyncThunk("BY_ID", (id) => {
+  return axios.get(`http://${expoLocalHost}/api/users/byId/${id}`).then((r) => {
+    return r.data;
+  });
 });
 
+const initState = {
+  usersByTitle: [],
+  userById: {},
+  allUsers: [],
+};
 
-/* export const deleteUser = createAction("DELETE_USER"); */
-
-/* const usersReducer = createReducer([], {
-    [setUsers]: (state, { payload: users}) => {
-        return users;
-    },
-    [deleteUser]: (state, { payload: users }) => {
-        return state.filter((user) => user.id !== users);
-    }
-}); */
-/* const registerReducer = createReducer([], {
-  [setUsers.fulfilled]: (state, action) => action.payload,
-}); */
+export const UserReducer = createReducer(initState, {
+  [setUsersByTitle.fulfilled]: (state, action) => {
+    state.usersByTitle = action.payload;
+  },
+  [setUsers.fulfilled]: (state, action) => {
+    state.allUsers = action.payload;
+  },
+  [userById.fulfilled]: (state, action) => {
+    state.userById = action.payload;
+  },
+});

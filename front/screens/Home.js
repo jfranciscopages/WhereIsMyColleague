@@ -1,18 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSingleUser } from "../store/usersReducer";
-import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
+import { userById } from "../store/usersReducer";
+import { StyleSheet, View, Image, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ListItem, Avatar } from "react-native-elements";
+import { ListItem, Button } from "react-native-elements";
 import SearchBar from "../components/SearchBar/searchBar";
 
-export default function Home(props) {
+export default function Home({ navigation }) {
   const dispatch = useDispatch();
-  const usersByTitle = useSelector((state) => state.usersByTitle);
+  const usersByTitle = useSelector((state) => state.users.usersByTitle);
   const inputValue = useSelector((state) => state.searchValue);
-  
+
+  const mapHandler = (id) => {
+    dispatch(userById(id));
+    navigation.navigate("map");
+  };
+
   return (
-    <SafeAreaView style={styles.homeView}>
+    <SafeAreaView>
       <View style={styles.header}>
         <View>
           <Image
@@ -27,29 +32,41 @@ export default function Home(props) {
       <View style={styles.search}>
         <SearchBar />
       </View>
-      <View style={styles.users}>
+      <View style={styles.listUsers}>
         {inputValue.length > 2 ? (
           usersByTitle.length > 0 && inputValue.length > 2 ? (
-            usersByTitle.map((user) => (
-              <ListItem bottomDivider key={user.id}>
-                <Avatar
-                  rounded
-                  source={{
-                    uri: `${user.avatar}`,
-                  }}
-                />
-                <ListItem.Content>
-                  <ListItem.Title
+            usersByTitle.map((user, i) => (
+              <ListItem.Swipeable
+                key={i}
+                leftContent={
+                  <Button
+                    title="Info"
+                    icon={{ name: "info", color: "white" }}
+                    buttonStyle={{ minHeight: "100%" }}
                     onPress={() => {
-                      dispatch(setSingleUser(user.id))
-                      props.navigation.navigate("UserDetails")
+                      console.log(`USUARIO`, user);
+                      dispatch(userById(user.id));
+                      return navigation.navigate("userinfo");
                     }}
-                  >
-                    {user.firstName}
-                  </ListItem.Title>
+                  />
+                }
+                rightContent={
+                  <Button
+                    title="Locate"
+                    icon={{ name: "search", color: "white" }}
+                    buttonStyle={{
+                      minHeight: "100%" /* , backgroundColor: "green" */,
+                    }}
+                    onPress={() => mapHandler(user.id)}
+                  />
+                }
+              >
+                <ListItem.Content>
+                  <ListItem.Title>{user.firstName}</ListItem.Title>
                   <ListItem.Subtitle>{user.lastName}</ListItem.Subtitle>
                 </ListItem.Content>
-              </ListItem>
+                <ListItem.Chevron />
+              </ListItem.Swipeable>
             ))
           ) : (
             <ListItem bottomDivider>
@@ -65,8 +82,11 @@ export default function Home(props) {
 const styles = StyleSheet.create({
   homeView: {
     flex: 1,
+    alignItems: "center",
     paddingHorizontal: 20,
-    backgroundColor: "white",
+  },
+  text: {
+    fontWeight: "bold",
   },
   img: {
     resizeMode: "contain",
@@ -74,18 +94,18 @@ const styles = StyleSheet.create({
     height: 100,
   },
   header: {
-    marginTop: 30,
-    flexDirection: "row",
-    justifyContent: "center",
+    marginLeft: 20,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   search: {
-    marginTop: 30,
+    marginTop: 150,
   },
   users: {
-    marginTop: 10,
-    backgroundColor: "yellowgreen",
+    marginTop: 30,
   },
-  text: {
-    fontWeight: "bold",
+  listUsers: {
+    marginTop: 10,
   },
 });
