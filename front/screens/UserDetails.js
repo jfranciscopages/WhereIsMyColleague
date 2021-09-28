@@ -5,20 +5,16 @@ import {
   Avatar,
   Image,
   Text,
-  NativeBaseProvider,
-  Center,
 } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet,  View,  Button, TextInput } from "react-native";
-import faker from "faker"
+import { View } from "react-native";
 
 function Nuevo() {
   const singleUser = useSelector((state) => state.singleUser);
   return (
     <View>
     {singleUser.id ?
-      <VStack m={4} space={4} border={1} borderRadius="lg">
-      {console.log("singleUSer==>", singleUser)}
+      <VStack m={4} space={4} borderRadius="lg">
       <HStack alignItems="center" px={4} pt={4}>
         <Avatar
           borderWidth={1}

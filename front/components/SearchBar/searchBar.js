@@ -5,25 +5,12 @@ import { setSearchValue } from "../../store/searchbar/searchValue";
 import {
   VStack,
   Input,
-  Button,
-  IconButton,
   Icon,
-  Text,
-  NativeBaseProvider,
-  Center,
-  Box,
-  Divider,
-  Heading,
 } from "native-base";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 function SearchBar() {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setUsers());
-  }, []);
 
   const handleChangeSearchBar = (value) => {
     dispatch(setSearchValue(value));

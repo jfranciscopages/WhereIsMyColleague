@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUsersByTitle, setUsers, setSingleUser } from "../store/usersReducer";
+import { setSingleUser } from "../store/usersReducer";
 import { StyleSheet, Text, View, Image, Button, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ListItem, Avatar } from "react-native-elements";
 import SearchBar from "../components/SearchBar/searchBar";
 
-export default function Home({ navigation }) {
+export default function Home(props) {
   const dispatch = useDispatch();
   const usersByTitle = useSelector((state) => state.usersByTitle);
   const inputValue = useSelector((state) => state.searchValue);
@@ -32,7 +32,6 @@ export default function Home({ navigation }) {
           usersByTitle.length > 0 && inputValue.length > 2 ? (
             usersByTitle.map((user) => (
               <ListItem bottomDivider key={user.id}>
-                {console.log("user===>", user)}
                 <Avatar
                   rounded
                   source={{
@@ -43,7 +42,7 @@ export default function Home({ navigation }) {
                   <ListItem.Title
                     onPress={() => {
                       dispatch(setSingleUser(user.id))
-                      navigation.navigate("UserDetails")
+                      props.navigation.navigate("UserDetails")
                     }}
                   >
                     {user.firstName}
