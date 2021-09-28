@@ -15,7 +15,6 @@ router.get("/getAll", function (req, res, next) {
 
 router.get(`/search/:name`, (req, res, next) => {
   const name = req.params.name;
-  console.log(name);
   User_Profile.findAll({
     where: {
       [Op.or]: {
@@ -46,7 +45,6 @@ router.get(`/search/id/:id`,(req, res, next)=>{
 })
 
 router.post("/create", (req, res, next) => {
-  console.log(req.body);
   User.create({
     email: req.body.email,
     password: req.body.password,
@@ -57,7 +55,6 @@ router.post("/create", (req, res, next) => {
     phone: req.body.phone,
   })
     .then((data) => {
-      console.log(data);
       return res.status(200).send(data);
     })
     .catch((e) => console.log(e.response));

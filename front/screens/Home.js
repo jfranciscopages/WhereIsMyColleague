@@ -9,20 +9,12 @@ import SearchBar from "../components/SearchBar/searchBar";
 export default function Home({ navigation }) {
   const dispatch = useDispatch();
   const usersByTitle = useSelector((state) => state.usersByTitle);
-  const allUsers = useSelector((state) => state.allUsers);
   const inputValue = useSelector((state) => state.searchValue);
-
-  useEffect(() => {
-    dispatch(setUsers());
-  }, []);
   
   return (
     <SafeAreaView style={styles.homeView}>
       <View style={styles.header}>
         <View>
-          {console.log("ALL USERS ==>", allUsers)}
-          {console.log(`USER BY TITLE ==>`, usersByTitle)}
-          {console.log("INPUT VALUE==>", inputValue)}
           <Image
             source={{
               uri: `https://secure.meetupstatic.com/photos/event/6/e/2/5/clean_488248197.jpeg`,
@@ -79,8 +71,8 @@ const styles = StyleSheet.create({
   },
   img: {
     resizeMode: "contain",
-    width: "160px",
-    height: "100px",
+    width: 160,
+    height: 100,
   },
   header: {
     marginTop: 30,
