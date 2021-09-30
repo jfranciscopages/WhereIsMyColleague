@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUsersByTitle, setUsers } from "../../store/usersReducer";
 import { setSearchValue } from "../../store/searchbar/searchValue";
-import {
-  VStack,
-  Input,
-  Icon,
-} from "native-base";
+import { VStack, Input, Icon } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 
 function SearchBar() {
@@ -42,15 +38,6 @@ function SearchBar() {
               size="6"
               color="gray.400"
               as={<MaterialIcons name="search" />}
-            />
-          }
-          InputRightElement={
-            <Icon
-              m="2"
-              mr="3"
-              size="6"
-              color="gray.400"
-              as={<MaterialIcons name="mic" />}
             />
           }
         />

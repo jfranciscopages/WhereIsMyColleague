@@ -2,6 +2,7 @@ import React from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import MapView, { Callout, Circle, Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
+import SearchBar from "../SearchBar/searchBar";
 
 export default function Map() {
   const user = useSelector((state) => state.users.userById);

@@ -8,8 +8,8 @@ router.get("/getAll", function (req, res, next) {
   User_Profile.findAll()
     .then((data) => {
       res.send(data);
-    }) 
-.catch((e) => console.log(e.response));
+    })
+    .catch((e) => console.log(e.response));
 });
 
 router.get("/search/:name", (req, res, next) => {
@@ -25,6 +25,7 @@ router.get("/search/:name", (req, res, next) => {
         },
       },
     },
+    order: [["firstName", "ASC"]],
   })
     .then((users) => res.status(200).json(users))
     .catch((err) => next(err));

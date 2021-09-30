@@ -1,13 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  useFonts,
-  KaushanScript_400Regular,
-} from "@expo-google-fonts/kaushan-script";
+import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function Intro({ navigation }) {
+export default function Intro() {
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.view}>
@@ -16,11 +14,9 @@ export default function Intro({ navigation }) {
           <Text style={styles.colleague}>Where is my colleague?</Text>
           <Image
             style={styles.img}
-            source={
-              {
-                uri: "https://upload.wikimedia.org/wikipedia/commons/5/56/Globant-LightBG-Color%403x.png",
-              }
-            }
+            source={{
+              uri: "https://upload.wikimedia.org/wikipedia/commons/5/56/Globant-LightBG-Color%403x.png",
+            }}
           />
         </View>
         <View style={styles.next}>
@@ -28,12 +24,12 @@ export default function Intro({ navigation }) {
             name="rightcircle"
             size={24}
             color="black"
-            onPress={() => navigation.navigate("home")}
+            onPress={() => navigation.navigate("login")}
           />
         </View>
       </View>
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

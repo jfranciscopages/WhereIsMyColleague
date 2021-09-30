@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import { searchValueReducer } from "./searchbar/searchValue";
 import { UserReducer } from "./usersReducer";
+import { BranchReducer } from "./BranchReducer";
+import { searchBranchReducer } from "./searchBranch/searchBranchReducer";
 
 const store = configureStore({
   /* middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger), */
@@ -9,6 +11,8 @@ const store = configureStore({
     //Aca irian los reducer de cada estado que necesitemos
     searchValue: searchValueReducer,
     users: UserReducer,
+    branches: BranchReducer,
+    searchBranch: searchBranchReducer,
   },
 });
 
