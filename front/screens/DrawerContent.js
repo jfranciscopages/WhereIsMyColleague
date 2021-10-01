@@ -1,19 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setProfile } from "../store/profileReducer";
 import { View, StyleSheet } from "react-native";
-
-import {
-  useTheme,
-  Avatar,
-  Title,
-  Caption,
-  Paragraph,
-  Drawer,
-  Text,
-  TouchableRipple,
-  Switch,
-} from "react-native-paper";
+import { useTheme, Avatar, Title, Caption, Drawer } from "react-native-paper";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";

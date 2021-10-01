@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
   },
   colleague: {
     fontSize: 20,
-    marginTop: 180,
+    marginTop: 250,
     marginRight: 70,
   },
   img: {
-    width: 200,
-    height: 50,
+    width: 320,
+    height: 100,
   },
   next: {
     marginTop: 250,

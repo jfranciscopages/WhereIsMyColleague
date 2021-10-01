@@ -5,7 +5,11 @@ import { useSelector } from "react-redux";
 import DrawerContainer from "./containers/DrawerContainer";
 import Intro from "./screens/Intro";
 import Login from "./screens/Login";
-import Home from "./screens/Home";
+import Home from "./screens/Home/Home";
+import newBranch from "./screens/Admin/newBranch";
+import editBranch from "./screens/Admin/editBranch";
+import Map from "./components/Map/Map";
+import UserDetails from "./screens/UserDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +30,10 @@ export default function Main() {
               name="Home"
               component={Home}
             />
+            <Stack.Screen name="editBranch" component={editBranch} />
+            <Stack.Screen name="newBranch" component={newBranch} />
+            <Stack.Screen name="userinfo" component={UserDetails} />
+            <Stack.Screen name="map" component={Map} />
           </>
         ) : (
           <>

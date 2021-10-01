@@ -1179,6 +1179,11 @@
   "resolved" "https://registry.npmjs.org/@eva-design/processor/-/processor-2.1.1.tgz"
   "version" "2.1.1"
 
+"@expo-google-fonts/inter@^0.2.0":
+  "integrity" "sha512-gIjkti/NxHABPc4xB/AlgSpbLJod/8Iill7DfW+rh2CHv3jjz7I7SLQY8u/3NoF8zZk0GNU8gTZkVwGQibuWcQ=="
+  "resolved" "https://registry.npmjs.org/@expo-google-fonts/inter/-/inter-0.2.0.tgz"
+  "version" "0.2.0"
+
 "@expo-google-fonts/kaushan-script@^0.2.0":
   "integrity" "sha512-cPtU4ymdNVsLq+yA8mepXapXK3ZSabChf07KNG/SHVFUOQBvD1sp6e+v6Fh0z2Pw+6tn/3n88hvPQjwtWqYFgw=="
   "resolved" "https://registry.npmjs.org/@expo-google-fonts/kaushan-script/-/kaushan-script-0.2.0.tgz"

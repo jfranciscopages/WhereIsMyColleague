@@ -43,11 +43,6 @@ export default function Branches() {
     dispatch(singleBranch(id));
     navigation.navigate("editBranch");
   };
-
-  useEffect(() => {
-    dispatch(allBranches());
-  }, []);
-
   return (
     <ScrollView>
       <View>

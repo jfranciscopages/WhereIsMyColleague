@@ -31,11 +31,22 @@ export default function Login() {
 
   return (
     <NativeBaseProvider>
-      <Box safeArea flex={1} p="2" py="8" w="90%" mx="auto">
-        <Heading size="lg" fontWeight="600" color="coolGray.800">
+      <Box marginTop="120" safeArea flex={1} p="2" py="8" w="90%" mx="auto">
+        <Heading
+          alignSelf="center"
+          size="lg"
+          fontWeight="bold"
+          color="coolGray.800"
+        >
           Welcome
         </Heading>
-        <Heading mt="1" color="coolGray.600" fontWeight="medium" size="xs">
+        <Heading
+          alignSelf="center"
+          mt="1"
+          color="coolGray.600"
+          fontWeight="medium"
+          size="xs"
+        >
           Please sign in to continue.
         </Heading>
 
@@ -44,14 +55,14 @@ export default function Login() {
             <FormControl.Label
               _text={{
                 color: "coolGray.800",
-                fontSize: "xs",
+                fontSize: "sm",
                 fontWeight: 500,
               }}
             >
               Email
             </FormControl.Label>
             <Input
-              style={styles.input}
+              style={[styles.input, { fontSize: 17 }]}
               value={loginEmail}
               onChangeText={(e) => setLoginEmail(e)}
             />
@@ -60,7 +71,7 @@ export default function Login() {
             <FormControl.Label
               _text={{
                 color: "coolGray.800",
-                fontSize: "xs",
+                fontSize: "sm",
                 fontWeight: 500,
               }}
             >
@@ -68,11 +79,16 @@ export default function Login() {
             </FormControl.Label>
             <Input
               type={show ? "text" : "password"}
-              style={styles.input}
+              style={[styles.input, { fontSize: 17 }]}
               value={loginPassword}
               onChangeText={(e) => setLoginPassword(e)}
               InputRightElement={
-                <Button backgroundColor="muted.900" onPress={handleClick}>
+                <Button
+                  _text={{ color: "coolGray.800" }}
+                  style={{ marginLeft: 7 }}
+                  backgroundColor="#aecf53"
+                  onPress={handleClick}
+                >
                   {show ? "Hide" : "Show"}
                 </Button>
               }
@@ -83,8 +99,8 @@ export default function Login() {
               handleSubmit(e);
             }}
             mt="2"
-            backgroundColor="muted.900"
-            _text={{ color: "white" }}
+            backgroundColor="#aecf53"
+            _text={{ color: "coolGray.800" }}
           >
             Sign in
           </Button>
