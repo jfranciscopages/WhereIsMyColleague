@@ -34,10 +34,10 @@ export default function Login() {
     <NativeBaseProvider>
       <Box safeArea flex={1} p="2" py="8" w="90%" mx="auto">
         <Heading size="lg" fontWeight="600" color="coolGray.800">
-          Te damos la bienvenida
+          Welcome
         </Heading>
         <Heading mt="1" color="coolGray.600" fontWeight="medium" size="xs">
-          Iniciá sesión para continuar
+          Please sign in to continue.
         </Heading>
 
         <VStack space={3} mt="5">
@@ -49,7 +49,7 @@ export default function Login() {
                 fontWeight: 500,
               }}
             >
-              Correo electrónico
+              Email
             </FormControl.Label>
             <Input
               style={styles.input}
@@ -65,7 +65,7 @@ export default function Login() {
                 fontWeight: 500,
               }}
             >
-              Contraseña
+              Password
             </FormControl.Label>
             <Input
               type={show ? "text" : "password"}
@@ -74,29 +74,20 @@ export default function Login() {
               onChange={(e) => setLoginPassword(e.target.value)}
               InputRightElement={
                 <Button backgroundColor="muted.900" onPress={handleClick}>
-                  {show ? "Ocultar" : "Mostrar"}
+                  {show ? "Hide" : "Show"}
                 </Button>
               }
             />
-            <Link
-              _text={{
-                fontSize: "xs",
-                fontWeight: "500",
-                color: "coolGray.600",
-              }}
-              alignSelf="flex-end"
-              mt="1"
-            >
-              ¿Olvidaste tu contraseña?
-            </Link>
           </FormControl>
           <Button
+            onPress={(e) => {
+              handleSubmit(e);
+            }}
             mt="2"
             backgroundColor="muted.900"
             _text={{ color: "white" }}
-            onPress={() => navigation.navigate("main")}
           >
-            Iniciar sesión
+            Sign in
           </Button>
         </VStack>
       </Box>
