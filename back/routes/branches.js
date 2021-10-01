@@ -43,6 +43,8 @@ router.post("/newBranch", (req, res, next) => {
 });
 
 router.put("/editBranch/:id", (req, res, next) => {
+  console.log(req.body);
+  console.log(req.params.id);
   Branches.update(req.body, {
     where: { id: req.params.id },
     returning: true,

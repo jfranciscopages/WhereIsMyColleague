@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, /* Text ,*/ View } from "react-native";
+import expoLocalHost from "../../localHost";
 import {
   FormControl,
   Input,
@@ -11,9 +12,11 @@ import {
   Button,
 } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
-import { createBranch } from "../../store/BranchReducer";
+import axios from "axios";
+import { useNavigation } from "@react-navigation/core";
 
 export default function editBranch() {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const singleBranch = useSelector((state) => state.branches.singleBranch);
 
@@ -56,7 +59,12 @@ export default function editBranch() {
   };
 
   const updateHandler = () => {
-    dispatch(createBranch());
+    axios
+      .put(
+        `http://${expoLocalHost}/api/branches/editBranch/${singleBranch.id}`,
+        branch
+      )
+      .then(() => navigation.navigate(`BranchesList`));
   };
 
   return (
@@ -84,7 +92,7 @@ export default function editBranch() {
           <FormControl mb="5">
             <FormControl.Label>Country</FormControl.Label>
             <Input
-            value={branch.country}
+              value={branch.country}
               placeholder={singleBranch.country}
               onChangeText={(value) => inputHandler("country", value)}
             />
@@ -94,7 +102,7 @@ export default function editBranch() {
           <FormControl mb="5">
             <FormControl.Label>City</FormControl.Label>
             <Input
-            value={branch.city}
+              value={branch.city}
               placeholder={singleBranch.city}
               onChangeText={(value) => inputHandler("city", value)}
             />
@@ -104,7 +112,7 @@ export default function editBranch() {
           <FormControl mb="5">
             <FormControl.Label>Address</FormControl.Label>
             <Input
-            value={branch.address}
+              value={branch.address}
               placeholder={singleBranch.address}
               onChangeText={(value) => inputHandler("address", value)}
             />
@@ -114,7 +122,7 @@ export default function editBranch() {
           <FormControl mb="5">
             <FormControl.Label>Postal Code</FormControl.Label>
             <Input
-            value={branch.CP}
+              value={branch.CP}
               placeholder={singleBranch.CP}
               onChangeText={(value) => inputHandler("cp", value)}
             />
@@ -124,7 +132,7 @@ export default function editBranch() {
           <FormControl mb="5">
             <FormControl.Label>Floor</FormControl.Label>
             <Input
-            value={branch.floor}
+              value={branch.floor}
               //   placeholder={singleBranch.floor ? singleBranch.floor : null}
               onChangeText={(value) => inputHandler("floor", value)}
             />
@@ -134,7 +142,7 @@ export default function editBranch() {
           <FormControl mb="5">
             <FormControl.Label>Phone</FormControl.Label>
             <Input
-            value={branch.phone}
+              value={branch.phone}
               placeholder={singleBranch.phone}
               onChangeText={(value) => inputHandler("phone", value)}
             />
@@ -144,7 +152,7 @@ export default function editBranch() {
           <FormControl mb="5">
             <FormControl.Label>Image</FormControl.Label>
             <Input
-            value={branch.image}
+              value={branch.image}
               placeholder={singleBranch.image}
               onChangeText={(value) => inputHandler("image", value)}
             />

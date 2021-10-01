@@ -30,7 +30,7 @@ export const singleBranch = createAsyncThunk("SINGLE_BRANCH", (id) => {
     .then((r) => r.data);
 });
 
-export const editBranch = createAsyncThunk("EDIT_BRANCH", (id) => {
+export const editBranches = createAsyncThunk("EDIT_BRANCH", (id) => {
   return axios
     .put(`http://${expoLocalHost}/api/branches/editBranch/${id}`)
     .then((r) => ("BRANCH EDITADA", r.data));

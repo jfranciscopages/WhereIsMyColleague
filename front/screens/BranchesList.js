@@ -38,6 +38,14 @@ export default function Branches() {
     setBranchCountry(itemValue);
     dispatch(byCountry(itemValue));
   };
+  useEffect(() => {
+    dispatch(allBranches());
+  }, []);
+
+  const individualBranchHandler = (id) => {
+    dispatch(singleBranch(id));
+    navigation.navigate("Branch");
+  };
 
   const singleBranchHandler = (id) => {
     dispatch(singleBranch(id));
@@ -164,11 +172,22 @@ export default function Branches() {
                   <View style={styles.Btns}>
                     <Button
                       size="sm"
+                      /* variant="outline" */
+                      width={20}
+                      height={7}
+                      marginLeft={2}
+                      marginRight={2}
+                      onPress={() => individualBranchHandler(id)}
+                    >
+                      View
+                    </Button>
+                    <Button
+                      size="sm"
                       /* variant="outline" */ width={20}
                       height={7}
                       onPress={() => singleBranchHandler(id)}
                     >
-                      EDIT
+                      Edit
                     </Button>
                     <Button
                       size="sm"
@@ -178,7 +197,7 @@ export default function Branches() {
                       marginLeft={2}
                       onPress={() => dispatch(deleteBranch(id))}
                     >
-                      DELETE
+                      Delete
                     </Button>
                   </View>
                 </Box>
