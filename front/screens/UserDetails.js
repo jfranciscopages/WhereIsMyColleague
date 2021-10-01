@@ -1,134 +1,157 @@
-import React from "react";
-import { VStack, HStack, Avatar, Image, Text } from "native-base";
-import { useSelector } from "react-redux";
-import { StyleSheet, View } from "react-native";
-import { List } from "react-native-paper";
-
-function UserDetails() {
+import React, { useEffect, useState } from "react";
+import expoLocalHost from "../localHost";
+import {
+  Box,
+  View,
+  Heading,
+  HStack,
+  Text,
+  AspectRatio,
+  NativeBaseProvider,
+  Spinner,
+  Image,
+  Center,
+  Stack,
+  SafeAreaView,
+  ScrollView,
+} from "native-base";
+import { SunIcon } from "native-base";
+import { IconButton } from "native-base";
+import axios from "axios";
+import listitem, { ListItem } from '@ui-kitten/components'
+import FloorList from "../components/FloorList/Floorlist";
+import { useDispatch, useSelector } from "react-redux";
+import { setBranchReducer } from "../store/searchBranch/searchBranchReducer";
+import { Icon } from 'react-native-elements'
+// import { styles } from "styled-system";
+import { StyleSheet } from "react-native";
+import { singleBranch } from "../store/BranchReducer";
+import { backgroundColor, width } from "styled-system";
+function Branch() {
+  const dispatch = useDispatch();
+  const branch = useSelector((state) => state.branches.singleBranch);
+  const [loading, setLoading] = useState(true);
   const userById = useSelector((state) => state.users.userById);
+  const actualUser = useSelector((state) => state.users.usersByTitle)
+
+
+  useEffect(() => {
+    dispatch(singleBranch(actualUser[0].branchId))
+    axios.get(`http://${expoLocalHost}/api/branches/singleBranch/${actualUser[0].branchId}`)
+      .then((data) => console.log('ACAAA', data.data))
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
+
   return (
-    <View style={styles.view}>
-      <View style={styles.firstBackground}>
-        {userById.id ? (
-          <VStack m={4} space={4} borderRadius="lg">
-            <HStack alignItems="center" px={4} pt={4} style={styles.nameStyle}>
-              <Avatar
-                source={{
-                  uri: `${userById.avatar}`,
-                }}
-              />
-              <VStack ml={2} space={2}>
-                <Text fontSize="lg" bold>
-                  {userById.firstName}
-                  {userById.lastName}
+    <View my="3">
+      <ScrollView>
+        {!loading ? (
+          <Box
+            rounded="lg"
+            overflow="hidden"
+            w="sm"
+            shadow={1}
+            _light={{ backgroundColor: "gray.50" }}
+            _dark={{ backgroundColor: "gray.700" }}
+          >
+            <Box>
+              <AspectRatio ratio={16 / 9}>
+                <Image
+                  source={{
+                    uri: `${branch.image}`,
+                  }}
+                  alt="image"
+                />
+              </AspectRatio>
+            </Box>
+            <Stack p="4" space={3}>
+              <Stack space={2}>
+                <Heading size="md" ml="-1">
+                  {userById.firstName} {userById.lastName}
+                </Heading>
+                <Text
+                  fontSize="md"
+                  _light={{ color: "rgba(52, 146, 2, 0.63)" }}
+                  _dark={{ color: "rgba(52, 146, 2, 0.63)" }}
+                  fontWeight="500"
+                  ml="-0.5"
+                  mt="-1"
+                >
+                  She is from {userById.city}, {userById.country}.
                 </Text>
-              </VStack>
-            </HStack>
-            <View style={styles.viewImg}>
-              <Image
-                w="100%"
-                style={styles.img}
-                height={72}
-                source={{
-                  uri: `http://lorempixel.com/400/400/city/gray/`,
+                <View></View>
+                <View></View>
+                <View style={styles.view}>
+                  <Heading size="md" ml="-1">
+                    <SunIcon /> Work place
+                  </Heading>
+                  <Text>{branch.city}, {branch.country}.</Text>
+                  <Text>{branch.floors[0].name}</Text>
+                </View>
+                <View></View>
+                <View></View>
+                <View style={styles.view}>
+                  <Heading size="md" ml="-1">
+                    <Icon name='sc-telegram' type='evilicon' color='#517fa4' /> Email
+                  </Heading>
+                  <Text>{userById.email}</Text>
+                </View>
+                <View></View>
+                <View></View>
+                <View style={styles.view}>
+                  <Heading size="md" ml="-1">
+                    <Icon name='phone' type='evilicon' color='#517fa4' /> Phone
+                  </Heading>
+                  <Text>{userById.phone}</Text>
+                </View>
+              </Stack>
+              {/* <Icon name='sc-telegram' type='evilicon' color='#517fa4' /> */}
+              <HStack
+                alignItems="center"
+                space={4}
+                justifyContent="space-between"
+              >
+              </HStack>
+            </Stack>
+            <Box justifyContent="center" alignItems="center">
+              <Box
+                w={{
+                  base: "100%",
+                  md: "25%",
                 }}
-                alt="NativeBase logo"
-              ></Image>
-            </View>
-            <VStack px={4} pb={4}>
-              <Text style={styles.text}>
-                <Text style={styles.text} bold>
-                  {userById.firstName}
-                </Text>{" "}
-                works in{" "}
-                <Text style={styles.text} bold>
-                  {userById.city}
-                </Text>{" "}
-                , {userById.country}.
-              </Text>
-            </VStack>
-            <View>
-              <List.Item
-                title="Email"
-                description={userById.email}
-                left={(props) => <List.Icon {...props} icon="email" />}
-              />
-              <List.Item
-                title="Email"
-                description={userById.email}
-                left={(props) => <List.Icon {...props} icon="email" />}
-              />
-            </View>
-          </VStack>
+              >
+              </Box>
+              {/* <FloorList /> */}
+            </Box>
+          </Box>
         ) : (
-          <Text>"LOADING.."</Text>
+          <Spinner color="danger.500" />
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  firstBackground: {
-    backgroundColor: "#A5CC6B",
-    height: 300,
-    zIndex: 1,
-    borderRadius: 25,
-    marginTop: -50,
-    paddingTop: 50,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.34,
-    shadowRadius: 6.27,
-    elevation: 10,
-  },
-  text: {
-    backgroundColor: "#A5CC6B",
-    fontSize: 20,
-    marginTop: 5,
-    width: 400,
-    backgroundColor: "#A1CF6B",
-    height: 50,
-    justifyContent: "center",
-    paddingTop: 5,
-    paddingLeft: 50,
-    marginLeft: -55,
+  view: {
+    borderBottomColor: 'rgba(52, 146, 2, 0.26)',
+    borderBottomWidth: 0.5,
     borderRadius: 12,
-    shadowColor: "#000",
-    overflow: "hidden",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.34,
-    shadowRadius: 6.27,
-    elevation: 10,
-  },
-  viewImg: {
-    borderRadius: 25,
-    shadowColor: "#000",
-    overflow: "hidden",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.34,
-    shadowRadius: 6.27,
-    backgroundColor: "#0000",
-    elevation: 10,
-  },
-  nameStyle: {
-    borderRadius: 15,
-    backgroundColor: "#A1CF6B",
-    height: 60,
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-  },
-  img: {
-    borderRadius: 25,
-  },
-});
-export default UserDetails;
+    width: 400,
+    marginLeft: -100,
+    paddingLeft: 125,
+    backgroundColor: 'rgba(0, 0, 0, 0.03)'
+  }
+})
+export default function () {
+  return (
+    <NativeBaseProvider>
+      <Center flex={1}>
+        <Branch />
+      </Center>
+    </NativeBaseProvider>
+  );
+}
