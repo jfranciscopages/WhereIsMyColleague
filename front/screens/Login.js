@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
 
 import {
   NativeBaseProvider,
@@ -16,8 +17,6 @@ import {
 import useLogin from "../hooks/useLogin";
 
 export default function Login() {
-  const navigation = useNavigation();
-
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
@@ -54,7 +53,7 @@ export default function Login() {
             <Input
               style={styles.input}
               value={loginEmail}
-              onChange={(e) => setLoginEmail(e.target.value)}
+              onChangeText={(e) => setLoginEmail(e)}
             />
           </FormControl>
           <FormControl>
@@ -71,7 +70,7 @@ export default function Login() {
               type={show ? "text" : "password"}
               style={styles.input}
               value={loginPassword}
-              onChange={(e) => setLoginPassword(e.target.value)}
+              onChangeText={(e) => setLoginPassword(e)}
               InputRightElement={
                 <Button backgroundColor="muted.900" onPress={handleClick}>
                   {show ? "Hide" : "Show"}

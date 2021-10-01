@@ -7,7 +7,7 @@ import { ProfileReducer } from "./profileReducer";
 import { searchBranchReducer } from "./searchBranch/searchBranchReducer";
 
 const store = configureStore({
-   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger), 
+  /* middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),  */
   reducer: {
     //Aca irian los reducer de cada estado que necesitemos
     profile: ProfileReducer,

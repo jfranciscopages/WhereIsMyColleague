@@ -1,0 +1,47 @@
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useSelector } from "react-redux";
+import DrawerContainer from "./containers/DrawerContainer";
+import Intro from "./screens/Intro";
+import Login from "./screens/Login";
+import Home from "./screens/Home";
+
+const Stack = createNativeStackNavigator();
+
+export default function Main() {
+  const profile = useSelector((state) => state.profile);
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Intro">
+        {profile.id ? (
+          <>
+            <Stack.Screen
+              name="DrawerNavigator"
+              component={DrawerContainer}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Home"
+              component={Home}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Intro"
+              component={Intro}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Login"
+              component={Login}
+            />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
