@@ -6,7 +6,7 @@ import SearchBar from "../SearchBar/searchBar";
 
 export default function Map() {
   const user = useSelector((state) => state.users.userById);
-  const { latitude, longitude, id } = user;
+  const { branch, id } = user;
 
   return (
     <View style={styles.container}>
@@ -15,16 +15,16 @@ export default function Map() {
           key={id}
           style={styles.map}
           initialRegion={{
-            latitude: latitude,
-            longitude: longitude,
+            latitude: branch.latitude,
+            longitude: branch.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
         >
           <Marker
             coordinate={{
-              latitude: latitude,
-              longitude: longitude,
+              latitude: branch.latitude,
+              longitude: branch.longitude,
             }}
             pinColor={"black"}
           >
@@ -34,8 +34,8 @@ export default function Map() {
           </Marker>
           <Circle
             center={{
-              latitude: latitude,
-              longitude: longitude,
+              latitude: branch.latitude,
+              longitude: branch.longitude,
             }}
             radius={1000}
           ></Circle>

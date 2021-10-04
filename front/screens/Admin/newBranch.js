@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, /* Text ,*/ View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import {
   FormControl,
   Input,
@@ -9,19 +9,21 @@ import {
   Divider,
   Box,
   Button,
+  WarningOutlineIcon,
 } from "native-base";
 import { useDispatch } from "react-redux";
-import { createBranch } from "../../store/BranchReducer";
+import { createBranch, allBranches } from "../../store/BranchReducer";
+import { useNavigation } from "@react-navigation/native";
 
 export default function newBranch() {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const [branch, setBranch] = useState({
     country: "",
     city: "",
     address: "",
     CP: "",
-    floor: "",
     phone: "",
     image: "",
   });
@@ -35,14 +37,10 @@ export default function newBranch() {
         setBranch({ ...branch, city: value });
         return;
       case "address":
-        // setBranch({ ...branch, address: value });
-        console.log(value);
+        setBranch({ ...branch, address: value });
         return;
       case "cp":
         setBranch({ ...branch, CP: value });
-        return;
-      case "floor":
-        setBranch({ ...branch, floor: value });
         return;
       case "phone":
         setBranch({ ...branch, phone: value });
@@ -56,8 +54,11 @@ export default function newBranch() {
   };
 
   const submitHandler = () => {
-    dispatch(createBranch());
+    dispatch(createBranch({ branch }));
+    dispatch(allBranches());
+    // navigation.navigate('BranchesList')
   };
+
 
   return (
     <ScrollView
@@ -81,9 +82,15 @@ export default function newBranch() {
           <Text bold fontSize="xl" mb="4">
             Branch
           </Text>
-          <FormControl mb="5">
+
+          <FormControl mb="5" isInvalid>
             <FormControl.Label>Country</FormControl.Label>
             <Input onChangeText={(value) => inputHandler("country", value)} />
+            <FormControl.ErrorMessage
+              leftIcon={<WarningOutlineIcon size="xs" />}
+            >
+              Required
+            </FormControl.ErrorMessage>
           </FormControl>
           <Divider />
 
@@ -106,12 +113,6 @@ export default function newBranch() {
           <Divider />
 
           <FormControl mb="5">
-            <FormControl.Label>Floor</FormControl.Label>
-            <Input onChangeText={(value) => inputHandler("floor", value)} />
-          </FormControl>
-          <Divider />
-
-          <FormControl mb="5">
             <FormControl.Label>Phone</FormControl.Label>
             <Input onChangeText={(value) => inputHandler("phone", value)} />
           </FormControl>
@@ -120,8 +121,24 @@ export default function newBranch() {
           <FormControl mb="5">
             <FormControl.Label>Image</FormControl.Label>
             <Input onChangeText={(value) => inputHandler("image", value)} />
-
-            <Button onPress={() => submitHandler()}>Create</Button>
+            <View style={styles.Btns}>
+              <Button 
+                size="sm"
+                /* variant="outline" */ width={20}
+                height={7}
+                onPress={() => submitHandler()}
+              >
+                Create
+              </Button>
+              <Button
+                size="sm"
+                /* variant="outline" */ width={20}
+                height={7}
+            
+                >
+                Go Back
+              </Button>
+                </View>
           </FormControl>
           <Divider />
         </Box>
@@ -130,4 +147,10 @@ export default function newBranch() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  Btns: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 10
+  }
+});

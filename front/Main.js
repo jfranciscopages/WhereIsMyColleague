@@ -33,7 +33,7 @@ export default function Main() {
             />
             <Stack.Screen name="Branch" component={Branch} />
             <Stack.Screen name="editBranch" component={editBranch} />
-            <Stack.Screen name="newBranch" component={newBranch} />
+           {/*  <Stack.Screen name="newBranch" component={newBranch} /> */}
             <Stack.Screen name="userinfo" component={UserDetails} />
             <Stack.Screen name="map" component={Map} />
           </>

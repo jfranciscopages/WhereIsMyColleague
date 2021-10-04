@@ -1,5 +1,5 @@
 const express = require(`express`);
-const User_Profile = require("../models/user_profile");
+const { User_Profile, Branches } = require("../models/index");
 const router = express.Router();
 const { Op } = require("sequelize");
 
@@ -34,6 +34,7 @@ router.get("/search/:name", (req, res, next) => {
 router.get("/byId/:id", (req, res, next) => {
   User_Profile.findOne({
     where: { id: req.params.id },
+    include: Branches
   })
     .then((user) => res.send(user))
     .catch((err) => next(err));
