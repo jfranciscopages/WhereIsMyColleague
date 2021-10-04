@@ -18,11 +18,11 @@ import {
 import { SunIcon } from "native-base";
 import { IconButton } from "native-base";
 import axios from "axios";
-import listitem, { ListItem } from '@ui-kitten/components'
+import listitem, { ListItem } from "@ui-kitten/components";
 import FloorList from "../components/FloorList/Floorlist";
 import { useDispatch, useSelector } from "react-redux";
 import { setBranchReducer } from "../store/searchBranch/searchBranchReducer";
-import { Icon } from 'react-native-elements'
+import { Icon } from "react-native-elements";
 // import { styles } from "styled-system";
 import { StyleSheet } from "react-native";
 import { singleBranch } from "../store/BranchReducer";
@@ -32,18 +32,19 @@ function Branch() {
   const branch = useSelector((state) => state.branches.singleBranch);
   const [loading, setLoading] = useState(true);
   const userById = useSelector((state) => state.users.userById);
-  const actualUser = useSelector((state) => state.users.usersByTitle)
-
+  const actualUser = useSelector((state) => state.users.usersByTitle);
 
   useEffect(() => {
-    dispatch(singleBranch(actualUser[0].branchId))
-    axios.get(`http://${expoLocalHost}/api/branches/singleBranch/${actualUser[0].branchId}`)
-      .then((data) => console.log('ACAAA', data.data))
+    dispatch(singleBranch(userById.branchId));
+    /*  axios
+      .get(
+        `http://${expoLocalHost}/api/branches/singleBranch/${userById.branchId}`
+      )
+      .then((data) => console.log("ACAAA", data.data)); */
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   }, []);
-
 
   return (
     <View my="3">
@@ -83,19 +84,22 @@ function Branch() {
                   She is from {userById.city}, {userById.country}.
                 </Text>
                 <View></View>
-                <View></View>
+                {/*   <View></View>
                 <View style={styles.view}>
                   <Heading size="md" ml="-1">
                     <SunIcon /> Work place
                   </Heading>
-                  <Text>{branch.city}, {branch.country}.</Text>
+                  <Text>
+                    {branch.city}, {branch.country}.
+                  </Text>
                   <Text>{branch.floors[0].name}</Text>
-                </View>
+                </View> */}
                 <View></View>
                 <View></View>
                 <View style={styles.view}>
                   <Heading size="md" ml="-1">
-                    <Icon name='sc-telegram' type='evilicon' color='#517fa4' /> Email
+                    <Icon name="sc-telegram" type="evilicon" color="#517fa4" />{" "}
+                    Email
                   </Heading>
                   <Text>{userById.email}</Text>
                 </View>
@@ -103,7 +107,7 @@ function Branch() {
                 <View></View>
                 <View style={styles.view}>
                   <Heading size="md" ml="-1">
-                    <Icon name='phone' type='evilicon' color='#517fa4' /> Phone
+                    <Icon name="phone" type="evilicon" color="#517fa4" /> Phone
                   </Heading>
                   <Text>{userById.phone}</Text>
                 </View>
@@ -113,8 +117,7 @@ function Branch() {
                 alignItems="center"
                 space={4}
                 justifyContent="space-between"
-              >
-              </HStack>
+              ></HStack>
             </Stack>
             <Box justifyContent="center" alignItems="center">
               <Box
@@ -122,8 +125,7 @@ function Branch() {
                   base: "100%",
                   md: "25%",
                 }}
-              >
-              </Box>
+              ></Box>
               {/* <FloorList /> */}
             </Box>
           </Box>
@@ -137,15 +139,15 @@ function Branch() {
 
 const styles = StyleSheet.create({
   view: {
-    borderBottomColor: 'rgba(52, 146, 2, 0.26)',
+    borderBottomColor: "rgba(52, 146, 2, 0.26)",
     borderBottomWidth: 0.5,
     borderRadius: 12,
     width: 400,
     marginLeft: -100,
     paddingLeft: 125,
-    backgroundColor: 'rgba(0, 0, 0, 0.03)'
-  }
-})
+    backgroundColor: "rgba(0, 0, 0, 0.03)",
+  },
+});
 export default function () {
   return (
     <NativeBaseProvider>

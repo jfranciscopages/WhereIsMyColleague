@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBranchReducer } from "../store/searchBranch/searchBranchReducer";
 function Branch() {
   const dispatch = useDispatch();
-  const branch = useSelector((state) => state.searchBranch);
+  const branch = useSelector((state) => state.branches.singleBranch);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ function Branch() {
             <Stack p="4" space={3}>
               <Stack space={2}>
                 <Heading size="md" ml="-1">
-                  Globant London
+                  {branch.country}
                 </Heading>
                 <Text
                   fontSize="xs"
@@ -67,7 +67,7 @@ function Branch() {
                   ml="-0.5"
                   mt="-1"
                 >
-                  It’s located in England’s Southeast.
+                  {`It’s located in England’s Southeast.`}
                 </Text>
               </Stack>
               <Text fontWeight="400">

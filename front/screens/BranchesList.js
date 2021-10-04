@@ -37,6 +37,14 @@ export default function Branches() {
     setBranchCountry(itemValue);
     dispatch(byCountry(itemValue));
   };
+  useEffect(() => {
+    dispatch(allBranches());
+  }, []);
+
+  const individualBranchHandler = (id) => {
+    dispatch(singleBranch(id));
+    navigation.navigate("Branch");
+  };
 
   const deleteHandler = async (id) => {
    await dispatch(deleteBranch(id));
@@ -178,30 +186,41 @@ export default function Branches() {
                           6 mins ago
                         </Text> */}
                     </HStack>
-                  </HStack>
-                </Stack>
-                <View style={styles.Btns}>
-                  <Button
-                    size="sm"
-                    /* variant="outline" */ width={20}
-                    height={7}
-                    onPress={() => singleBranchHandler(id)}
-                  >
-                    EDIT
-                  </Button>
-                  <Button
-                    size="sm"
-                    /* variant="outline" */
-                    width={20}
-                    height={7}
-                    marginLeft={2}
-                    onPress={() => deleteHandler(id)}
-                  >
-                    DELETE
-                  </Button>
-                </View>
-              </Box>
-            ))
+                  </Stack>
+                  <View style={styles.Btns}>
+                    <Button
+                      size="sm"
+                      /* variant="outline" */
+                      width={20}
+                      height={7}
+                      marginLeft={2}
+                      marginRight={2}
+                      onPress={() => individualBranchHandler(id)}
+                    >
+                      View
+                    </Button>
+                    <Button
+                      size="sm"
+                      /* variant="outline" */ width={20}
+                      height={7}
+                      onPress={() => singleBranchHandler(id)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      size="sm"
+                      /* variant="outline" */
+                      width={20}
+                      height={7}
+                      marginLeft={2}
+                      onPress={() => dispatch(deleteBranch(id))}
+                    >
+                      Delete
+                    </Button>
+                  </View>
+                </Box>
+              )
+            )
           : null}
       </View>
     </ScrollView>

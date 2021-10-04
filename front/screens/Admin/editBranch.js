@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, /* Text ,*/ View } from "react-native";
+import expoLocalHost from "../../localHost";
 import {
   FormControl,
   Input,
@@ -12,9 +13,14 @@ import {
   WarningOutlineIcon
 } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
+
 import { allBranches, editedBranch } from "../../store/BranchReducer";
 import { useNavigation } from "@react-navigation/native";
 import { byCountry } from "../../store/BranchReducer";
+
+import axios from "axios";
+import { useNavigation } from "@react-navigation/core";
+
 
 export default function editBranch() {
   const navigation = useNavigation();
@@ -54,7 +60,7 @@ export default function editBranch() {
         setBranch({});
     }
   };
-
+  
   const updateHandler = async (id) => {
     await dispatch(editedBranch({ id, branch }));
     await dispatch(byCountry(branch.country));
@@ -64,7 +70,6 @@ export default function editBranch() {
   const backHandler = () => {
     dispatch(allBranches());
     navigation.navigate("BranchesList");
-  };
 
   return (
     <ScrollView

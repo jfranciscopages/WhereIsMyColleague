@@ -10,6 +10,7 @@ import newBranch from "./screens/Admin/newBranch";
 import editBranch from "./screens/Admin/editBranch";
 import Map from "./components/Map/Map";
 import UserDetails from "./screens/UserDetails";
+import Branch from "./screens/Branch";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ export default function Main() {
               name="Home"
               component={Home}
             />
+            <Stack.Screen name="Branch" component={Branch} />
             <Stack.Screen name="editBranch" component={editBranch} />
            {/*  <Stack.Screen name="newBranch" component={newBranch} /> */}
             <Stack.Screen name="userinfo" component={UserDetails} />
