@@ -83,11 +83,29 @@ export default function DrawerContent(props) {
             />
             <DrawerItem
               icon={({ color, size }) => (
+                <Icon name="folder-plus" color={color} size={size} />
+              )}
+              label="Create Branch"
+              onPress={() => {
+                props.navigation.navigate("createBranch");
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
                 <Icon name="map-marker-multiple" color={color} size={size} />
               )}
               label="Branch List"
               onPress={() => {
                 props.navigation.navigate("BranchesList");
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon name="map-marker-multiple" color={color} size={size} />
+              )}
+              label="Branchs Map"
+              onPress={() => {
+                props.navigation.navigate("BranchsMap");
               }}
             />
             {/*  <DrawerItem 

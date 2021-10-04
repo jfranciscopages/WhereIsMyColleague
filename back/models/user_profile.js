@@ -47,12 +47,6 @@ User_Profile.init(
       type: Sequelize.STRING,
       allowNull: false,
     },
-    latitude: {
-      type: Sequelize.FLOAT,
-    },
-    longitude: {
-      type: Sequelize.FLOAT,
-    },
     salt: {
       type: Sequelize.STRING,
     },

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, /* Text ,*/ View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
 import {
   FormControl,
   Input,
@@ -9,11 +9,15 @@ import {
   Divider,
   Box,
   Button,
+  WarningOutlineIcon
 } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
-import { createBranch } from "../../store/BranchReducer";
+import { allBranches, editedBranch } from "../../store/BranchReducer";
+import { useNavigation } from "@react-navigation/native";
+import { byCountry } from "../../store/BranchReducer";
 
 export default function editBranch() {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const singleBranch = useSelector((state) => state.branches.singleBranch);
 
@@ -22,7 +26,6 @@ export default function editBranch() {
     city: "",
     address: "",
     CP: "",
-    floor: "",
     phone: "",
     image: "",
   });
@@ -41,9 +44,6 @@ export default function editBranch() {
       case "cp":
         setBranch({ ...branch, CP: value });
         return;
-      case "floor":
-        setBranch({ ...branch, floor: value });
-        return;
       case "phone":
         setBranch({ ...branch, phone: value });
         return;
@@ -55,8 +55,15 @@ export default function editBranch() {
     }
   };
 
-  const updateHandler = () => {
-    dispatch(createBranch());
+  const updateHandler = async (id) => {
+    await dispatch(editedBranch({ id, branch }));
+    await dispatch(byCountry(branch.country));
+    // navigation.navigate("BranchesList");
+  };
+
+  const backHandler = () => {
+    dispatch(allBranches());
+    navigation.navigate("BranchesList");
   };
 
   return (
@@ -81,30 +88,34 @@ export default function editBranch() {
           <Text bold fontSize="xl" mb="4">
             Branch
           </Text>
-          <FormControl mb="5">
-            <FormControl.Label>Country</FormControl.Label>
+
+          <FormControl mb="2" isRequired>
+            <FormControl.Label justifyContent='center'>Country</FormControl.Label>
             <Input
-            value={branch.country}
+              value={branch.country}
               placeholder={singleBranch.country}
               onChangeText={(value) => inputHandler("country", value)}
             />
+            <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+            Required
+            </FormControl.ErrorMessage>
           </FormControl>
-          <Divider />
+          <Divider height={1} marginBottom={3}/>
 
-          <FormControl mb="5">
-            <FormControl.Label>City</FormControl.Label>
+          <FormControl mb="2">
+            <FormControl.Label justifyContent='center'>City</FormControl.Label>
             <Input
-            value={branch.city}
+              value={branch.city}
               placeholder={singleBranch.city}
               onChangeText={(value) => inputHandler("city", value)}
             />
           </FormControl>
-          <Divider />
+          <Divider height={1} marginBottom={3}/>
 
           <FormControl mb="5">
-            <FormControl.Label>Address</FormControl.Label>
+            <FormControl.Label justifyContent='center'>Address</FormControl.Label>
             <Input
-            value={branch.address}
+              value={branch.address}
               placeholder={singleBranch.address}
               onChangeText={(value) => inputHandler("address", value)}
             />
@@ -112,9 +123,9 @@ export default function editBranch() {
           <Divider />
 
           <FormControl mb="5">
-            <FormControl.Label>Postal Code</FormControl.Label>
+            <FormControl.Label justifyContent='center'>Postal Code</FormControl.Label>
             <Input
-            value={branch.CP}
+              value={branch.CP}
               placeholder={singleBranch.CP}
               onChangeText={(value) => inputHandler("cp", value)}
             />
@@ -122,19 +133,9 @@ export default function editBranch() {
           <Divider />
 
           <FormControl mb="5">
-            <FormControl.Label>Floor</FormControl.Label>
+            <FormControl.Label justifyContent='center'>Phone</FormControl.Label>
             <Input
-            value={branch.floor}
-              //   placeholder={singleBranch.floor ? singleBranch.floor : null}
-              onChangeText={(value) => inputHandler("floor", value)}
-            />
-          </FormControl>
-          <Divider />
-
-          <FormControl mb="5">
-            <FormControl.Label>Phone</FormControl.Label>
-            <Input
-            value={branch.phone}
+              value={branch.phone}
               placeholder={singleBranch.phone}
               onChangeText={(value) => inputHandler("phone", value)}
             />
@@ -142,14 +143,17 @@ export default function editBranch() {
           <Divider />
 
           <FormControl mb="5">
-            <FormControl.Label>Image</FormControl.Label>
+            <FormControl.Label justifyContent='center'>Image</FormControl.Label>
             <Input
-            value={branch.image}
+              value={branch.image}
               placeholder={singleBranch.image}
               onChangeText={(value) => inputHandler("image", value)}
             />
 
-            <Button onPress={() => updateHandler()}>Update Branch</Button>
+            <Button onPress={() => updateHandler(singleBranch.id)}>
+              Update Branch
+            </Button>
+            <Button onPress={() => backHandler()}>Go Back</Button>
           </FormControl>
           <Divider />
         </Box>

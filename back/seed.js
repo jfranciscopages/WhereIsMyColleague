@@ -9,6 +9,8 @@ const Branchs = [
     phone: "+54 11 4109-1700",
     image:
       "https://www.globant.com/sites/default/files/styles/crop_center_335_224/public/2019-03/1%20%282%29.jpg?itok=Z8MucHhy",
+    latitude: "-34.54100703942528",
+    longitude: "-58.47279831729628",
   },
   {
     country: "Argentina",
@@ -18,6 +20,8 @@ const Branchs = [
     phone: "+54 11 4109-1700",
     image:
       "https://www.globant.com/sites/default/files/styles/crop_center_335_224/public/2018-09/Mar%20del%20Plata.jpg?itok=5k7_CvH5",
+    latitude: "-38.01078500106845",
+    longitude: "-57.535618144180674",
   },
   {
     country: "United Kingdom",
@@ -27,6 +31,8 @@ const Branchs = [
     phone: "+44 20 7979-1885",
     image:
       "https://www.globant.com/sites/default/files/styles/crop_center_335_224/public/2018-09/london1.jpg?itok=sVZb3IFJ",
+    latitude: "51.520321956776826",
+    longitude: "-0.10822237518363834",
   },
   {
     country: "Romania",
@@ -36,6 +42,8 @@ const Branchs = [
     phone: "+40-264-418-686",
     image:
       "https://www.globant.com/sites/default/files/styles/crop_center_335_224/public/2019-03/istockphoto-658396342-612x612.jpg?itok=OYNhIC4X",
+    latitude: "48.13159598006025",
+    longitude: "23.5873611",
   },
   {
     country: "Spain",
@@ -46,6 +54,8 @@ const Branchs = [
     phone: "+34 917 874 700",
     image:
       "https://www.globant.com/sites/default/files/styles/crop_center_335_224/public/2018-09/Madrid.jpg?itok=ahObQH3m",
+    latitude: "40.45206561667841",
+    longitude: "-3.6915253170713465",
   },
 ];
 
@@ -136,8 +146,6 @@ const Users = [
     city: "Buenos Aires",
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
-    latitude: "-34.54100703942528",
-    longitude: "-58.47279831729628",
   },
   {
     branchId: "2",
@@ -150,8 +158,6 @@ const Users = [
     city: "London",
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
-    latitude: "51.520321956776826",
-    longitude: "-0.10822237518363834",
   },
   {
     branchId: "3",
@@ -164,8 +170,6 @@ const Users = [
     city: "Cluj-Napoca",
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
-    latitude: "48.13159598006025",
-    longitude: "23.5873611",
   },
   {
     branchId: "4",
@@ -178,8 +182,6 @@ const Users = [
     city: "Mar del Plata",
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
-    latitude: "-38.01078500106845",
-    longitude: "-57.535618144180674",
   },
   {
     branchId: "5",
@@ -192,8 +194,6 @@ const Users = [
     city: "Madrid",
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
-    latitude: "40.45206561667841",
-    longitude: "-3.6915253170713465",
   },
   {
     branchId: "1",
@@ -206,8 +206,6 @@ const Users = [
     city: "Madrid",
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
-    latitude: "40.45206561667841",
-    longitude: "-3.6915253170713465",
   },
 ];
 

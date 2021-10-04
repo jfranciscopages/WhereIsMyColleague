@@ -12,6 +12,9 @@ Branches.init(
     country: {
       type: Sequelize.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
     city: {
       type: Sequelize.STRING,
@@ -28,6 +31,12 @@ Branches.init(
     image: {
       type: Sequelize.STRING,
       allowNull: false,
+    },
+    latitude: {
+      type: Sequelize.FLOAT,
+    },
+    longitude: {
+      type: Sequelize.FLOAT,
     },
   },
   { sequelize: db, modelName: "branches" }
