@@ -9,7 +9,6 @@ import {
   Box,
   Heading,
   AspectRatio,
-  Center,
   Stack,
   Button,
 } from "native-base";
@@ -47,9 +46,9 @@ export default function Branches() {
   };
 
   const deleteHandler = async (id) => {
-   await dispatch(deleteBranch(id));
-    dispatch(byCountry(branchCountry))
-   return dispatch(allBranches());
+    await dispatch(deleteBranch(id));
+    dispatch(byCountry(branchCountry));
+    return dispatch(allBranches());
   };
 
   const singleBranchHandler = (id) => {
@@ -170,13 +169,8 @@ export default function Branches() {
                       high-tech industry. The city is also known for its parks
                       and nightlife.
                     </Text> */}
-                  <HStack
-                    alignItems="center"
-                    space={4}
-                    justifyContent="space-between"
-                  >
-                    <HStack alignItems="center">
-                      {/* <Text
+                  <HStack alignItems="center">
+                    {/* <Text
                           color="coolGray.600"
                           _dark={{
                             color: "warmGray.200",
@@ -185,42 +179,41 @@ export default function Branches() {
                         >
                           6 mins ago
                         </Text> */}
-                    </HStack>
-                  </Stack>
-                  <View style={styles.Btns}>
-                    <Button
-                      size="sm"
-                      /* variant="outline" */
-                      width={20}
-                      height={7}
-                      marginLeft={2}
-                      marginRight={2}
-                      onPress={() => individualBranchHandler(id)}
-                    >
-                      View
-                    </Button>
-                    <Button
-                      size="sm"
-                      /* variant="outline" */ width={20}
-                      height={7}
-                      onPress={() => singleBranchHandler(id)}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      size="sm"
-                      /* variant="outline" */
-                      width={20}
-                      height={7}
-                      marginLeft={2}
-                      onPress={() => dispatch(deleteBranch(id))}
-                    >
-                      Delete
-                    </Button>
-                  </View>
-                </Box>
-              )
-            )
+                  </HStack>
+                </Stack>
+                <View style={styles.Btns}>
+                  <Button
+                    size="sm"
+                    /* variant="outline" */
+                    width={20}
+                    height={7}
+                    marginLeft={2}
+                    marginRight={2}
+                    onPress={() => individualBranchHandler(id)}
+                  >
+                    View
+                  </Button>
+                  <Button
+                    size="sm"
+                    /* variant="outline" */ width={20}
+                    height={7}
+                    onPress={() => singleBranchHandler(id)}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    size="sm"
+                    /* variant="outline" */
+                    width={20}
+                    height={7}
+                    marginLeft={2}
+                    onPress={() => dispatch(deleteBranch(id))}
+                  >
+                    Delete
+                  </Button>
+                </View>
+              </Box>
+            ))
           : null}
       </View>
     </ScrollView>
@@ -237,8 +230,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   Btns: {
-    flexDirection: 'row',
+    flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 10
+    marginBottom: 10,
   },
 });
