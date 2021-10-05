@@ -13,11 +13,19 @@ import {
 } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
+import { setSelectedFloor } from "../../store/floorReducer";
+import axios from "axios";
+import { singleBranch } from "../../store/BranchReducer";
+import expoLocalHost from "../../localHost";
 export default function FloorList() {
-  const branch = useSelector((state) => state.searchBranch);
+  const branch = useSelector((state) => state.branches.singleBranch);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
+
+  const singleBranchFloors = useSelector((state) => {
+    return state.branches.singleBranch.floors
+  })
 
   useEffect(() => {
     setLoading(false);
@@ -27,6 +35,16 @@ export default function FloorList() {
     dispatch(userById(id));
     navigation.navigate("userinfo");
   };
+  const handlePressEditFloor = (value) => {
+    navigation.navigate('EditFloor')
+    console.log(value)
+    dispatch(setSelectedFloor(value))
+  }
+  useEffect(() => {
+    axios.get()
+    console.log(singleBranchFloors)
+  }, [singleBranchFloors])
+
 
   return (
     <Flex>
@@ -87,6 +105,7 @@ export default function FloorList() {
                       </Button>
                     );
                   })}
+                  <Button onPress={(value) => handlePressEditFloor(floor.id)}>Edit Floor</Button>
                 </Accordion.Details>
               </Accordion.Item>
             );

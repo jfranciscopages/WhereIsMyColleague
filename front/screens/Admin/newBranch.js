@@ -122,7 +122,7 @@ export default function newBranch() {
             <FormControl.Label>Image</FormControl.Label>
             <Input onChangeText={(value) => inputHandler("image", value)} />
             <View style={styles.Btns}>
-              <Button 
+              <Button
                 size="sm"
                 /* variant="outline" */ width={20}
                 height={7}
@@ -134,11 +134,11 @@ export default function newBranch() {
                 size="sm"
                 /* variant="outline" */ width={20}
                 height={7}
-            
-                >
+
+              >
                 Go Back
               </Button>
-                </View>
+            </View>
           </FormControl>
           <Divider />
         </Box>

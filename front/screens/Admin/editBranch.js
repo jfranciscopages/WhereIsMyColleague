@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { StyleSheet, /* Text ,*/ View } from "react-native";
-import expoLocalHost from "../../localHost";
 import {
   FormControl,
   Input,
@@ -19,7 +18,6 @@ import { useNavigation } from "@react-navigation/native";
 import { byCountry } from "../../store/BranchReducer";
 
 import axios from "axios";
-import { useNavigation } from "@react-navigation/core";
 
 
 export default function editBranch() {
@@ -60,7 +58,7 @@ export default function editBranch() {
         setBranch({});
     }
   };
-  
+
   const updateHandler = async (id) => {
     await dispatch(editedBranch({ id, branch }));
     await dispatch(byCountry(branch.country));
@@ -70,6 +68,12 @@ export default function editBranch() {
   const backHandler = () => {
     dispatch(allBranches());
     navigation.navigate("BranchesList");
+  }
+
+  const CreateFloorHandlePress = () => {
+    navigation.navigate('CreateFloor')
+  }
+
 
   return (
     <ScrollView
@@ -102,10 +106,10 @@ export default function editBranch() {
               onChangeText={(value) => inputHandler("country", value)}
             />
             <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-            Required
+              Required
             </FormControl.ErrorMessage>
           </FormControl>
-          <Divider height={1} marginBottom={3}/>
+          <Divider height={1} marginBottom={3} />
 
           <FormControl mb="2">
             <FormControl.Label justifyContent='center'>City</FormControl.Label>
@@ -115,7 +119,7 @@ export default function editBranch() {
               onChangeText={(value) => inputHandler("city", value)}
             />
           </FormControl>
-          <Divider height={1} marginBottom={3}/>
+          <Divider height={1} marginBottom={3} />
 
           <FormControl mb="5">
             <FormControl.Label justifyContent='center'>Address</FormControl.Label>
@@ -162,6 +166,7 @@ export default function editBranch() {
           </FormControl>
           <Divider />
         </Box>
+        <Button onPress={CreateFloorHandlePress}>Add floor!</Button>
       </Stack>
     </ScrollView>
   );

@@ -8,6 +8,7 @@ import BranchesList from "../screens/BranchesList";
 import Branch from "../screens/Branch";
 import newBranch from "../screens/Admin/newBranch";
 import BranchsMap from "../components/Map/BranchsMap";
+import { CreateFloor } from "../screens/CreateFloor";
 
 const Drawer = createDrawerNavigator();
 

@@ -18,7 +18,6 @@ import {
 import { SunIcon } from "native-base";
 import { IconButton } from "native-base";
 import axios from "axios";
-import listitem, { ListItem } from "@ui-kitten/components";
 import FloorList from "../components/FloorList/Floorlist";
 import { useDispatch, useSelector } from "react-redux";
 import { setBranchReducer } from "../store/searchBranch/searchBranchReducer";

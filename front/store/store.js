@@ -5,6 +5,7 @@ import { UserReducer } from "./usersReducer";
 import { BranchReducer } from "./BranchReducer";
 import { ProfileReducer } from "./profileReducer";
 import { searchBranchReducer } from "./searchBranch/searchBranchReducer";
+import { FloorReducer } from "./floorReducer";
 
 const store = configureStore({
   /* middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),  */
@@ -15,6 +16,7 @@ const store = configureStore({
     users: UserReducer,
     branches: BranchReducer,
     searchBranch: searchBranchReducer,
+    selectedFloor: FloorReducer,
   },
 });
 
