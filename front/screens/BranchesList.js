@@ -169,7 +169,6 @@ export default function Branches() {
                       high-tech industry. The city is also known for its parks
                       and nightlife.
                     </Text> */}
-
                 <HStack
                   alignItems="center"
                   space={4}
@@ -186,43 +185,46 @@ export default function Branches() {
                           6 mins ago
                         </Text> */}
                   </HStack>
-                </Stack>
-                <View style={styles.Btns}>
-                  <Button
-                    size="sm"
-                    /* variant="outline" */
-                    width={20}
-                    height={7}
-                    marginLeft={2}
-                    marginRight={2}
-                    onPress={() => individualBranchHandler(id)}
-                  >
-                    View
-                  </Button>
-                  <Button
-                    size="sm"
-                    /* variant="outline" */ width={20}
-                    height={7}
-                    onPress={() => singleBranchHandler(id)}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    size="sm"
-                    /* variant="outline" */
-                    width={20}
-                    height={7}
-                    marginLeft={2}
-                    onPress={() => dispatch(deleteBranch(id))}
-                  >
-                    Delete
-                  </Button>
-                </View>
-              </Box>
-            ))
+                </HStack>
+              </Stack>
+              <View style={styles.Btns}>
+                <Button
+                  size="sm"
+                  /* variant="outline" */
+                  width={20}
+                  height={7}
+                  marginLeft={2}
+                  marginRight={2}
+                  onPress={() => individualBranchHandler(id)}
+                >
+                  View
+                </Button>
+                <Button
+                  size="sm"
+                      /* variant="outline" */ width={20}
+                  height={7}
+                  onPress={() => singleBranchHandler(id)}
+                >
+                  Edit
+                </Button>
+                <Button
+                  size="sm"
+                  /* variant="outline" */
+                  width={20}
+                  height={7}
+                  marginLeft={2}
+                  onPress={() => dispatch(deleteBranch(id))}
+                >
+                  Delete
+                </Button>
+              </View>
+            </Box>
+          )
+          )
           : null}
       </View>
     </ScrollView>
+
   );
 }
 

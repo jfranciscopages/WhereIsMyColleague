@@ -29,7 +29,7 @@ export const EditFloor = () => {
         return state.branches.singleBranch
     });
 
-    const floorId = useSelector((state) => state.selectedFloor)
+    const floorId = useSelector((state) => state.selectedFloorId)
     console.log(selectedBranch)
 
     const floorsNameHandler = (value) => {
