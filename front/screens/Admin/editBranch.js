@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { StyleSheet, /* Text ,*/ View } from "react-native";
-import expoLocalHost from "../../localHost";
 import {
   FormControl,
   Input,
@@ -17,6 +16,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { allBranches, editedBranch } from "../../store/BranchReducer";
 import { useNavigation } from "@react-navigation/native";
 import { byCountry } from "../../store/BranchReducer";
+
+
+import axios from "axios";
+
 
 export default function editBranch() {
   const navigation = useNavigation();
@@ -66,6 +69,12 @@ export default function editBranch() {
   const backHandler = () => {
     dispatch(allBranches());
     navigation.navigate("BranchesList");
+  }
+
+  const CreateFloorHandlePress = () => {
+    navigation.navigate('CreateFloor')
+  }
+
 
     return (
       <ScrollView
@@ -74,6 +83,7 @@ export default function editBranch() {
           md: "90%",
         }}
       >
+
         <Stack
           space={2.5}
           alignSelf="center"

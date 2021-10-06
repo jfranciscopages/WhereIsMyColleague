@@ -24,7 +24,7 @@ export default function Intro() {
             name="rightcircle"
             size={24}
             color="black"
-            onPress={() => navigation.navigate("Login")}
+            onPress={() => navigation.navigate("userinfo")}
           />
         </View>
       </View>

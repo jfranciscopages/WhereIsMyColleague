@@ -11,6 +11,8 @@ import editBranch from "./screens/Admin/editBranch";
 import Map from "./components/Map/Map";
 import UserDetails from "./screens/UserDetails";
 import Branch from "./screens/Branch";
+import { CreateFloor } from "./screens/CreateFloor";
+import { EditFloor } from "./screens/EditFloor";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,26 +20,28 @@ export default function Main() {
   const profile = useSelector((state) => state.profile);
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Intro">
-        {profile.id ? (
-          <>
-            <Stack.Screen
-              name="DrawerNavigator"
-              component={DrawerContainer}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="Home"
-              component={Home}
-            />
-            <Stack.Screen name="Branch" component={Branch} />
-            <Stack.Screen name="editBranch" component={editBranch} />
-           {/*  <Stack.Screen name="newBranch" component={newBranch} /> */}
-            <Stack.Screen name="userinfo" component={UserDetails} />
-            <Stack.Screen name="map" component={Map} />
-          </>
-        ) : (
+      <Stack.Navigator initialRouteName="DrawerNavigator">
+        {/* {profile.id ? ( */}
+        <>
+          <Stack.Screen
+            name="DrawerNavigator"
+            component={DrawerContainer}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Home"
+            component={Home}
+          />
+          <Stack.Screen name="Branch" component={Branch} />
+          <Stack.Screen name="editBranch" component={editBranch} />
+          {/*  <Stack.Screen name="newBranch" component={newBranch} /> */}
+          <Stack.Screen name="CreateFloor" component={CreateFloor} />
+          <Stack.Screen name='EditFloor' component={EditFloor} />
+          <Stack.Screen name="userinfo" component={UserDetails} />
+          <Stack.Screen name="map" component={Map} />
+        </>
+        {/* ) : (
           <>
             <Stack.Screen
               options={{ headerShown: false }}
@@ -48,9 +52,9 @@ export default function Main() {
               options={{ headerShown: false }}
               name="Login"
               component={Login}
-            />
-          </>
-        )}
+            /> */}
+        {/* </> */}
+        {/* )} */}
       </Stack.Navigator>
     </NavigationContainer>
   );

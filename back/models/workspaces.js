@@ -2,7 +2,7 @@ const Sequelize = require(`sequelize`);
 const db = require("../db/db");
 
 //-- User Model
-class Workspaces extends Sequelize.Model {}
+class Workspaces extends Sequelize.Model { }
 Workspaces.init(
   {
     name: {

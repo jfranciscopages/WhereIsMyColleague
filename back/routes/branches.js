@@ -45,7 +45,16 @@ router.post("/newBranch", (req, res, next) => {
 router.put("/editBranch/:id", (req, res, next) => {
   console.log(req.body);
   console.log(req.params.id);
-  Branches.update(req.body, {
+  Branches.update({
+    address: req.body.address,
+    country: req.body.country,
+    city: req.body.city,
+    CP: req.body.CP,
+    phone: req.body.phone,
+    image: req.body.image,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude
+  }, {
     where: { id: req.params.id },
     returning: true,
   })
