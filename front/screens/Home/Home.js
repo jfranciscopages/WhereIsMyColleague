@@ -3,9 +3,12 @@ import { View, Text, ImageBackground, Image } from "react-native";
 import { useSelector } from "react-redux";
 import styles from "./homeStyles";
 import { Button } from "native-base";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
   const profile = useSelector((state) => state.profile);
+  const navigation = useNavigation();
+  
   return (
     <View style={styles.container}>
       <View alignItems="center">
@@ -31,7 +34,8 @@ export default function Home() {
           mt="50"
           w="150"
           borderRadius="10"
-          variant="subtle" // onPress={() => console.log('hello world')}
+          variant="subtle"
+          onPress={()=>{navigation.navigate("SearchColleague")}} // onPress={() => console.log('hello world')}
         >
           Search Colleague
         </Button>

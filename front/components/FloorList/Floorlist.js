@@ -36,9 +36,14 @@ export default function FloorList() {
     navigation.navigate("userinfo");
   };
   const handlePressEditFloor = (value) => {
-    navigation.navigate('EditFloor')
     console.log(value)
     dispatch(setSelectedFloor(value))
+    navigation.navigate('EditFloor')
+  }
+  const handlePressViewFloor = (value) => {
+    console.log("VALUEEEE",value)
+    dispatch(setSelectedFloor(value))
+    navigation.navigate('floorDetails')
   }
 
 
@@ -47,14 +52,16 @@ export default function FloorList() {
       <Accordion allowMultiple w="sm">
         {!loading ? (
           branch.floors.map((floor, i) => {
+            {console.log("cuerpoFLOOR==>", floor)}
             return (
               <Accordion.Item key={i}>
+                
                 <Accordion.Summary>
                   {floor.name}
                   <Accordion.Icon />
                 </Accordion.Summary>
                 <Accordion.Details>
-                  {floor.workspaces.map((workspace, i) => {
+                  {/* {floor.workspaces.map((workspace, i) => {
                     return (
                       <Button
                         borderWidth={2}
@@ -100,7 +107,8 @@ export default function FloorList() {
                         </HStack>
                       </Button>
                     );
-                  })}
+                  })} */}
+                  <Button onPress={(value) => handlePressViewFloor(floor)}>Floor Details</Button>
                   <Button onPress={(value) => handlePressEditFloor(floor.id)}>Edit Floor</Button>
                 </Accordion.Details>
               </Accordion.Item>
