@@ -40,10 +40,6 @@ export default function FloorList() {
     console.log(value)
     dispatch(setSelectedFloor(value))
   }
-  useEffect(() => {
-    axios.get()
-    console.log(singleBranchFloors)
-  }, [singleBranchFloors])
 
 
   return (
