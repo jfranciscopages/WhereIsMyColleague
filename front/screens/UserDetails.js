@@ -1,49 +1,34 @@
 import React, { useEffect, useState } from "react";
-import expoLocalHost from "../localHost";
 import {
   Box,
-  View,
   Heading,
-  HStack,
-  Text,
+  Icon,
   AspectRatio,
-  NativeBaseProvider,
-  Spinner,
   Image,
+  Text,
   Center,
+  HStack,
   Stack,
-  SafeAreaView,
+  View,
+  Spinner,
   Button,
   ScrollView,
 } from "native-base";
-import { SunIcon } from "native-base";
-import { IconButton } from "native-base";
-import axios from "axios";
-import FloorList from "../components/FloorList/Floorlist";
+import { NativeBaseProvider } from "native-base";
+import { useNavigation } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
-import { setBranchReducer } from "../store/searchBranch/searchBranchReducer";
-import { Icon } from "react-native-elements";
-// import { styles } from "styled-system";
-import { StyleSheet } from "react-native";
 import { singleBranch } from "../store/BranchReducer";
 import { userById } from "../store/usersReducer";
-import { backgroundColor, width } from "styled-system";
-import { useNavigation } from "@react-navigation/core";
-function Branch() {
-  const dispatch = useDispatch();
+
+function UserDetails() {
   const navigation = useNavigation();
-  const branch = useSelector((state) => state.branches.singleBranch);
+  const dispatch = useDispatch();
+  const branch = useSelector((state) => state.branches.singleBranch.image);
   const [loading, setLoading] = useState(true);
   const user = useSelector((state) => state.users.userById);
-  const actualUser = useSelector((state) => state.users.usersByTitle);
 
   useEffect(() => {
     dispatch(singleBranch(user.branchId));
-    /*  axios
-      .get(
-        `http://${expoLocalHost}/api/branches/singleBranch/${userById.branchId}`
-      )
-      .then((data) => console.log("ACAAA", data.data)); */
     setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -55,112 +40,85 @@ function Branch() {
   };
 
   return (
-    <View my="3">
-      <ScrollView>
-        {!loading ? (
-          <Box
-            rounded="lg"
-            overflow="hidden"
-            w="sm"
-            shadow={1}
-            _light={{ backgroundColor: "gray.50" }}
-            _dark={{ backgroundColor: "gray.700" }}
-          >
-            <Box>
-              <AspectRatio ratio={16 / 9}>
-                <Image
-                  source={{
-                    uri: `${branch.image}`,
-                  }}
-                  alt="image"
-                />
-              </AspectRatio>
-            </Box>
-            <Stack p="4" space={3}>
-              <Stack space={2}>
-                <Heading size="md" ml="-1">
-                  {user.firstName} {user.lastName}
-                </Heading>
-                <Text
-                  fontSize="md"
-                  _light={{ color: "rgba(52, 146, 2, 0.63)" }}
-                  _dark={{ color: "rgba(52, 146, 2, 0.63)" }}
-                  fontWeight="500"
-                  ml="-0.5"
-                  mt="-1"
-                >
-                  She is from {user.city}, {user.country}.
-                </Text>
-                <View></View>
-                {/*   <View></View>
-                <View style={styles.view}>
-                  <Heading size="md" ml="-1">
-                    <SunIcon /> Work place
-                  </Heading>
-                  <Text>
-                    {branch.city}, {branch.country}.
-                  </Text>
-                  <Text>{branch.floors[0].name}</Text>
-                </View> */}
-                <View></View>
-                <View></View>
-                <View style={styles.view}>
-                  <Heading size="md" ml="-1">
-                    <Icon name="sc-telegram" type="evilicon" color="#517fa4" />{" "}
-                    Email
-                  </Heading>
-                  <Text>{user.email}</Text>
-                </View>
-                <View></View>
-                <View></View>
-                <View style={styles.view}>
-                  <Heading size="md" ml="-1">
-                    <Icon name="phone" type="evilicon" color="#517fa4" /> Phone
-                  </Heading>
-                  <Text>{user.phone}</Text>
-                </View>
-              </Stack>
-              {/* <Icon name='sc-telegram' type='evilicon' color='#517fa4' /> */}
-              <HStack
-                alignItems="center"
-                space={4}
-                justifyContent="space-between"
-              ></HStack>
-            </Stack>
-            <Box justifyContent="center" alignItems="center">
-              <Box
-                w={{
-                  base: "100%",
-                  md: "25%",
+    <View>
+      {!loading ? (
+        <Box
+          rounded="lg"
+          overflow="hidden"
+          width="72"
+          shadow={1}
+          _light={{ backgroundColor: "gray.50" }}
+          _dark={{ backgroundColor: "gray.700" }}
+        >
+          <Box>
+            <AspectRatio ratio={16 / 9}>
+              <Image
+                source={{
+                  uri: `${branch}`,
                 }}
-              ></Box>
-              <Button onPress={() => editUser()}> Edit</Button>
-            </Box>
+                alt="image"
+              />
+            </AspectRatio>
+            <Center
+              bg="violet.500"
+              _text={{ color: "white", fontWeight: "700", fontSize: "xs" }}
+              position="absolute"
+              bottom={0}
+              px="3"
+              py="1.5"
+            >
+              PHOTOS
+            </Center>
           </Box>
-        ) : (
-          <Spinner color="danger.500" />
-        )}
-      </ScrollView>
+          <Stack p="4" space={3}>
+            <Stack space={2}>
+              <Heading size="md" ml="-1">
+                {user.firstName} {user.lastName}
+              </Heading>
+              <Text
+                fontSize="xs"
+                _light={{ color: "violet.500" }}
+                _dark={{ color: "violet.300" }}
+                fontWeight="500"
+                ml="-0.5"
+                mt="-1"
+              >
+                The Silicon Valley of India.
+              </Text>
+            </Stack>
+            <Text fontWeight="400">
+              Bengaluru (also called Bangalore) is the center of India's
+              high-tech industry. The city is also known for its parks and
+              nightlife.
+            </Text>
+            <HStack
+              alignItems="center"
+              space={4}
+              justifyContent="space-between"
+            >
+              <HStack alignItems="center">
+                <Text color="gray.500" fontWeight="400">
+                  6 mins ago
+                </Text>
+              </HStack>
+            </HStack>
+          </Stack>
+          <Button bg="#A6CE39" onPress={() => editUser()}>
+            Edit
+          </Button>
+        </Box>
+      ) : (
+        <Spinner color="danger.500" />
+      )}
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  view: {
-    borderBottomColor: "rgba(52, 146, 2, 0.26)",
-    borderBottomWidth: 0.5,
-    borderRadius: 12,
-    width: 400,
-    marginLeft: -100,
-    paddingLeft: 125,
-    backgroundColor: "rgba(0, 0, 0, 0.03)",
-  },
-});
 export default function () {
   return (
     <NativeBaseProvider>
-      <Center flex={1}>
-        <Branch />
+      <Center flex={1} px="3">
+        <UserDetails />
       </Center>
     </NativeBaseProvider>
   );
