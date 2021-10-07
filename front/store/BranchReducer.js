@@ -12,7 +12,7 @@ export const byCountry = createAsyncThunk("BY_COUNTRY", (country) => {
     .then((r) => {
       console.log("********************");
       console.log("DATA DEL BACK", r.data);
-     return r.data;
+      return r.data;
     });
 });
 

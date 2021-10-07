@@ -1,4 +1,23 @@
-const { User_Profile } = require(`../models`);
+const { User_Profile } = require(`../models/index`);
+// const jwt = require("jsonwebtoken");
+
+// const checkJWT = (req, res, next) => {
+//   if (!req.headers.authorization) return res.status(401).send("No autorizado");
+
+//   const token = req.headers.authorization.split(" ")[1];
+//   const data = jwt.verify(token, "ClaveSecreta", (err, decoded) => {
+//     if (err) res.status(401).send("No permitido");
+//     return decoded;
+//   });
+//   if (data) {
+//     User_Profile.findByPk(data.id).then((user) => {
+//       req.user = data;
+//       next();
+//     });
+//   }
+// };
+
+// module.exports = checkJWT;
 
 const auth_controller = {
   login: (req, res, next) => {

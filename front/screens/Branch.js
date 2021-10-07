@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import expoLocalHost from "../localHost";
 import {
   Box,
   View,

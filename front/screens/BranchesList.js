@@ -39,9 +39,9 @@ export default function Branches() {
   };
 
   const deleteHandler = async (id) => {
-   await dispatch(deleteBranch(id));
-    dispatch(byCountry(branchCountry))
-   return dispatch(allBranches());
+    await dispatch(deleteBranch(id));
+    dispatch(byCountry(branchCountry));
+    return dispatch(allBranches());
   };
 
   const singleBranchHandler = (id) => {
@@ -157,11 +157,13 @@ export default function Branches() {
                       {/* {floor.length > 0 ? floor : null} */}
                     </Text>
                   </Stack>
-                  {/*  <Text fontWeight="400">
-                      Bengaluru (also called Bangalore) is the center of India's
-                      high-tech industry. The city is also known for its parks
-                      and nightlife.
-                    </Text> */}
+                  <Text fontWeight="400">
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book.
+                  </Text>
                   <HStack
                     alignItems="center"
                     space={4}
@@ -218,8 +220,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   Btns: {
-    flexDirection: 'row',
+    flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 10
+    marginBottom: 10,
   },
 });
