@@ -13,7 +13,7 @@ import {
 } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedFloor } from "../../store/floorReducer";
+import { setSelectedFloor, setSelectedFloorId } from "../../store/floorReducer";
 import axios from "axios";
 import { singleBranch } from "../../store/BranchReducer";
 import expoLocalHost from "../../localHost";
@@ -37,13 +37,13 @@ export default function FloorList() {
   };
   const handlePressEditFloor = (value) => {
     console.log(value)
-    dispatch(setSelectedFloor(value))
+    dispatch(setSelectedFloorId(value))
     navigation.navigate('EditFloor')
   }
   const handlePressViewFloor = (value) => {
     console.log("VALUEEEE",value)
     dispatch(setSelectedFloor(value))
-    navigation.navigate('floorDetails')
+    navigation.navigate('WorkSpaces')
   }
 
 
