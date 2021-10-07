@@ -54,6 +54,17 @@ export const EditFloor = () => {
             })
             .catch((e) => console.log('falla en la edicion', e))
     }
+    const createWorkSpaceHAndler = () => {
+        axios.post(`http://${expoLocalHost}/api/workSpace/createWorkSpace/${floorId}`, {
+            name: workSpaceName
+        })
+            .then((data) => {
+                dispatch(singleBranch(selectedBranch.id))
+                navigation.navigate('Branch')
+                return data.data
+            })
+            .catch((e) => console.log(e))
+    }
 
 
     return (
@@ -119,7 +130,7 @@ export const EditFloor = () => {
                             Required
                         </FormControl.ErrorMessage>
                     </FormControl>
-                    <Button onPress={() => createWorkSpace()}>
+                    <Button onPress={() => createWorkSpaceHAndler()}>
                         Create Workspace
                     </Button>
                 </Stack>
