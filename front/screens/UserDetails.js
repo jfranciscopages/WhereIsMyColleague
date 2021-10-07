@@ -13,6 +13,7 @@ import {
   Center,
   Stack,
   SafeAreaView,
+  Button,
   ScrollView,
 } from "native-base";
 import { SunIcon } from "native-base";
@@ -25,16 +26,19 @@ import { Icon } from "react-native-elements";
 // import { styles } from "styled-system";
 import { StyleSheet } from "react-native";
 import { singleBranch } from "../store/BranchReducer";
+import { userById } from "../store/usersReducer";
 import { backgroundColor, width } from "styled-system";
+import { useNavigation } from "@react-navigation/core";
 function Branch() {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const branch = useSelector((state) => state.branches.singleBranch);
   const [loading, setLoading] = useState(true);
-  const userById = useSelector((state) => state.users.userById);
+  const user = useSelector((state) => state.users.userById);
   const actualUser = useSelector((state) => state.users.usersByTitle);
 
   useEffect(() => {
-    dispatch(singleBranch(userById.branchId));
+    dispatch(singleBranch(user.branchId));
     /*  axios
       .get(
         `http://${expoLocalHost}/api/branches/singleBranch/${userById.branchId}`
@@ -44,6 +48,11 @@ function Branch() {
       setLoading(false);
     }, 1000);
   }, []);
+
+  const editUser = () => {
+    dispatch(userById(user.id));
+    navigation.navigate("EditUser");
+  };
 
   return (
     <View my="3">
@@ -70,7 +79,7 @@ function Branch() {
             <Stack p="4" space={3}>
               <Stack space={2}>
                 <Heading size="md" ml="-1">
-                  {userById.firstName} {userById.lastName}
+                  {user.firstName} {user.lastName}
                 </Heading>
                 <Text
                   fontSize="md"
@@ -80,7 +89,7 @@ function Branch() {
                   ml="-0.5"
                   mt="-1"
                 >
-                  She is from {userById.city}, {userById.country}.
+                  She is from {user.city}, {user.country}.
                 </Text>
                 <View></View>
                 {/*   <View></View>
@@ -100,7 +109,7 @@ function Branch() {
                     <Icon name="sc-telegram" type="evilicon" color="#517fa4" />{" "}
                     Email
                   </Heading>
-                  <Text>{userById.email}</Text>
+                  <Text>{user.email}</Text>
                 </View>
                 <View></View>
                 <View></View>
@@ -108,7 +117,7 @@ function Branch() {
                   <Heading size="md" ml="-1">
                     <Icon name="phone" type="evilicon" color="#517fa4" /> Phone
                   </Heading>
-                  <Text>{userById.phone}</Text>
+                  <Text>{user.phone}</Text>
                 </View>
               </Stack>
               {/* <Icon name='sc-telegram' type='evilicon' color='#517fa4' /> */}
@@ -125,7 +134,7 @@ function Branch() {
                   md: "25%",
                 }}
               ></Box>
-              {/* <FloorList /> */}
+              <Button onPress={() => editUser()}> Edit</Button>
             </Box>
           </Box>
         ) : (

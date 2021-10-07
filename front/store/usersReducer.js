@@ -23,6 +23,7 @@ export const setUsers = createAsyncThunk("USERS", () => {
 
 export const userById = createAsyncThunk("BY_ID", (id) => {
   return axios.get(`http://${expoLocalHost}/api/users/byId/${id}`).then((r) => {
+    console.log(r.data);
     return r.data;
   });
 });
