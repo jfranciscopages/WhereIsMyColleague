@@ -13,6 +13,6 @@ router.use("/branches", branches);
 router.use("/search", searchRouter);
 router.use("/auth", authRouter);
 router.use("/floors", floors)
-router.use('/editWorkSpace', workSpace)
+router.use('/workSpace', workSpace)
 
 module.exports = router;
