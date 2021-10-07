@@ -108,6 +108,15 @@ export default function DrawerContent(props) {
                 props.navigation.navigate("BranchsMap");
               }}
             />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon name="map-marker-multiple" color={color} size={size} />
+              )}
+              label="Create User"
+              onPress={() => {
+                props.navigation.navigate("Create User");
+              }}
+            />
             {/*  <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 

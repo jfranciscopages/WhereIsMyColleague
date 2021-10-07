@@ -1,5 +1,5 @@
 const express = require(`express`);
-const { User_Profile, Branches } = require("../models/index");
+const { User_Profile, Branches, Workspaces } = require("../models/index");
 const router = express.Router();
 const { Op } = require("sequelize");
 
@@ -34,24 +34,22 @@ router.get("/search/:name", (req, res, next) => {
 router.get("/byId/:id", (req, res, next) => {
   User_Profile.findOne({
     where: { id: req.params.id },
-    include: Branches
+    include: Branches,
   })
     .then((user) => res.send(user))
     .catch((err) => next(err));
 });
 
 router.post("/create", (req, res, next) => {
-  User_Profile.create({
-    email: req.body.email,
-    password: req.body.password,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    country: req.body.country,
-    city: req.body.city,
-    phone: req.body.phone,
-  })
+  const user = req.body;
+  console.log(user);
+  User_Profile.findOne({ where: { workspaceId: user.workspaceId } })
     .then((data) => {
-      return res.status(200).send(data);
+      if (data) res.sendStatus(404);
+      else
+        User_Profile.create(user).then((data) => {
+          return res.status(200).send(data);
+        });
     })
     .catch((e) => console.log(e.response));
 });

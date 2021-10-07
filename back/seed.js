@@ -136,8 +136,6 @@ const Workspace = [
 
 const Users = [
   {
-    branchId: "1",
-    workspaceId: "1",
     firstName: "Ramiro",
     lastName: "Arias",
     email: "ramiroarias@globant.com",
@@ -148,8 +146,6 @@ const Users = [
     job: "Front-End Developer",
   },
   {
-    branchId: "2",
-    workspaceId: "2",
     firstName: "Caterina",
     lastName: "Jones",
     email: "caterinajones@globant.com",
@@ -160,7 +156,6 @@ const Users = [
     job: "Front-End Developer",
   },
   {
-    branchId: "3",
     workspaceId: "3",
     firstName: "Dock",
     lastName: "Koch",
@@ -172,7 +167,6 @@ const Users = [
     job: "Front-End Developer",
   },
   {
-    branchId: "4",
     workspaceId: "4",
     firstName: "Gabriel",
     lastName: "Rama",
@@ -184,7 +178,6 @@ const Users = [
     job: "Front-End Developer",
   },
   {
-    branchId: "5",
     workspaceId: "5",
     firstName: "Tessie ",
     lastName: "Hills ",
@@ -196,7 +189,6 @@ const Users = [
     job: "Front-End Developer",
   },
   {
-    branchId: "1",
     workspaceId: "7",
     firstName: "Tesssie ",
     lastName: "Hills ",

@@ -11,6 +11,14 @@ User_Profile.init(
       allowNull: false,
       defaultValue: "user",
     },
+    firstName: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    lastName: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     email: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -23,21 +31,13 @@ User_Profile.init(
       type: Sequelize.STRING,
       allowNull: false,
     },
-    firstName: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    lastName: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
     country: {
       type: Sequelize.STRING,
       allowNull: false,
     },
     city: {
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     phone: {
       type: Sequelize.STRING,

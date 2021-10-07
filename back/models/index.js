@@ -6,9 +6,6 @@ const Workspaces = require(`./workspaces`);
 Branches.hasMany(Floors);
 Floors.belongsTo(Branches);
 
-Branches.hasMany(User_Profile);
-User_Profile.belongsTo(Branches);
-
 Floors.hasMany(Workspaces);
 Workspaces.belongsTo(Floors);
 

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, /* Text ,*/ View } from "react-native";
 import {
-    FormControl,
-    Input,
-    Stack,
-    Text,
-    ScrollView,
-    Divider,
-    Box,
-    Button,
-    WarningOutlineIcon
+  FormControl,
+  Input,
+  Stack,
+  Text,
+  ScrollView,
+  Divider,
+  Box,
+  Button,
+  WarningOutlineIcon,
 } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,20 +17,19 @@ import expoLocalHost from "../localHost";
 import axios from "axios";
 import { singleBranch } from "../store/BranchReducer";
 
-
 export const EditFloor = () => {
-    let floorsName;
-    let siteMap;
-    let workSpaceName;
-    const navigation = useNavigation();
-    const dispatch = useDispatch()
-    const selectedBranch = useSelector((state) => {
-        console.log(state)
-        return state.branches.singleBranch
-    });
+  let floorsName;
+  let siteMap;
+  let workSpaceName;
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const selectedBranch = useSelector((state) => {
+    console.log(state);
+    return state.branches.singleBranch;
+  });
 
-    const floorId = useSelector((state) => state.selectedFloor)
-    console.log(selectedBranch)
+  const floorId = useSelector((state) => state.selectedFloorId);
+  console.log(selectedBranch);
 
     const floorsNameHandler = (value) => {
         floorsName = value
@@ -66,42 +65,47 @@ export const EditFloor = () => {
             .catch((e) => console.log(e))
     }
 
+  return (
+    <View>
+      {
+        <ScrollView
+          w={{
+            base: "90%",
+            md: "90%",
+          }}
+        >
+          <Stack
+            space={2.5}
+            alignSelf="center"
+            px="4"
+            safeArea
+            mt="4"
+            w={{
+              base: "100%",
+              md: "25%",
+            }}
+          >
+            <Box>
+              <Text bold fontSize="xl" mb="4">
+                Branch
+              </Text>
 
-    return (
-        <View>
-            {<ScrollView
-                w={{
-                    base: "90%",
-                    md: "90%",
-                }}
-            >
-                <Stack
-                    space={2.5}
-                    alignSelf="center"
-                    px="4"
-                    safeArea
-                    mt="4"
-                    w={{
-                        base: "100%",
-                        md: "25%",
-                    }}
+              <FormControl mb="2" isRequired>
+                <FormControl.Label justifyContent="center">
+                  Floor's Name
+                </FormControl.Label>
+                <Input
+                  placeholder="Set Floor Name"
+                  onChangeText={(value) => floorsNameHandler(value)}
+                />
+                <FormControl.ErrorMessage
+                  leftIcon={<WarningOutlineIcon size="xs" />}
                 >
-                    <Box>
-                        <Text bold fontSize="xl" mb="4">
-                            Branch
-                        </Text>
+                  Required
+                </FormControl.ErrorMessage>
+              </FormControl>
+              <Divider height={1} marginBottom={3} />
 
-                        <FormControl mb="2" isRequired>
-                            <FormControl.Label justifyContent='center'>Floor's Name</FormControl.Label>
-                            <Input
-                                placeholder='Set Floor Name'
-                                onChangeText={(value) => floorsNameHandler(value)}
-                            />
-                            <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-                                Required
-                            </FormControl.ErrorMessage>
-                        </FormControl>
-                        <Divider height={1} marginBottom={3} />
 
                         <FormControl mb="2">
                             <FormControl.Label justifyContent='center'>Site Map</FormControl.Label>
@@ -138,3 +142,4 @@ export const EditFloor = () => {
         </View>
     )
 }
+

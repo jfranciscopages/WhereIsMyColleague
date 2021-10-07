@@ -8,7 +8,7 @@ import BranchesList from "../screens/BranchesList";
 import Branch from "../screens/Branch";
 import newBranch from "../screens/Admin/newBranch";
 import BranchsMap from "../components/Map/BranchsMap";
-import { CreateFloor } from "../screens/CreateFloor";
+import { CreateUser } from "../screens/CreateUser";
 
 const Drawer = createDrawerNavigator();
 
@@ -20,6 +20,7 @@ export default function DrawerContainer() {
       <Drawer.Screen name="BranchesList" component={BranchesList} />
       <Drawer.Screen name="Branch" component={Branch} />
       <Drawer.Screen name="createBranch" component={newBranch} />
+      <Drawer.Screen name="Create User" component={CreateUser} />
       <Drawer.Screen name="BranchsMap" component={BranchsMap} />
     </Drawer.Navigator>
   );
