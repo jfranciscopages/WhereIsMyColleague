@@ -6,7 +6,6 @@ const users = require("./users");
 const branches = require("./branches");
 const floors = require("./floors");
 const workSpace = require("./workSpace");
-
 /* GET home page. */
 router.use("/users", users);
 router.use("/branches", branches);

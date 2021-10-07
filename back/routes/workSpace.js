@@ -26,8 +26,9 @@ router.post("/findWorkspace", function (req, res, next) {
     .catch((err) => next(err));
 });
 
-router.put("/editWorkSpace", function (req, res, next) {
-  Workspaces.update({});
+/* router.put("/editWorkSpace", function (req, res, next) {
+  Workspaces.update({}); */
+
 
 router.post("/createWorkSpace/:id", (req, res, next) => {
   Workspaces.create({
