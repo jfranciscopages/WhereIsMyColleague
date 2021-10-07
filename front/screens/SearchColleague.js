@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userById } from "../store/usersReducer";
 import { StyleSheet, View, Image, Text } from "react-native";
-import { ScrollView } from "native-base";
+import { Divider, ScrollView } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ListItem, Button } from "react-native-elements";
 import SearchBar from "../components/SearchBar/searchBar";
@@ -49,37 +49,19 @@ export default function Home() {
           {inputValue.length > 2 && limited === true ? (
             usersByTitle.length > 0 && inputValue.length > 2 ? (
               limitUserBy5.map((user, i) => (
-                <ListItem.Swipeable
-                  key={i}
-                  leftContent={
-                    <Button
-                      title="Info"
-                      icon={{ name: "info", color: "white" }}
-                      buttonStyle={{ minHeight: "100%" }}
-                      onPress={() => {
-                        console.log(`USUARIO`, user);
-                        dispatch(userById(user.id));
-                        return navigation.navigate("userinfo");
-                      }}
-                    />
-                  }
-                  rightContent={
-                    <Button
-                      title="Locate"
-                      icon={{ name: "search", color: "white" }}
-                      buttonStyle={{
-                        minHeight: "100%" /* , backgroundColor: "green" */,
-                      }}
-                      onPress={() => mapHandler(user.id)}
-                    />
-                  }
-                >
-                  <ListItem.Content style={styles.listItem}>
+                <View>
+                  <ListItem
+                    onPress={() => {
+                      console.log(`USUARIO`, user);
+                      dispatch(userById(user.id));
+                      navigation.navigate("userinfo");
+                    }}
+                  >
                     <ListItem.Title>{user.firstName}</ListItem.Title>
                     <ListItem.Subtitle>{user.lastName}</ListItem.Subtitle>
-                  </ListItem.Content>
-                  <ListItem.Chevron />
-                </ListItem.Swipeable>
+                  </ListItem>
+                  <Divider my="1" />
+                </View>
               ))
             ) : (
               <ListItem bottomDivider>
@@ -90,39 +72,19 @@ export default function Home() {
           {inputValue.length > 2 && limited === false ? (
             usersByTitle.length > 0 && inputValue.length > 2 ? (
               usersByTitle.map((user, i) => (
-                <ListItem.Swipeable
-                  key={i}
-                  leftContent={
-                    <Button
-                      color="#A1CF6B"
-                      title="Info"
-                      icon={{ name: "info", color: "white" }}
-                      buttonStyle={{ minHeight: "100%" }}
-                      onPress={() => {
-                        console.log(`USUARIO`, user);
-                        dispatch(userById(user.id));
-                        return navigation.navigate("userinfo");
-                      }}
-                    />
-                  }
-                  rightContent={
-                    <Button
-                      color="#A1CF6B"
-                      title="Locate"
-                      icon={{ name: "search", color: "white" }}
-                      buttonStyle={{
-                        minHeight: "100%" /* , backgroundColor: "green" */,
-                      }}
-                      onPress={() => mapHandler(user.id)}
-                    />
-                  }
-                >
-                  <ListItem.Content style={styles.listItem}>
+                <View>
+                  <ListItem
+                    onPress={() => {
+                      console.log(`USUARIO`, user);
+                      dispatch(userById(user.id));
+                      return navigation.navigate("userinfo");
+                    }}
+                  >
                     <ListItem.Title>{user.firstName}</ListItem.Title>
                     <ListItem.Subtitle>{user.lastName}</ListItem.Subtitle>
-                  </ListItem.Content>
-                  <ListItem.Chevron />
-                </ListItem.Swipeable>
+                  </ListItem>
+                  <Divider my="1" />
+                </View>
               ))
             ) : (
               <ListItem bottomDivider>
@@ -174,6 +136,7 @@ export default function Home() {
 const styles = StyleSheet.create({
   listItem: {
     height: 30,
+    // marginTop: 10,
   },
   button: {
     position: "relative",

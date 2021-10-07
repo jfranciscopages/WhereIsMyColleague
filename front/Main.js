@@ -13,7 +13,12 @@ import UserDetails from "./screens/UserDetails";
 import Branch from "./screens/Branch";
 import { CreateFloor } from "./screens/CreateFloor";
 import { EditFloor } from "./screens/EditFloor";
+
 import { WorkSpaces } from "./screens/WorkSpaces";
+
+import { FloorDetails } from "./screens/FloorDetails";
+import { EditUser } from "./screens/EditUser";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -38,8 +43,15 @@ export default function Main() {
           <Stack.Screen name="editBranch" component={editBranch} />
           {/*  <Stack.Screen name="newBranch" component={newBranch} /> */}
           <Stack.Screen name="CreateFloor" component={CreateFloor} />
+
           <Stack.Screen name="WorkSpaces" component={WorkSpaces} />
           <Stack.Screen name='EditFloor' component={EditFloor} />
+
+          <Stack.Screen name="floorDetails" component={FloorDetails} />
+          <Stack.Screen name="EditFloor" component={EditFloor} />
+          <Stack.Screen name="EditUser" component={EditUser} />
+
+
           <Stack.Screen name="userinfo" component={UserDetails} />
           <Stack.Screen name="map" component={Map} />
         </>

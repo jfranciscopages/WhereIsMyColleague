@@ -24,8 +24,8 @@ export default function FloorList() {
   const navigation = useNavigation();
 
   const singleBranchFloors = useSelector((state) => {
-    return state.branches.singleBranch.floors
-  })
+    return state.branches.singleBranch.floors;
+  });
 
   useEffect(() => {
     setLoading(false);
@@ -36,6 +36,7 @@ export default function FloorList() {
     navigation.navigate("userinfo");
   };
   const handlePressEditFloor = (value) => {
+
     console.log(value)
     dispatch(setSelectedFloorId(value))
     navigation.navigate('EditFloor')
@@ -47,15 +48,27 @@ export default function FloorList() {
   }
 
 
+    console.log(value);
+    dispatch(setSelectedFloorId(value));
+    navigation.navigate("EditFloor");
+  };
+  const handlePressViewFloor = (value) => {
+    console.log("VALUEEEE", value);
+    dispatch(setSelectedFloor(value));
+    navigation.navigate("WorkSpaces");
+  };
+
+
   return (
     <Flex>
       <Accordion allowMultiple w="sm">
         {!loading ? (
           branch.floors.map((floor, i) => {
-            {console.log("cuerpoFLOOR==>", floor)}
+            {
+              console.log("cuerpoFLOOR==>", floor);
+            }
             return (
               <Accordion.Item key={i}>
-                
                 <Accordion.Summary>
                   {floor.name}
                   <Accordion.Icon />
@@ -108,8 +121,12 @@ export default function FloorList() {
                       </Button>
                     );
                   })} */}
-                  <Button onPress={(value) => handlePressViewFloor(floor)}>Floor Details</Button>
-                  <Button onPress={(value) => handlePressEditFloor(floor.id)}>Edit Floor</Button>
+                  <Button onPress={(value) => handlePressViewFloor(floor)}>
+                    Floor Details
+                  </Button>
+                  <Button onPress={(value) => handlePressEditFloor(floor.id)}>
+                    Edit Floor
+                  </Button>
                 </Accordion.Details>
               </Accordion.Item>
             );
