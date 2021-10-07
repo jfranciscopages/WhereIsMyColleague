@@ -16,7 +16,7 @@ import { EditFloor } from "./screens/EditFloor";
 
 import { WorkSpaces } from "./screens/WorkSpaces";
 
-import { FloorDetails } from "./screens/FloorDetails";
+/* import { FloorDetails } from "./screens/FloorDetails"; */
 import { EditUser } from "./screens/EditUser";
 
 
@@ -27,7 +27,6 @@ export default function Main() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="DrawerNavigator">
-        {/* {profile.id ? ( */}
         <>
           <Stack.Screen
             name="DrawerNavigator"
@@ -47,8 +46,7 @@ export default function Main() {
           <Stack.Screen name="WorkSpaces" component={WorkSpaces} />
           <Stack.Screen name='EditFloor' component={EditFloor} />
 
-          <Stack.Screen name="floorDetails" component={FloorDetails} />
-          <Stack.Screen name="EditFloor" component={EditFloor} />
+         {/*  <Stack.Screen name="floorDetails" component={FloorDetails} /> */}
           <Stack.Screen name="EditUser" component={EditUser} />
 
 

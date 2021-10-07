@@ -11,7 +11,7 @@ import {
 
   export const workspacesByFloor = createAsyncThunk("WORKSPACEBYFLOOR", (value) => {
     return axios
-      .post(`http://${expoLocalHost}/api//editWorkSpace/findWorkspace`, value)
+      .post(`http://${expoLocalHost}/api/workSpace/findWorkspace`, value)
       .then((r) => {
         return r.data;
       });
