@@ -36,6 +36,18 @@ export default function FloorList() {
     navigation.navigate("userinfo");
   };
   const handlePressEditFloor = (value) => {
+
+    console.log(value)
+    dispatch(setSelectedFloorId(value))
+    navigation.navigate('EditFloor')
+  }
+  const handlePressViewFloor = (value) => {
+    console.log("VALUEEEE",value)
+    dispatch(setSelectedFloor(value))
+    navigation.navigate('WorkSpaces')
+  }
+
+
     console.log(value);
     dispatch(setSelectedFloorId(value));
     navigation.navigate("EditFloor");
@@ -45,6 +57,7 @@ export default function FloorList() {
     dispatch(setSelectedFloor(value));
     navigation.navigate("WorkSpaces");
   };
+
 
   return (
     <Flex>
