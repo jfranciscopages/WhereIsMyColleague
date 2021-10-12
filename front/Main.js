@@ -19,7 +19,6 @@ import { WorkSpaces } from "./screens/WorkSpaces";
 /* import { FloorDetails } from "./screens/FloorDetails"; */
 import { EditUser } from "./screens/EditUser";
 
-
 const Stack = createNativeStackNavigator();
 
 export default function Main() {
@@ -27,33 +26,33 @@ export default function Main() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="DrawerNavigator">
-        <>
-          <Stack.Screen
-            name="DrawerNavigator"
-            component={DrawerContainer}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Home"
-            component={Home}
-          />
-          <Stack.Screen name="Branch" component={Branch} />
-          <Stack.Screen name="editBranch" component={editBranch} />
-          {/*  <Stack.Screen name="newBranch" component={newBranch} /> */}
-          <Stack.Screen name="CreateFloor" component={CreateFloor} />
+        {profile.id ? (
+          <>
+            <Stack.Screen
+              name="DrawerNavigator"
+              component={DrawerContainer}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Home"
+              component={Home}
+            />
+            <Stack.Screen name="Branch" component={Branch} />
+            <Stack.Screen name="editBranch" component={editBranch} />
+            {/*  <Stack.Screen name="newBranch" component={newBranch} /> */}
+            <Stack.Screen name="CreateFloor" component={CreateFloor} />
 
-          <Stack.Screen name="WorkSpaces" component={WorkSpaces} />
-          <Stack.Screen name='EditFloor' component={EditFloor} />
+            <Stack.Screen name="WorkSpaces" component={WorkSpaces} />
+            <Stack.Screen name="EditFloor" component={EditFloor} />
 
-         {/*  <Stack.Screen name="floorDetails" component={FloorDetails} /> */}
-          <Stack.Screen name="EditUser" component={EditUser} />
+            {/*  <Stack.Screen name="floorDetails" component={FloorDetails} /> */}
+            <Stack.Screen name="EditUser" component={EditUser} />
 
-
-          <Stack.Screen name="userinfo" component={UserDetails} />
-          <Stack.Screen name="map" component={Map} />
-        </>
-        {/* ) : (
+            <Stack.Screen name="userinfo" component={UserDetails} />
+            <Stack.Screen name="map" component={Map} />
+          </>
+        ) : (
           <>
             <Stack.Screen
               options={{ headerShown: false }}
@@ -64,9 +63,9 @@ export default function Main() {
               options={{ headerShown: false }}
               name="Login"
               component={Login}
-            /> */}
-        {/* </> */}
-        {/* )} */}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

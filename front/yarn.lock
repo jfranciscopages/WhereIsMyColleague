@@ -5524,6 +5524,11 @@
     "commander" "2.20.0"
     "update-check" "1.5.3"
 
+"expo-secure-store@~10.2.0":
+  "integrity" "sha512-yNahMY3qzEotAYdsE02ps4yGfDay2twasHfsI/7gJB9SrwXYFx5bJuCDk8uTo8jsm6psvDjO+9VMM2DSPHik2A=="
+  "resolved" "https://registry.npmjs.org/expo-secure-store/-/expo-secure-store-10.2.0.tgz"
+  "version" "10.2.0"
+
 "expo-splash-screen@~0.11.2":
   "integrity" "sha512-WycJfWaBuj/W9KSgYTUHjm90VkwZ0Pv/EIqh2pW4/zw10AoSLHVgVA0CoC5R944iE42m6KWioax/0ydHU61qzA=="
   "resolved" "https://registry.npmjs.org/expo-splash-screen/-/expo-splash-screen-0.11.4.tgz"
