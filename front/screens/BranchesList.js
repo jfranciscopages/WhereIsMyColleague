@@ -125,23 +125,6 @@ export default function Branches() {
                       alt="image"
                     />
                   </AspectRatio>
-                  {/* <Center
-                      bg="violet.500"
-                      _dark={{
-                        bg: "violet.400",
-                      }}
-                      _text={{
-                        color: "warmGray.50",
-                        fontWeight: "700",
-                        fontSize: "xs",
-                      }}
-                      position="absolute"
-                      bottom="0"
-                      px="3"
-                      py="1.5"
-                    >
-                      PHOTOS
-                    </Center> */}
                 </Box>
                 <Stack p="4" space={3}>
                   <Stack space={2}>
@@ -176,17 +159,7 @@ export default function Branches() {
                     space={4}
                     justifyContent="space-between"
                   >
-                    <HStack alignItems="center">
-                      {/* <Text
-                          color="coolGray.600"
-                          _dark={{
-                            color: "warmGray.200",
-                          }}
-                          fontWeight="400"
-                        >
-                          6 mins ago
-                        </Text> */}
-                    </HStack>
+                    <HStack alignItems="center"></HStack>
                   </HStack>
                 </Stack>
                 <View style={styles.Btns}>

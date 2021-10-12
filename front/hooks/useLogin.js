@@ -16,19 +16,10 @@ const useLogin = () => {
     e.preventDefault();
     // POST user credentials
     await axios
-      .post(
-        `https://${expoLocalHost}/api/auth/login`,
-        {
-          email: loginEmail,
-          password: loginPassword,
-        },
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            Accept: "application/json",
-          },
-        }
-      )
+      .post(`http://${expoLocalHost}/api/auth/login`, {
+        email: loginEmail,
+        password: loginPassword,
+      })
       .then((data) => {
         dispatch(setProfile(data.data));
         success(`logged user ${data.data}`);

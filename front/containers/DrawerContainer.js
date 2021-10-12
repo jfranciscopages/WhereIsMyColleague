@@ -18,7 +18,6 @@ export default function DrawerContainer() {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="SearchColleague" component={SearchColleague} />
       <Drawer.Screen name="BranchesList" component={BranchesList} />
-      <Drawer.Screen name="Branch" component={Branch} />
       <Drawer.Screen name="createBranch" component={newBranch} />
       <Drawer.Screen name="Create User" component={CreateUser} />
       <Drawer.Screen name="BranchsMap" component={BranchsMap} />
