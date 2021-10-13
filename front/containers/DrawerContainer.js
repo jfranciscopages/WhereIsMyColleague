@@ -9,6 +9,7 @@ import Branch from "../screens/Branch";
 import newBranch from "../screens/Admin/newBranch";
 import BranchsMap from "../components/Map/BranchsMap";
 import { CreateUser } from "../screens/CreateUser";
+import UserDetails from "../screens/UserDetails";
 
 const Drawer = createDrawerNavigator();
 
