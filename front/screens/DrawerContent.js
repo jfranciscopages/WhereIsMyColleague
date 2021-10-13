@@ -67,6 +67,7 @@ export default function DrawerContent(props) {
               icon={({ color, size }) => (
                 <Icon name="home-outline" color={color} size={size} />
               )}
+              pressColor="#A6CE39"
               label="Home"
               onPress={() => {
                 props.navigation.navigate("Home");
@@ -77,6 +78,7 @@ export default function DrawerContent(props) {
                 <Icon name="account-outline" color={color} size={size} />
               )}
               label="Find Colleague"
+              pressColor="#A6CE39"
               onPress={() => {
                 props.navigation.navigate("SearchColleague");
               }}
@@ -85,6 +87,7 @@ export default function DrawerContent(props) {
               icon={({ color, size }) => (
                 <Icon name="folder-plus" color={color} size={size} />
               )}
+              pressColor="#A6CE39"
               label="Create Branch"
               onPress={() => {
                 props.navigation.navigate("createBranch");
@@ -94,6 +97,7 @@ export default function DrawerContent(props) {
               icon={({ color, size }) => (
                 <Icon name="home-group" color={color} size={size} />
               )}
+              pressColor="#A6CE39"
               label="Branch List"
               onPress={() => {
                 props.navigation.navigate("BranchesList");
@@ -103,6 +107,7 @@ export default function DrawerContent(props) {
               icon={({ color, size }) => (
                 <Icon name="map-marker-multiple" color={color} size={size} />
               )}
+              pressColor="#A6CE39"
               label="Branchs Map"
               onPress={() => {
                 props.navigation.navigate("BranchsMap");
@@ -116,6 +121,7 @@ export default function DrawerContent(props) {
                   size={size}
                 />
               )}
+              pressColor="#A6CE39"
               label="Create User"
               onPress={() => {
                 props.navigation.navigate("Create User");
@@ -173,6 +179,7 @@ export default function DrawerContent(props) {
             <Icon name="exit-to-app" color={color} size={size} />
           )}
           label="Sign Out"
+          pressColor="#A6CE39"
           onPress={() => handleLogout()}
         /* onPress={() => {}} */
         />

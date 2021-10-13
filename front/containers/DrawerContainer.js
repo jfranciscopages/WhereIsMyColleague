@@ -8,7 +8,9 @@ import BranchesList from "../screens/BranchesList";
 import Branch from "../screens/Branch";
 import newBranch from "../screens/Admin/newBranch";
 import BranchsMap from "../components/Map/BranchsMap";
-import { CreateUser } from "../screens/CreateUser";
+
+import { CreateUser } from "../screens/Admin/CreateUser";
+
 import UserDetails from "../screens/UserDetails";
 
 const Drawer = createDrawerNavigator();
@@ -17,11 +19,41 @@ export default function DrawerContainer() {
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="SearchColleague" component={SearchColleague} />
-      <Drawer.Screen name="BranchesList" component={BranchesList} />
-      <Drawer.Screen name="createBranch" component={newBranch} />
-      <Drawer.Screen name="Create User" component={CreateUser} />
-      <Drawer.Screen name="BranchsMap" component={BranchsMap} />
+      <Drawer.Screen
+        name="SearchColleague"
+        component={SearchColleague}
+        options={{
+          headerTitle: "",
+        }}
+      />
+      <Drawer.Screen
+        name="BranchesList"
+        component={BranchesList}
+        options={{
+          headerTitle: "",
+        }}
+      />
+      <Drawer.Screen
+        name="createBranch"
+        component={newBranch}
+        options={{
+          headerTitle: "",
+        }}
+      />
+      <Drawer.Screen
+        name="Create User"
+        component={CreateUser}
+        options={{
+          headerTitle: "",
+        }}
+      />
+      <Drawer.Screen
+        name="BranchsMap"
+        component={BranchsMap}
+        options={{
+          headerTitle: "Map",
+        }}
+      />
     </Drawer.Navigator>
   );
 }

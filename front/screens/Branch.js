@@ -39,7 +39,7 @@ function Branch() {
             <Spinner size="lg" color="#A6CE39" />
           </Center>
         ) : (
-          <View minWidth="380">
+          <View>
             <Box
               rounded="xl"
               overflow="hidden"

@@ -13,8 +13,9 @@ import {
   CheckIcon,
 } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
-import useCreateUser from "../hooks/useCreateUser";
-import { allBranches } from "../store/BranchReducer";
+import useCreateUser from "../../hooks/useCreateUser";
+import { SelectBranch } from "../../components/SelectBranch/SelectBranch";
+import { useForm, Controller } from "react-hook-form";
 
 export const CreateUser = () => {
   const params = useCreateUser();
@@ -36,23 +37,9 @@ export const CreateUser = () => {
     job,
     setJob,
     nameValidation,
-    searchFloor,
-    branch,
-    floorsOk,
-    floor,
-    searchWorkspace,
-    workspacesOk,
-    setWorkspace,
     createUser,
     loading,
   } = params;
-
-  const dispatch = useDispatch();
-  const branches = useSelector((state) => state.branches.allBranches);
-
-  useEffect(() => {
-    dispatch(allBranches());
-  }, []);
 
   return (
     <View>
@@ -109,6 +96,7 @@ export const CreateUser = () => {
                 </FormControl.Label>
                 <Input
                   value={email}
+                  keyboardType={"email-address"}
                   onChangeText={(value) => setEmail(value)}
                   mb="2"
                 />
@@ -133,6 +121,7 @@ export const CreateUser = () => {
                 </FormControl.Label>
                 <Input
                   value={phone}
+                  keyboardType="number-pad"
                   onChangeText={(value) => setPhone(value)}
                   mb="2"
                 />
@@ -144,99 +133,28 @@ export const CreateUser = () => {
                   onChangeText={(value) => setJob(value)}
                   mb="2"
                 />
-                <FormControl.Label alignSelf="center">
-                  Select Branch
-                </FormControl.Label>
-                <Select
-                  minWidth="200"
-                  placeholder="Choose Branch"
-                  _selectedItem={{
-                    bg: "teal.600",
-                    endIcon: <CheckIcon size={5} />,
-                  }}
-                  mt="1"
-                  mb="2"
-                  onValueChange={(itemValue) => searchFloor(itemValue)}
-                >
-                  {branches
-                    ? branches.map((branch) => {
-                        return (
-                          <Select.Item
-                            key={branch.id}
-                            label={branch.city}
-                            value={branch.id}
-                          />
-                        );
-                      })
-                    : null}
-                </Select>
-                <FormControl.Label alignSelf="center">
-                  Select Floor
-                </FormControl.Label>
-                <Select
-                  minWidth="200"
-                  placeholder="Choose Branch"
-                  _selectedItem={{
-                    bg: "teal.600",
-                    endIcon: <CheckIcon size={5} />,
-                  }}
-                  mt="1"
-                  mb="2"
-                  onValueChange={(itemValue) => searchWorkspace(itemValue)}
-                >
-                  {floorsOk ? (
-                    branch.floors.map((floor) => {
-                      return (
-                        <Select.Item
-                          key={floor.id}
-                          label={floor.name}
-                          value={floor.id}
-                        />
-                      );
-                    })
-                  ) : (
-                    <Select.Item />
-                  )}
-                </Select>
-                <FormControl.Label alignSelf="center">
-                  Select Workspace
-                </FormControl.Label>
-                <Select
-                  minWidth="200"
-                  placeholder="Choose Branch"
-                  _selectedItem={{
-                    bg: "teal.600",
-                    endIcon: <CheckIcon size={5} />,
-                  }}
-                  mt="1"
-                  mb="4"
-                  onValueChange={(itemValue) => setWorkspace(itemValue)}
-                >
-                  {workspacesOk ? (
-                    floor.workspaces.map((workspace) => {
-                      return (
-                        <Select.Item
-                          key={workspace.id}
-                          label={workspace.name}
-                          value={workspace.id}
-                        />
-                      );
-                    })
-                  ) : (
-                    <Select.Item />
-                  )}
-                </Select>
+                <SelectBranch />
               </FormControl>
             </Box>
-            {loading ? (
-              <Button bg="#A6CE39" isLoading>
-                Loading
-              </Button>
-            ) : (
-              <Button bg="#A6CE39" mb="10" onPress={() => createUser()}>
-                Submit
-              </Button>
-            )}
+            <Button
+              bg="#A6CE39"
+              mb="10"
+              _pressed={{ bg: "#A6CE39" }}
+              isLoading={loading}
+              _loading={{
+                bg: "#A6CE39",
+                _text: {
+                  color: "coolGray.700",
+                },
+              }}
+              _spinner={{
+                color: "white",
+              }}
+              isLoadingText="Loading"
+              onPress={() => createUser()}
+            >
+              Submit
+            </Button>
           </Stack>
         </ScrollView>
       </Center>
