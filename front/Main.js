@@ -13,7 +13,11 @@ import UserDetails from "./screens/UserDetails";
 import Branch from "./screens/Branch";
 import { CreateFloor } from "./screens/CreateFloor";
 import { EditFloor } from "./screens/EditFloor";
-import { FloorDetails } from "./screens/FloorDetails";
+
+import { WorkSpaces } from "./screens/WorkSpaces";
+
+/* import { FloorDetails } from "./screens/FloorDetails"; */
+import { EditUser } from "./screens/EditUser";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,28 +26,33 @@ export default function Main() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="DrawerNavigator">
-        {/* {profile.id ? ( */}
-        <>
-          <Stack.Screen
-            name="DrawerNavigator"
-            component={DrawerContainer}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Home"
-            component={Home}
-          />
-          <Stack.Screen name="Branch" options={{ headerShown: false }} component={Branch} />
-          <Stack.Screen name="editBranch" options={{ headerShown: false }} component={editBranch} />
-          {/*  <Stack.Screen name="newBranch" component={newBranch} /> */}
-          <Stack.Screen name="CreateFloor" options={{ headerShown: false }} component={CreateFloor} />
-          <Stack.Screen name="floorDetails" options={{ headerShown: false }} component={FloorDetails} />
-          <Stack.Screen name='EditFloor' options={{ headerShown: false }} component={EditFloor} />
+        {profile.id ? (
+          <>
+            <Stack.Screen
+              name="DrawerNavigator"
+              component={DrawerContainer}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Home"
+              component={Home}
+            />
+            <Stack.Screen name="Branch" component={Branch} />
+            <Stack.Screen name="editBranch" component={editBranch} />
+            {/*  <Stack.Screen name="newBranch" component={newBranch} /> */}
+            <Stack.Screen name="CreateFloor" component={CreateFloor} />
 
-          <Stack.Screen name="map" options={{ headerShown: false }} component={Map} />
-        </>
-        {/* ) : (
+            <Stack.Screen name="WorkSpaces" component={WorkSpaces} />
+            <Stack.Screen name="EditFloor" component={EditFloor} />
+
+            {/*  <Stack.Screen name="floorDetails" component={FloorDetails} /> */}
+            <Stack.Screen name="EditUser" component={EditUser} />
+
+            <Stack.Screen name="userinfo" component={UserDetails} />
+            <Stack.Screen name="map" component={Map} />
+          </>
+        ) : (
           <>
             <Stack.Screen
               options={{ headerShown: false }}
@@ -54,9 +63,9 @@ export default function Main() {
               options={{ headerShown: false }}
               name="Login"
               component={Login}
-            /> */}
-        {/* </> */}
-        {/* )} */}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

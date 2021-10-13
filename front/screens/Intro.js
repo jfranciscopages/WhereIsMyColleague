@@ -6,6 +6,9 @@ import { AntDesign } from "@expo/vector-icons";
 
 export default function Intro() {
   const navigation = useNavigation();
+  setTimeout(() => {
+    navigation.navigate("Login");
+  }, 5000);
 
   return (
     <SafeAreaView style={styles.view}>
@@ -19,14 +22,14 @@ export default function Intro() {
             }}
           />
         </View>
-        <View style={styles.next}>
+        {/* <View style={styles.next}>
           <AntDesign
             name="rightcircle"
             size={24}
             color="black"
-            onPress={() => navigation.navigate("userinfo")}
+            onPress={() => navigation.navigate("Login")}
           />
-        </View>
+        </View> */}
       </View>
     </SafeAreaView>
   );

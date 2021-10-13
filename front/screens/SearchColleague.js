@@ -50,11 +50,13 @@ export default function Home() {
             usersByTitle.length > 0 && inputValue.length > 2 ? (
               limitUserBy5.map((user, i) => (
                 <View>
-                  <ListItem onPress={() => {
-                    console.log(`USUARIO`, user);
-                    dispatch(userById(user.id));
-                    return navigation.navigate("userinfo");
-                  }}>
+                  <ListItem
+                    onPress={() => {
+                      console.log(`USUARIO`, user);
+                      dispatch(userById(user.id));
+                      navigation.navigate("userinfo");
+                    }}
+                  >
                     <ListItem.Title>{user.firstName}</ListItem.Title>
                     <ListItem.Subtitle>{user.lastName}</ListItem.Subtitle>
                   </ListItem>
@@ -70,12 +72,14 @@ export default function Home() {
           {inputValue.length > 2 && limited === false ? (
             usersByTitle.length > 0 && inputValue.length > 2 ? (
               usersByTitle.map((user, i) => (
-                <View >
-                  <ListItem onPress={() => {
-                    console.log(`USUARIO`, user);
-                    dispatch(userById(user.id));
-                    return navigation.navigate("userinfo");
-                  }}>
+                <View>
+                  <ListItem
+                    onPress={() => {
+                      console.log(`USUARIO`, user);
+                      dispatch(userById(user.id));
+                      return navigation.navigate("userinfo");
+                    }}
+                  >
                     <ListItem.Title>{user.firstName}</ListItem.Title>
                     <ListItem.Subtitle>{user.lastName}</ListItem.Subtitle>
                   </ListItem>
@@ -91,8 +95,8 @@ export default function Home() {
         </View>
         <View style={styles.button}>
           {limited === true &&
-            usersByTitle.length > 4 &&
-            inputValue.length > 2 ? (
+          usersByTitle.length > 4 &&
+          inputValue.length > 2 ? (
             <Button
               type="solid"
               color="#A1CF6B"
@@ -107,8 +111,8 @@ export default function Home() {
             ></Button>
           ) : null}
           {limited === false &&
-            usersByTitle.length > 4 &&
-            inputValue.length > 2 ? (
+          usersByTitle.length > 4 &&
+          inputValue.length > 2 ? (
             <Button
               type="solid"
               color="#A1CF6B"

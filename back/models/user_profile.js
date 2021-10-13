@@ -74,6 +74,10 @@ User_Profile.prototype.hashPass = function (password, salt) {
   return crypto.hash(password, salt);
 };
 
+// User_Profile.prototype.validPassword = function (password) {
+//   return crypto.compareSync(password, this.password);
+// };
+
 User_Profile.prototype.validPassword = function (password, salt) {
   return this.hashPass(password, salt).then((pass) => {
     return this.password === pass;

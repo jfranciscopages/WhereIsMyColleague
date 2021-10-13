@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, /* Text ,*/ View } from "react-native";
+import React, { useEffect } from "react";
+import { View } from "react-native";
 import {
   FormControl,
   Input,
   Stack,
   Text,
   ScrollView,
-  Divider,
   Box,
   Button,
-  WarningOutlineIcon,
   Center,
   Select,
   CheckIcon,
 } from "native-base";
-import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
-import expoLocalHost from "../localHost";
-import axios from "axios";
-import { singleBranch } from "../store/BranchReducer";
 import useCreateUser from "../hooks/useCreateUser";
 import { allBranches } from "../store/BranchReducer";
 
@@ -37,15 +31,10 @@ export const CreateUser = () => {
     setPassword,
     phone,
     setPhone,
-    city,
-    setCity,
     country,
     setCountry,
     job,
     setJob,
-    onSubmitCreateUser,
-    error,
-    disabled,
     nameValidation,
     searchFloor,
     branch,
@@ -53,11 +42,11 @@ export const CreateUser = () => {
     floor,
     searchWorkspace,
     workspacesOk,
-    setWorkspaceId,
+    setWorkspace,
     createUser,
+    loading,
   } = params;
 
-  const navigation = useNavigation();
   const dispatch = useDispatch();
   const branches = useSelector((state) => state.branches.allBranches);
 
@@ -83,46 +72,78 @@ export const CreateUser = () => {
               <Text bold fontSize="xl" mb="4" alignSelf="center">
                 Create User
               </Text>
-
               <FormControl mb="2" isRequired>
-                <FormControl.Label justifyContent="center">
-                  Access
-                </FormControl.Label>
-                <Input onChangeText={(value) => setAccess(value)} mb="2" />
+                <Select
+                  minWidth="200"
+                  placeholder="Select Access"
+                  _selectedItem={{
+                    bg: "teal.600",
+                    endIcon: <CheckIcon size={5} />,
+                  }}
+                  mt="1"
+                  mb="2"
+                  value={access}
+                  onValueChange={(itemValue) => setAccess(itemValue)}
+                >
+                  <Select.Item label="user" value="user" />
+                  <Select.Item label="admin" value="admin" />
+                </Select>
                 <FormControl.Label justifyContent="center">
                   First Name
                 </FormControl.Label>
-                <Input onChangeText={(value) => setFistName(value)} mb="2" />
-                <FormControl.ErrorMessage
-                  leftIcon={<WarningOutlineIcon size="xs" />}
-                >
-                  Required
-                </FormControl.ErrorMessage>
-
+                <Input
+                  value={firstName}
+                  onChangeText={(value) => setFistName(value)}
+                  mb="2"
+                />
                 <FormControl.Label justifyContent="center">
                   Last Name
                 </FormControl.Label>
-                <Input onChangeText={(value) => setLastName(value)} mb="2" />
+                <Input
+                  value={lastName}
+                  onChangeText={(value) => setLastName(value)}
+                  mb="2"
+                />
                 <FormControl.Label justifyContent="center">
                   Email
                 </FormControl.Label>
-                <Input onChangeText={(value) => setLastName(value)} mb="2" />
+                <Input
+                  value={email}
+                  onChangeText={(value) => setEmail(value)}
+                  mb="2"
+                />
                 <FormControl.Label justifyContent="center">
                   Password
                 </FormControl.Label>
-                <Input onChangeText={(value) => setLastName(value)} mb="2" />
+                <Input
+                  value={password}
+                  onChangeText={(value) => setPassword(value)}
+                  mb="2"
+                />
                 <FormControl.Label justifyContent="center">
                   Country
                 </FormControl.Label>
-                <Input onChangeText={(value) => setLastName(value)} mb="2" />
+                <Input
+                  value={country}
+                  onChangeText={(value) => setCountry(value)}
+                  mb="2"
+                />
                 <FormControl.Label justifyContent="center">
                   Phone Number
                 </FormControl.Label>
-                <Input onChangeText={(value) => setLastName(value)} mb="2" />
+                <Input
+                  value={phone}
+                  onChangeText={(value) => setPhone(value)}
+                  mb="2"
+                />
                 <FormControl.Label justifyContent="center">
                   Job
                 </FormControl.Label>
-                <Input onChangeText={(value) => setLastName(value)} mb="2" />
+                <Input
+                  value={job}
+                  onChangeText={(value) => setJob(value)}
+                  mb="2"
+                />
                 <FormControl.Label alignSelf="center">
                   Select Branch
                 </FormControl.Label>
@@ -149,11 +170,6 @@ export const CreateUser = () => {
                       })
                     : null}
                 </Select>
-                <FormControl.ErrorMessage
-                  leftIcon={<WarningOutlineIcon size="xs" />}
-                >
-                  Please make a selection!
-                </FormControl.ErrorMessage>
                 <FormControl.Label alignSelf="center">
                   Select Floor
                 </FormControl.Label>
@@ -169,7 +185,7 @@ export const CreateUser = () => {
                   onValueChange={(itemValue) => searchWorkspace(itemValue)}
                 >
                   {floorsOk ? (
-                    branch.floors.map((floor, i) => {
+                    branch.floors.map((floor) => {
                       return (
                         <Select.Item
                           key={floor.id}
@@ -182,11 +198,6 @@ export const CreateUser = () => {
                     <Select.Item />
                   )}
                 </Select>
-                <FormControl.ErrorMessage
-                  leftIcon={<WarningOutlineIcon size="xs" />}
-                >
-                  Please make a selection!
-                </FormControl.ErrorMessage>
                 <FormControl.Label alignSelf="center">
                   Select Workspace
                 </FormControl.Label>
@@ -199,7 +210,7 @@ export const CreateUser = () => {
                   }}
                   mt="1"
                   mb="4"
-                  onValueChange={(itemValue) => setWorkspaceId(itemValue)}
+                  onValueChange={(itemValue) => setWorkspace(itemValue)}
                 >
                   {workspacesOk ? (
                     floor.workspaces.map((workspace) => {
@@ -215,16 +226,17 @@ export const CreateUser = () => {
                     <Select.Item />
                   )}
                 </Select>
-                <FormControl.ErrorMessage
-                  leftIcon={<WarningOutlineIcon size="xs" />}
-                >
-                  Please make a selection!
-                </FormControl.ErrorMessage>
               </FormControl>
             </Box>
-            <Button mb="10" onPress={() => createUser()}>
-              Edit Floor
-            </Button>
+            {loading ? (
+              <Button bg="#A6CE39" isLoading>
+                Loading
+              </Button>
+            ) : (
+              <Button bg="#A6CE39" mb="10" onPress={() => createUser()}>
+                Submit
+              </Button>
+            )}
           </Stack>
         </ScrollView>
       </Center>

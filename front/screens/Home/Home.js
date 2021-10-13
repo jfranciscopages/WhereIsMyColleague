@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function Home() {
   const profile = useSelector((state) => state.profile);
   const navigation = useNavigation();
-  
+
   return (
     <View style={styles.container}>
       <View alignItems="center">
@@ -29,13 +29,15 @@ export default function Home() {
       </View>
       <View alignItems="center">
         <Button
-          backgroundColor="#bbd17d"
+          backgroundColor="#A6CE39"
           colorScheme="muted"
           mt="50"
           w="150"
           borderRadius="10"
           variant="subtle"
-          onPress={()=>{navigation.navigate("SearchColleague")}} // onPress={() => console.log('hello world')}
+          onPress={() => {
+            navigation.navigate("SearchColleague");
+          }} // onPress={() => console.log('hello world')}
         >
           Search Colleague
         </Button>

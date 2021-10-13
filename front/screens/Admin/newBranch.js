@@ -59,7 +59,6 @@ export default function newBranch() {
     // navigation.navigate('BranchesList')
   };
 
-
   return (
     <ScrollView
       w={{
@@ -123,7 +122,10 @@ export default function newBranch() {
             <Input onChangeText={(value) => inputHandler("image", value)} />
             <View style={styles.Btns}>
               <Button
+                bg="#A6CE39"
                 size="sm"
+                mx="2"
+                my="5"
                 /* variant="outline" */ width={20}
                 height={7}
                 onPress={() => submitHandler()}
@@ -131,10 +133,13 @@ export default function newBranch() {
                 Create
               </Button>
               <Button
+                mx="2"
+                my="5"
+                bg="#A6CE39"
                 size="sm"
                 /* variant="outline" */ width={20}
                 height={7}
-
+                onPress={() => navigation.navigate("Home")}
               >
                 Go Back
               </Button>
@@ -151,6 +156,6 @@ const styles = StyleSheet.create({
   Btns: {
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 });

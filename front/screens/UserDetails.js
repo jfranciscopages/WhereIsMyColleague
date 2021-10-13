@@ -9,7 +9,6 @@ import {
   Center,
   HStack,
   Stack,
-  NativeBaseProvider,
   View,
   Spinner,
   Button
@@ -26,11 +25,12 @@ import { alignContent, alignItems, justifyContent, width } from "styled-system";
 import { useNavigation } from "@react-navigation/core";
 
 function UserDetails() {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const branch = useSelector((state) => state.branches.singleBranch);
   const [loading, setLoading] = useState(true);
-  const user = useSelector((state) => state.users.usersByTitle[0]);
+  const user = useSelector((state) => state.users.userById);
 
   useEffect(() => {
     dispatch(singleBranch(user.branchId));
@@ -59,6 +59,11 @@ function UserDetails() {
   }
 
 
+  const editUser = () => {
+    dispatch(userById(user.id));
+    navigation.navigate("EditUser");
+  };
+
   return (
     <View my="3">
       {!loading ? (
@@ -68,8 +73,8 @@ function UserDetails() {
           overflow="hidden"
           width="sm"
           shadow={1}
-          _light={{ backgroundColor: 'gray.50' }}
-          _dark={{ backgroundColor: 'gray.700' }}
+          _light={{ backgroundColor: "gray.50" }}
+          _dark={{ backgroundColor: "gray.700" }}
         >
           <Box>
             {/* <AspectRatio ratio={10 / 9}> */}
@@ -87,7 +92,7 @@ function UserDetails() {
             {/* </AspectRatio> */}
             {/* <Center
               bg="violet.500"
-              _text={{ color: 'white', fontWeight: '700', fontSize: 'xs' }}
+              _text={{ color: "white", fontWeight: "700", fontSize: "xs" }}
               position="absolute"
               bottom={0}
               px="3"
@@ -102,6 +107,7 @@ function UserDetails() {
                 {user.firstName} {user.lastName}
               </Heading>
               <Text
+
                 fontSize="md"
                 _light={{ color: 'violet.500' }}
                 _dark={{ color: 'violet.300' }}
@@ -163,7 +169,11 @@ function UserDetails() {
               </HStack>
             </HStack>
           </Stack>
-        </Box>) : (
+          <Button bg="#A6CE39" onPress={() => editUser()}>
+            Edit
+          </Button>
+        </Box>
+      ) : (
         <Spinner color="danger.500" />
       )
       }

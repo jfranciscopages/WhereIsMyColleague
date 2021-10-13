@@ -179,6 +179,7 @@ export default function editBranch() {
                 Update Branch
               </Button>
               <Button onPress={() => backHandler()}>Go Back</Button>
+              <Button onPress={CreateFloorHandlePress}>Add floor!</Button>
             </FormControl>
             <Divider />
           </Box>

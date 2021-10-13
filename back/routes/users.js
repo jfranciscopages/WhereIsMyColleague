@@ -32,10 +32,7 @@ router.get("/search/:name", (req, res, next) => {
 });
 
 router.get("/byId/:id", (req, res, next) => {
-  User_Profile.findOne({
-    where: { id: req.params.id },
-    include: Branches,
-  })
+  User_Profile.findByPk(req.params.id)
     .then((user) => res.send(user))
     .catch((err) => next(err));
 });
@@ -51,7 +48,33 @@ router.post("/create", (req, res, next) => {
           return res.status(200).send(data);
         });
     })
-    .catch((e) => console.log(e.response));
+    .catch((e) => next(e));
+});
+
+router.get("/findUserInWorkspace/:id", (req, res, next) => {
+  const id = req.params.id;
+  User_Profile.findOne({ where: { workspaceId: id } })
+    .then((data) => {
+      if (data) res.sendStatus(500);
+      else return res.sendStatus(200);
+    })
+    .catch((e) => next(e));
+});
+
+router.put("/editUser", (req, res, next) => {
+  const user = req.body;
+  User_Profile.findOne({ where: { workspaceId: user.workspaceId } })
+    .then((data) => {
+      if (data) res.sendStatus(404);
+      else
+        User_Profile.update(user, {
+          where: { id: user.id },
+          returning: true,
+        }).then(([n, data]) => {
+          return res.status(201).send(data);
+        });
+    })
+    .catch((e) => next(e));
 });
 
 module.exports = router;

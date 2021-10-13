@@ -92,7 +92,7 @@ export default function DrawerContent(props) {
             />
             <DrawerItem
               icon={({ color, size }) => (
-                <Icon name="map-marker-multiple" color={color} size={size} />
+                <Icon name="home-group" color={color} size={size} />
               )}
               label="Branch List"
               onPress={() => {
@@ -110,7 +110,11 @@ export default function DrawerContent(props) {
             />
             <DrawerItem
               icon={({ color, size }) => (
-                <Icon name="map-marker-multiple" color={color} size={size} />
+                <Icon
+                  name="account-multiple-plus-outline"
+                  color={color}
+                  size={size}
+                />
               )}
               label="Create User"
               onPress={() => {
