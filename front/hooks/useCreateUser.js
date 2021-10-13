@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import expoLocalHost from "../localHost";
-import { useToast } from "native-base";
-import { Box } from "native-base";
+import { useToast, Box } from "native-base";
 import { useNavigation } from "@react-navigation/core";
 
 const useCreateUser = () => {
