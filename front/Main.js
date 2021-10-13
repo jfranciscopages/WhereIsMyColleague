@@ -34,14 +34,14 @@ export default function Main() {
             name="Home"
             component={Home}
           />
-          <Stack.Screen name="Branch" component={Branch} />
-          <Stack.Screen name="editBranch" component={editBranch} />
+          <Stack.Screen name="Branch" options={{ headerShown: false }} component={Branch} />
+          <Stack.Screen name="editBranch" options={{ headerShown: false }} component={editBranch} />
           {/*  <Stack.Screen name="newBranch" component={newBranch} /> */}
-          <Stack.Screen name="CreateFloor" component={CreateFloor} />
-          <Stack.Screen name="floorDetails" component={FloorDetails} />
-          <Stack.Screen name='EditFloor' component={EditFloor} />
-          <Stack.Screen name="userinfo" component={UserDetails} />
-          <Stack.Screen name="map" component={Map} />
+          <Stack.Screen name="CreateFloor" options={{ headerShown: false }} component={CreateFloor} />
+          <Stack.Screen name="floorDetails" options={{ headerShown: false }} component={FloorDetails} />
+          <Stack.Screen name='EditFloor' options={{ headerShown: false }} component={EditFloor} />
+
+          <Stack.Screen name="map" options={{ headerShown: false }} component={Map} />
         </>
         {/* ) : (
           <>
