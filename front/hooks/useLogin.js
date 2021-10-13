@@ -35,7 +35,7 @@ const useLogin = () => {
           placement: "top",
           render: () => {
             return (
-              <Box bg="red.500" px="2" py="4" rounded="sm" mt={70}>
+              <Box bg="red.500" px="2" py="4" rounded="sm" mt={50}>
                 You have entered an invalid username or password.
               </Box>
             );
