@@ -3,6 +3,7 @@ import axios from "axios";
 import expoLocalHost from "../localHost";
 import { useToast, Box } from "native-base";
 import { useNavigation } from "@react-navigation/core";
+import { useSelector } from "react-redux";
 
 const useCreateUser = () => {
   const toast = useToast();
@@ -109,7 +110,7 @@ const useCreateUser = () => {
             );
           },
         });
-        navigation.navigate("userinfo");
+        navigation.navigate("DrawerNavigator");
       })
       .catch((err) => {
         setLoading(false);
@@ -156,7 +157,7 @@ const useCreateUser = () => {
             );
           },
         });
-        navigation.navigate("userinfo");
+        navigation.navigate("DrawerNavigator");
       })
       .catch((err) => {
         setLoading(false);

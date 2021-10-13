@@ -10,6 +10,7 @@ import {
   View,
   Spinner,
   Button,
+  Avatar,
 } from "native-base";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -71,7 +72,22 @@ function UserDetails() {
           _dark={{ backgroundColor: "gray.700" }}
         >
           <Box>
-            {/* <AspectRatio ratio={10 / 9}> */}
+
+            <AspectRatio ratio={16 / 9}>
+              <Avatar
+              alignSelf='center'
+            marginTop={10}
+                bg="purple.600"
+                size="2xl"
+                source={{
+                  uri: "https://pbs.twimg.com/profile_images/1320985200663293952/lE_Kg6vr_400x400.jpg",
+                }}
+              >
+                RB
+              </Avatar>
+              
+
+          
             <View style={styles.avatar}>
               <Avatar
                 style={styles.avatarImg}
@@ -79,21 +95,16 @@ function UserDetails() {
                 source={{
                   uri: "https://pbs.twimg.com/profile_images/1177303899243343872/B0sUJIH0_400x400.jpg",
                 }}
-              >
-                GG
+
+                alt="image"
+             
+            </AspectRatio>
+
+              
               </Avatar>
             </View>
-            {/* </AspectRatio> */}
-            {/* <Center
-              bg="violet.500"
-              _text={{ color: "white", fontWeight: "700", fontSize: "xs" }}
-              position="absolute"
-              bottom={0}
-              px="3"
-              py="1.5"
-            >
-              PROFILE
-            </Center> */}
+        
+
           </Box>
           <Stack p="4" space={3}>
             <Stack space={2}>

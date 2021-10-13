@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
@@ -28,6 +28,7 @@ export default function BranchsMap() {
   const navigation = useNavigation();
   const branches = useSelector((state) => state.branches.allBranches);
   const countrySelected = useSelector((state) => state.branches.byCountry);
+  const [blur, setBlur] = useState(false);
 
   let uniqueMap = branches.map(({ country }) => country);
   let uniqueSet = [...new Set(uniqueMap)];
@@ -42,12 +43,14 @@ export default function BranchsMap() {
   };
 
   const markerHandler = (country) => {
+    setBlur(true);
     dispatch(byCountry(country));
   };
 
   return (
     <View>
       <MapView
+        onPress={() => setBlur(false)}
         style={styles.map}
         initialRegion={{
           latitude: 40.45206561667841,
@@ -85,6 +88,7 @@ export default function BranchsMap() {
             )
           : null}
       </MapView>
+
       <View style={styles.searchBox}>
         <Input
           style={styles.searchInput}
@@ -97,6 +101,7 @@ export default function BranchsMap() {
         />
         {/* <SearchIcon size="4" /> */}
       </View>
+
       {/* <ScrollView
         horizontal
         scrollEventThrottle={1}
@@ -111,28 +116,49 @@ export default function BranchsMap() {
           </TouchableOpacity>
         ))}
       </ScrollView> */}
+
       <Animated.ScrollView
         horizontal
         scrollEventThrottle={1}
         showsHorizontalScrollIndicator={false}
         style={styles.bottomScrollView}
-        contentContainerStyle={{paddingRight: 30}}
+        contentContainerStyle={{ paddingRight: 30 }}
       >
         {countrySelected
           ? countrySelected.map(({ id, city, address, image, CP }) => (
-              <View style={styles.card} key={id}>
-                <Image
-                  style={styles.cardImage}
-                  source={{ uri: image }}
-                  resizeMode="cover"
-                />
-                <TouchableOpacity
-                  style={styles.countryData}
-                  onPress={() => touchableHandler(id)}
-                >
-                  <Text style={{ fontWeight: "bold" }}>{city}</Text>
-                  <Text>{`${address}, ${CP}`}</Text>
-                </TouchableOpacity>
+              <View key={id}>
+                {blur ? (
+                  <View
+                    style={{
+                      height: 220,
+                      width: width * 0.8,
+                      backgroundColor: "transparent",
+                      borderRadius: 50,
+                      marginBottom: 80,
+                      marginLeft: 40,
+                      position: "relative",
+                    }}
+                  >
+                    <View style={styles.countryData}>
+                      <View style={styles.box}>
+                        <Text style={{ fontWeight: "bold" }}>{city}</Text>
+                        <Text>{`${address}, ${CP}`}</Text>
+                      </View>
+                    </View>
+                    <Image
+                      style={styles.cardImage}
+                      source={{ uri: image }}
+                      resizeMode="cover"
+                    />
+
+                    <TouchableOpacity
+                      style={styles.branchBtn}
+                      onPress={() => touchableHandler(id)}
+                    >
+                      <Text>Visit Branch</Text>
+                    </TouchableOpacity>
+                  </View>
+                ) : null}
               </View>
             ))
           : null}
@@ -203,8 +229,22 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   countryData: {
-    marginTop: 5,
-    marginBottom: 40,
+    paddingTop: 5,
     marginLeft: 10,
+    position: "absolute",
+    zIndex: 1,
+  },
+  box: {
+    padding: 5,
+    backgroundColor: "#A6CE39",
+    opacity: 0.6,
+    borderRadius: 10,
+  },
+  branchBtn: {
+    /*  marginTop: 40, */
+
+    borderRadius: 10,
+    alignItems: "center",
+    backgroundColor: "#A6CE39",
   },
 });

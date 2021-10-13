@@ -18,10 +18,13 @@ import WorkspaceIndividual from "./screens/WorkspaceIndividual";
 
 /* import { FloorDetails } from "./screens/FloorDetails"; */
 
+import { EditUser } from "./screens/EditUser";
+
+
 const Stack = createNativeStackNavigator();
 
 export default function Main() {
-  const profile = useSelector((state) => state.profile);
+  const profile = useSelector((state) => state.profile.user);
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="DrawerNavigator">
@@ -33,12 +36,15 @@ export default function Main() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
+
               options={{ headerShown: false, headerTitle: "Ellabro" }}
+
               name="Home"
               component={Home}
             />
             <Stack.Screen name="Branch" component={Branch} />
             <Stack.Screen name="editBranch" component={editBranch} />
+
             <Stack.Screen name="CreateFloor" component={CreateFloor} />
             <Stack.Screen name="WorkSpaces" component={WorkSpaces} />
             <Stack.Screen name="WorkSpaceIndividual" component={WorkspaceIndividual} />
@@ -51,6 +57,7 @@ export default function Main() {
                 headerTitle: "Colleague",
               }}
             />
+
             <Stack.Screen name="map" component={Map} />
           </>
         ) : (
