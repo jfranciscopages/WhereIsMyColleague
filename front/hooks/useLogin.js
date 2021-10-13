@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { success, log } from "../utils/logs";
-import { setProfile } from "../store/profileReducer";
+import { setProfile, loggedIn } from "../store/profileReducer";
 import { useNavigation } from "@react-navigation/native";
 import expoLocalHost from "../localHost";
 
@@ -11,32 +11,13 @@ const useLogin = () => {
   const [loginPassword, setLoginPassword] = useState(``);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const user = useSelector(state=> state.profile.user)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // POST user credentials
-    await axios
-      .post(
-        `https://${expoLocalHost}/api/auth/login`,
-        {
-          email: loginEmail,
-          password: loginPassword,
-        },
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            Accept: "application/json",
-          },
-        }
-      )
-      .then((data) => {
-        dispatch(setProfile(data.data));
-        success(`logged user ${data.data}`);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const handleSubmit = async () => {
+    dispatch(loggedIn({ loginEmail, loginPassword }));
+    // success(`logged user ${data.data}`);
   };
+
   return {
     handleSubmit,
     loginEmail,

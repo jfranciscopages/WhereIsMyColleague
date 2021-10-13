@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   FormControl,
@@ -10,20 +10,25 @@ import {
   Box,
   Button,
   WarningOutlineIcon,
+  AddIcon,
 } from "native-base";
 import { useDispatch } from "react-redux";
 import { createBranch, allBranches } from "../../store/BranchReducer";
 import { useNavigation } from "@react-navigation/native";
+import * as ImagePicker from "expo-image-picker";
 
 export default function newBranch() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [imageAttached, setImageAttached] = useState(null);
 
   const [branch, setBranch] = useState({
     country: "",
     city: "",
     address: "",
     CP: "",
+    latitude: "",
+    longitude: "",
     phone: "",
     image: "",
   });
@@ -42,6 +47,12 @@ export default function newBranch() {
       case "cp":
         setBranch({ ...branch, CP: value });
         return;
+      case "latitude":
+        setBranch({ ...branch, latitude: value });
+        return;
+      case "longitude":
+        setBranch({ ...branch, longitude: value });
+        return;
       case "phone":
         setBranch({ ...branch, phone: value });
         return;
@@ -53,10 +64,32 @@ export default function newBranch() {
     }
   };
 
-  const submitHandler = () => {
-    dispatch(createBranch({ branch }));
-    dispatch(allBranches());
+  const submitHandler = async () => {
+    await dispatch(createBranch({ branch }));
+    await dispatch(allBranches());
     // navigation.navigate('BranchesList')
+  };
+
+  useEffect(() => {
+    (async () => {
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted")
+        alert("Sorry, we need camera roll permissions to make this work!");
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImageAttached(result.uri);
+    }
   };
 
   return (
@@ -112,6 +145,18 @@ export default function newBranch() {
           <Divider />
 
           <FormControl mb="5">
+            <FormControl.Label>Latitude</FormControl.Label>
+            <Input onChangeText={(value) => inputHandler("latitude", value)} />
+          </FormControl>
+          <Divider />
+
+          <FormControl mb="5">
+            <FormControl.Label>Longitude</FormControl.Label>
+            <Input onChangeText={(value) => inputHandler("longitude", value)} />
+          </FormControl>
+          <Divider />
+
+          <FormControl mb="5">
             <FormControl.Label>Phone</FormControl.Label>
             <Input onChangeText={(value) => inputHandler("phone", value)} />
           </FormControl>
@@ -119,7 +164,18 @@ export default function newBranch() {
 
           <FormControl mb="5">
             <FormControl.Label>Image</FormControl.Label>
-            <Input onChangeText={(value) => inputHandler("image", value)} />
+            <Input
+              onChangeText={(value) =>
+                inputHandler("image", imageAttached ? imageAttached : value)
+              }
+            />
+            <Button
+              title="Pick an image from camera roll"
+              onPress={pickImage}
+              style={{ height: 40, width: 80 }}
+            >
+              <AddIcon size="5" />
+            </Button>
             <View style={styles.Btns}>
               <Button
                 bg="#A6CE39"

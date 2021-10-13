@@ -13,6 +13,7 @@ import {
   Spinner,
   Button,
   ScrollView,
+  Avatar,
 } from "native-base";
 import { NativeBaseProvider } from "native-base";
 import { useNavigation } from "@react-navigation/core";
@@ -52,14 +53,25 @@ function UserDetails() {
         >
           <Box>
             <AspectRatio ratio={16 / 9}>
-              <Image
+              <Avatar
+              alignSelf='center'
+            marginTop={10}
+                bg="purple.600"
+                size="2xl"
+                source={{
+                  uri: "https://pbs.twimg.com/profile_images/1320985200663293952/lE_Kg6vr_400x400.jpg",
+                }}
+              >
+                RB
+              </Avatar>
+              {/* <Image
                 source={{
                   uri: `${branch}`,
                 }}
                 alt="image"
-              />
+              /> */}
             </AspectRatio>
-            <Center
+            {/* <Center
               bg="violet.500"
               _text={{ color: "white", fontWeight: "700", fontSize: "xs" }}
               position="absolute"
@@ -68,7 +80,7 @@ function UserDetails() {
               py="1.5"
             >
               PHOTOS
-            </Center>
+            </Center> */}
           </Box>
           <Stack p="4" space={3}>
             <Stack space={2}>
@@ -97,9 +109,9 @@ function UserDetails() {
               justifyContent="space-between"
             >
               <HStack alignItems="center">
-                <Text color="gray.500" fontWeight="400">
+                {/* <Text color="gray.500" fontWeight="400">
                   6 mins ago
-                </Text>
+                </Text> */}
               </HStack>
             </HStack>
           </Stack>

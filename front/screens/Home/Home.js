@@ -6,7 +6,7 @@ import { Button } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
-  const profile = useSelector((state) => state.profile);
+  const profile = useSelector((state) => state.profile.user);
   const navigation = useNavigation();
 
   return (

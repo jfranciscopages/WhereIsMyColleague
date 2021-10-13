@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { StyleSheet, View, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import {
   VStack,
   HStack,
@@ -11,23 +14,26 @@ import {
   AspectRatio,
   Stack,
   Button,
+  useToast,
+  AlertDialog,
 } from "native-base";
-import { useSelector, useDispatch } from "react-redux";
-import { StyleSheet, View, ScrollView } from "react-native";
 import {
   byCountry,
   allBranches,
   deleteBranch,
   singleBranch,
 } from "../store/BranchReducer";
-import { useNavigation } from "@react-navigation/native";
 
 export default function Branches() {
+  const toast = useToast();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [branchCountry, setBranchCountry] = useState("");
   const branches = useSelector((state) => state.branches.allBranches);
   const countrySelected = useSelector((state) => state.branches.byCountry);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onClose = () => setIsOpen(false);
 
   let uniqueMap = branches.map(({ country }) => country);
   let uniqueSet = [...new Set(uniqueMap)];
@@ -48,6 +54,7 @@ export default function Branches() {
   const deleteHandler = async (id) => {
     await dispatch(deleteBranch(id));
     dispatch(byCountry(branchCountry));
+    setIsOpen(false);
     return dispatch(allBranches());
   };
 
@@ -60,16 +67,6 @@ export default function Branches() {
     dispatch(allBranches());
   }, []);
 
-  // useEffect(() => {
-  //   console.log('BRANCHESLIST byCountry');
-  //   dispatch(allBranches());
-  // }, [branches]);
-
-  console.log("BRANCHESSSSSS", branches);
-
-  // console.log('STATE DEL DROPDOWN', branchCountry)
-  console.log("*********************");
-  console.log("COUNTRY EELEGIDO", countrySelected);
   return (
     <ScrollView>
       <View>
@@ -218,10 +215,27 @@ export default function Branches() {
                     width={20}
                     height={7}
                     marginLeft={2}
-                    onPress={() => dispatch(deleteBranch(id))}
+                    onPress={() => setIsOpen(!isOpen)}
                   >
                     Delete
                   </Button>
+                  <AlertDialog isOpen={isOpen} onClose={onClose}>
+                    <AlertDialog.Content>
+                      <AlertDialog.CloseButton />
+                      <AlertDialog.Header>Are you sure?</AlertDialog.Header>
+                      <AlertDialog.Body>
+                        This will remove all data relating to the branch.
+                      </AlertDialog.Body>
+                      <AlertDialog.Footer>
+                        <Button
+                          colorScheme="danger"
+                          onPress={() => deleteHandler(id)}
+                        >
+                          Delete branch
+                        </Button>
+                      </AlertDialog.Footer>
+                    </AlertDialog.Content>
+                  </AlertDialog>
                 </View>
               </Box>
             ))
