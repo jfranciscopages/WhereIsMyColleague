@@ -181,7 +181,7 @@ export default function DrawerContent(props) {
           label="Sign Out"
           pressColor="#A6CE39"
           onPress={() => handleLogout()}
-          /* onPress={() => {}} */
+        /* onPress={() => {}} */
         />
       </Drawer.Section>
     </View>
