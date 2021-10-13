@@ -47,13 +47,6 @@ export default function Main() {
               component={UserDetails}
               options={{
                 headerTitle: "Colleague",
-                headerStyle: {
-                  backgroundColor: "#A6CE39",
-                },
-                headerTintColor: "#fff",
-                headerTitleStyle: {
-                  fontWeight: "bold",
-                },
               }}
             />
             <Stack.Screen name="map" component={Map} />

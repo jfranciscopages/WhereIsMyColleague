@@ -2,32 +2,28 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   Heading,
-  Icon,
-  AspectRatio,
-  Image,
+  NativeBaseProvider,
   Text,
   Center,
   HStack,
   Stack,
   View,
   Spinner,
-  Button
-} from 'native-base';
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+  Button,
+} from "native-base";
+import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { singleBranch } from "../store/BranchReducer";
-import { Avatar } from 'native-base';
-import { Entypo } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Avatar } from "native-base";
+import { Entypo } from "@expo/vector-icons";
 import { Linking, StyleSheet } from "react-native";
-import { AntDesign } from '@expo/vector-icons';
-import { alignContent, alignItems, justifyContent, width } from "styled-system";
+import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
+import { userById } from "../store/usersReducer";
 
 function UserDetails() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const navigation = useNavigation();
   const branch = useSelector((state) => state.branches.singleBranch);
   const [loading, setLoading] = useState(true);
   const user = useSelector((state) => state.users.userById);
@@ -38,13 +34,12 @@ function UserDetails() {
       setLoading(false);
     }, 1000);
   }, []);
-  console.log(branch.id)
+  console.log(branch.id);
 
   const makeCall = () => {
+    let phoneNumber = "";
 
-    let phoneNumber = '';
-
-    if (Platform.OS === 'android') {
+    if (Platform.OS === "android") {
       phoneNumber = `tel:${user.phone}`;
     } else {
       phoneNumber = `telprompt:${user.phone}`;
@@ -55,9 +50,8 @@ function UserDetails() {
 
   const branchButtonHandlePress = () => {
     dispatch(singleBranch(user.branchId));
-    navigation.navigate('Branch')
-  }
-
+    navigation.navigate("Branch");
+  };
 
   const editUser = () => {
     dispatch(userById(user.id));
@@ -107,10 +101,9 @@ function UserDetails() {
                 {user.firstName} {user.lastName}
               </Heading>
               <Text
-
                 fontSize="md"
-                _light={{ color: 'violet.500' }}
-                _dark={{ color: 'violet.300' }}
+                _light={{ color: "violet.500" }}
+                _dark={{ color: "violet.300" }}
                 fontWeight="500"
                 ml="-0.5"
                 mt="-1"
@@ -118,55 +111,84 @@ function UserDetails() {
                 - {user.job} -
               </Text>
               <View style={styles.textButtonView}>
-                <MaterialIcons style={styles.placeIcon} name="place" size={24} color="black" />
+                <MaterialIcons
+                  style={styles.placeIcon}
+                  name="place"
+                  size={24}
+                  color="black"
+                />
                 <Text
                   style={styles.text}
                   fontSize="md"
-                  _light={{ color: 'rgb(65, 64, 102)' }}
-                  _dark={{ color: 'violet.300' }}
+                  _light={{ color: "rgb(65, 64, 102)" }}
+                  _dark={{ color: "violet.300" }}
                   fontWeight="500"
                   ml="-0.5"
                   mt="-1"
                 >
                   {`Work's in ${branch.city}, ${branch.country}`}
                 </Text>
-                <Button overflow="hidden" onPress={() => branchButtonHandlePress()} variant="outline" style={styles.goToBranchButton}>Go to Branch!</Button>
+                <Button
+                  overflow="hidden"
+                  onPress={() => branchButtonHandlePress()}
+                  variant="outline"
+                  style={styles.goToBranchButton}
+                >
+                  Go to Branch!
+                </Button>
               </View>
               <View style={styles.textPhoneView}>
                 <AntDesign name="phone" size={24} color="black" />
                 <Text
                   style={styles.phoneText}
                   fontSize="md"
-                  _light={{ color: 'rgb(65, 64, 102)' }}
-                  _dark={{ color: 'violet.300' }}
+                  _light={{ color: "rgb(65, 64, 102)" }}
+                  _dark={{ color: "violet.300" }}
                   fontWeight="500"
                   ml="-0.5"
                   mt="-1"
                 >
                   {`Phone's number:`}
                 </Text>
-                <Button onPress={() => makeCall()} overflow="hidden" variant="outline" style={styles.phoneButton}>{user.phone}</Button>
+                <Button
+                  onPress={() => makeCall()}
+                  overflow="hidden"
+                  variant="outline"
+                  style={styles.phoneButton}
+                >
+                  {user.phone}
+                </Button>
               </View>
               <View style={styles.emailTextView}>
                 <Entypo name="mail" size={24} color="black" />
                 <Text
                   style={styles.mailText}
                   fontSize="md"
-                  _light={{ color: 'rgb(65, 64, 102)' }}
-                  _dark={{ color: 'violet.300' }}
+                  _light={{ color: "rgb(65, 64, 102)" }}
+                  _dark={{ color: "violet.300" }}
                   fontWeight="500"
                   ml="-0.5"
                   mt="-1"
                 >
                   {`E-mail:`}
                 </Text>
-                <Button variant="outline" style={styles.mailButton} onPress={() => Linking.openURL(`mailto:${user.email}`)}
-                  title="support@example.com"> {user.email}</Button>
+                <Button
+                  variant="outline"
+                  style={styles.mailButton}
+                  onPress={() => Linking.openURL(`mailto:${user.email}`)}
+                  title="support@example.com"
+                >
+                  {" "}
+                  {user.email}
+                </Button>
               </View>
             </Stack>
-            <HStack alignItems="center" space={4} justifyContent="space-between">
-              <HStack alignItems="center">
-              </HStack>
+            <HStack
+              alignItems="center"
+              space={4}
+              justifyContent="space-between"
+            >
+              <HStack alignItems="center"></HStack>
             </HStack>
           </Stack>
           <Button bg="#A6CE39" onPress={() => editUser()}>
@@ -175,9 +197,8 @@ function UserDetails() {
         </Box>
       ) : (
         <Spinner color="danger.500" />
-      )
-      }
-    </View >
+      )}
+    </View>
   );
 }
 
@@ -189,16 +210,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     // height: 500
-    paddingTop: 20
+    paddingTop: 20,
   },
   backBox: {
-    marginTop: -100
+    marginTop: -100,
   },
   text: {
     // borderColor: 'red',
     // borderWidth: 1,
     // paddingTop: 10,
-    width: 150
+    width: 150,
   },
   textButtonView: {
     // borderColor: 'red',
@@ -207,7 +228,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     justifyContent: "space-between",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
     // borderColor: 'red',
     // borderWidth: 1
   },
@@ -215,7 +236,7 @@ const styles = StyleSheet.create({
     height: 500,
   },
   mailText: {
-    marginLeft: -20
+    marginLeft: -20,
   },
   mailButton: {
     height: 60,
@@ -236,9 +257,7 @@ const styles = StyleSheet.create({
   phoneText: {
     marginLeft: 15,
   },
-  phoneButton: {
-
-  },
+  phoneButton: {},
   emailTextView: {
     flexDirection: "row",
     alignItems: "center",
@@ -252,7 +271,7 @@ const styles = StyleSheet.create({
 export default function () {
   return (
     <NativeBaseProvider>
-      <Center flex={1} >
+      <Center flex={1}>
         <UserDetails />
       </Center>
     </NativeBaseProvider>
