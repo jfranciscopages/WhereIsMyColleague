@@ -81,7 +81,7 @@ export default function Branches() {
             accessibilityLabel="Countries"
             placeholder="Countries"
             _selectedItem={{
-              bg: "teal.600",
+              bg: "#39B54A",
               endIcon: <CheckIcon size="5" />,
             }}
             mt={1}

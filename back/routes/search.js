@@ -1,6 +1,11 @@
 const express = require(`express`);
 const router = express.Router();
-const { Branches, Floors, Workspaces } = require("../models/index");
+const {
+  Branches,
+  Floors,
+  Workspaces,
+  User_Profile,
+} = require("../models/index");
 
 router.get("/", function (req, res, next) {
   res.send("VIVA PERON A RE QUE NO");
@@ -25,11 +30,15 @@ router.get("/searchFloorWorkspaces/:id", function (req, res, next) {
     include: [
       {
         model: Workspaces,
+        include: {
+          model: User_Profile,
+        },
       },
     ],
   })
-    .then((branch) => {
-      res.status(200).send(branch);
+    .then((floor) => {
+      console.log(floor.workspaces.user_profile);
+      res.status(200).send(floor);
     })
     .catch(next);
 });

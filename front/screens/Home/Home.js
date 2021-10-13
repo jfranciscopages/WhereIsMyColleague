@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { View, Text, ImageBackground, Image } from "react-native";
 import { useSelector } from "react-redux";
 import styles from "./homeStyles";
-import { Button } from "native-base";
+import { Button, Center } from "native-base";
 import { useNavigation } from "@react-navigation/native";
+import { style } from "styled-system";
 
 export default function Home() {
   const profile = useSelector((state) => state.profile);
@@ -11,13 +12,13 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <View alignItems="center">
+      <Center alignItems="center">
         <Image
-          style={{ marginTop: 80, width: 360, height: 130 }}
-          source={require("../../assets/mountain.png")}
+          style={styles.image}
+          source={require("../../assets/work_4.png")}
           alt="ella"
         />
-      </View>
+      </Center>
       <View style={styles.welcomeMessage}>
         <Text style={styles.heading}>{`Hi ${profile.firstName}, Welcome`}</Text>
         <Text style={styles.subheading}>{"to WhereIsMyColleague"}</Text>

@@ -74,13 +74,11 @@ const useCreateUser = () => {
           render: () => {
             return (
               <Box bg="red.500" px="2" py="4" rounded="sm" mt={70}>
-                This Workspace its Ocuppied! Select another!
+                This Workspace its Ocuppied! Please select another!
               </Box>
             );
           },
         });
-        setWorkspaceId("");
-        setWorkspacesOk(false);
       });
   };
 
