@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { useSelector } from "react-redux";
 
 import {
@@ -9,7 +9,9 @@ import {
   Heading,
   VStack,
   FormControl,
+  Center,
   Input,
+  Image,
   Link,
   Button,
 } from "native-base";
@@ -19,6 +21,7 @@ import useLogin from "../hooks/useLogin";
 export default function Login() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
+  const passwordRef = useRef();
 
   const params = useLogin();
   const {
@@ -27,11 +30,22 @@ export default function Login() {
     loginPassword,
     setLoginEmail,
     setLoginPassword,
+    loading,
   } = params;
 
   return (
     <NativeBaseProvider>
-      <Box marginTop="120" safeArea flex={1} p="2" py="8" w="90%" mx="auto">
+      <Box marginTop="81" safeArea flex={1} p="2" py="8" w="90%" mx="auto">
+        <Center>
+          <Image
+            source={{
+              uri: `https://secure.meetupstatic.com/photos/event/6/e/2/5/clean_488248197.jpeg`,
+            }}
+            resizeMode="center"
+            size="xl"
+            alt="Globant logo"
+          />
+        </Center>
         <Heading
           alignSelf="center"
           size="lg"
@@ -65,6 +79,12 @@ export default function Login() {
               style={[styles.input, { fontSize: 17 }]}
               value={loginEmail}
               onChangeText={(e) => setLoginEmail(e)}
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                passwordRef.current.focus();
+              }}
+              blurOnSubmit={false}
+              keyboardType={"email-address"}
             />
           </FormControl>
           <FormControl>
@@ -78,10 +98,13 @@ export default function Login() {
               Password
             </FormControl.Label>
             <Input
+              ref={passwordRef}
               type={show ? "text" : "password"}
               style={[styles.input, { fontSize: 17 }]}
               value={loginPassword}
               onChangeText={(e) => setLoginPassword(e)}
+              returnKeyType="send"
+              onSubmitEditing={(e) => handleSubmit(e)}
               InputRightElement={
                 <Button
                   _text={{ color: "coolGray.800" }}
@@ -94,16 +117,22 @@ export default function Login() {
               }
             />
           </FormControl>
-          <Button
-            onPress={(e) => {
-              handleSubmit(e);
-            }}
-            mt="2"
-            backgroundColor="#aecf53"
-            _text={{ color: "coolGray.800" }}
-          >
-            Sign in
-          </Button>
+          {loading ? (
+            <Button bg="#A6CE39" isLoading>
+              Submitting...
+            </Button>
+          ) : (
+            <Button
+              onPress={(e) => {
+                handleSubmit(e);
+              }}
+              mt="2"
+              backgroundColor="#aecf53"
+              _text={{ color: "coolGray.800" }}
+            >
+              Sign in
+            </Button>
+          )}
         </VStack>
       </Box>
     </NativeBaseProvider>

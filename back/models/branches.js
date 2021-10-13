@@ -16,6 +16,10 @@ Branches.init(
         notEmpty: true,
       },
     },
+    description: {
+      type: Sequelize.TEXT,
+      allowNull: true,
+    },
     city: {
       type: Sequelize.STRING,
       allowNull: false,

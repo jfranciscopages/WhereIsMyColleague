@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import expoLocalHost from "../localHost";
-import { useToast } from "native-base";
-import { Box } from "native-base";
+import { useToast, Box } from "native-base";
 import { useNavigation } from "@react-navigation/core";
 import { useSelector } from "react-redux";
 
@@ -75,13 +74,11 @@ const useCreateUser = () => {
           render: () => {
             return (
               <Box bg="red.500" px="2" py="4" rounded="sm" mt={70}>
-                This Workspace its Ocuppied! Select another!
+                This Workspace its Ocuppied! Please select another!
               </Box>
             );
           },
         });
-        setWorkspaceId("");
-        setWorkspacesOk(false);
       });
   };
 

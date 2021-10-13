@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/heebo": "^0.2.0",
     "@expo-google-fonts/inter": "^0.2.0",
     "@expo-google-fonts/kaushan-script": "^0.2.0",
     "@expo/ngrok": "^2.4.3",
@@ -31,6 +32,7 @@
     "native-base": "^3.2.1-RC-1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^7.17.2",
     "react-leaflet": "^3.2.1",
     "react-measure": "^2.5.2",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",

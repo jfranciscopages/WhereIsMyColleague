@@ -6,18 +6,19 @@ import DrawerContainer from "./containers/DrawerContainer";
 import Intro from "./screens/Intro";
 import Login from "./screens/Login";
 import Home from "./screens/Home/Home";
-import newBranch from "./screens/Admin/newBranch";
 import editBranch from "./screens/Admin/editBranch";
 import Map from "./components/Map/Map";
 import UserDetails from "./screens/UserDetails";
 import Branch from "./screens/Branch";
 import { CreateFloor } from "./screens/CreateFloor";
 import { EditFloor } from "./screens/EditFloor";
-
+import { EditUser } from "./screens/Admin/EditUser";
 import { WorkSpaces } from "./screens/WorkSpaces";
 
 /* import { FloorDetails } from "./screens/FloorDetails"; */
+
 import { EditUser } from "./screens/EditUser";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -34,22 +35,27 @@ export default function Main() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              options={{ headerShown: false }}
+
+              options={{ headerShown: false, headerTitle: "Ellabro" }}
+
               name="Home"
               component={Home}
             />
             <Stack.Screen name="Branch" component={Branch} />
             <Stack.Screen name="editBranch" component={editBranch} />
-            {/*  <Stack.Screen name="newBranch" component={newBranch} /> */}
-            <Stack.Screen name="CreateFloor" component={CreateFloor} />
 
+            <Stack.Screen name="CreateFloor" component={CreateFloor} />
             <Stack.Screen name="WorkSpaces" component={WorkSpaces} />
             <Stack.Screen name="EditFloor" component={EditFloor} />
-
-            {/*  <Stack.Screen name="floorDetails" component={FloorDetails} /> */}
             <Stack.Screen name="EditUser" component={EditUser} />
+            <Stack.Screen
+              name="userinfo"
+              component={UserDetails}
+              options={{
+                headerTitle: "Colleague",
+              }}
+            />
 
-            <Stack.Screen name="userinfo" component={UserDetails} />
             <Stack.Screen name="map" component={Map} />
           </>
         ) : (

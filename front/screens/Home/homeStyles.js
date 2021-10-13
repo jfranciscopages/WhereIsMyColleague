@@ -4,11 +4,14 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flex: 1,
-    padding: 15,
     backgroundColor: "#dddddd",
   },
   welcomeMessage: {
-    marginTop: 20,
+    marginTop: 40,
+  },
+  image: {
+    width: 500,
+    height: 300,
   },
   heading: {
     fontSize: 30,
@@ -17,7 +20,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   subheading: {
-    fontSize: 22,
+    fontSize: 20,
     color: "#222222",
     marginTop: 10,
     fontWeight: "normal",
@@ -25,7 +28,7 @@ const styles = StyleSheet.create({
   },
   description: {
     color: "#222222",
-    marginTop: 15,
+    marginTop: 14,
     marginLeft: 20,
     marginRight: 20,
     textAlign: "center",
