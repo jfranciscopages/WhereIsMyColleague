@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { View } from "react-native";
 import {
   FormControl,
@@ -21,6 +21,13 @@ import { SelectBranch } from "../../components/SelectBranch/SelectBranch";
 export const EditUser = () => {
   const [rendering, setRendering] = useState(true);
   const params = useCreateUser();
+  const lastNameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const countryRef = useRef();
+  const phoneRef = useRef();
+  const jobRef = useRef();
+
   const {
     access,
     setAccess,
@@ -99,59 +106,98 @@ export const EditUser = () => {
                     value={firstName}
                     onChangeText={(value) => setFistName(value)}
                     mb="2"
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                      lastNameRef.current.focus();
+                    }}
+                    blurOnSubmit={false}
                   />
                   <FormControl.Label justifyContent="center">
                     Last Name
                   </FormControl.Label>
                   <Input
                     placeholder={user.lastName}
+                    ref={lastNameRef}
                     value={lastName}
                     onChangeText={(value) => setLastName(value)}
                     mb="2"
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                      emailRef.current.focus();
+                    }}
+                    blurOnSubmit={false}
                   />
                   <FormControl.Label justifyContent="center">
                     Email
                   </FormControl.Label>
                   <Input
                     placeholder={user.email}
+                    ref={emailRef}
                     value={email}
                     onChangeText={(value) => setEmail(value)}
                     mb="2"
+                    keyboardType="email-address"
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                      passwordRef.current.focus();
+                    }}
+                    blurOnSubmit={false}
                   />
                   <FormControl.Label justifyContent="center">
                     Password
                   </FormControl.Label>
                   <Input
+                    ref={passwordRef}
                     value={password}
                     onChangeText={(value) => setPassword(value)}
                     mb="2"
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                      countryRef.current.focus();
+                    }}
+                    blurOnSubmit={false}
                   />
                   <FormControl.Label justifyContent="center">
                     Country
                   </FormControl.Label>
                   <Input
                     placeholder={user.country}
+                    ref={countryRef}
                     value={country}
                     onChangeText={(value) => setCountry(value)}
                     mb="2"
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                      phoneRef.current.focus();
+                    }}
+                    blurOnSubmit={false}
                   />
                   <FormControl.Label justifyContent="center">
                     Phone Number
                   </FormControl.Label>
                   <Input
                     placeholder={user.phone}
+                    ref={phoneRef}
                     value={phone}
                     onChangeText={(value) => setPhone(value)}
                     mb="2"
+                    keyboardType="phone-pad"
+                    returnKeyType="next"
+                    onSubmitEditing={() => {
+                      jobRef.current.focus();
+                    }}
+                    blurOnSubmit={false}
                   />
                   <FormControl.Label justifyContent="center">
                     Job
                   </FormControl.Label>
                   <Input
                     placeholder={user.job}
+                    ref={jobRef}
                     value={job}
                     onChangeText={(value) => setJob(value)}
                     mb="2"
+                    returnKeyType="done"
                   />
                   <SelectBranch />
                 </FormControl>
