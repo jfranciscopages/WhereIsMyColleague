@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { View } from "react-native";
 import {
   FormControl,
@@ -19,6 +19,13 @@ import { useForm, Controller } from "react-hook-form";
 
 export const CreateUser = () => {
   const params = useCreateUser();
+  const lastNameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const countryRef = useRef();
+  const phoneRef = useRef();
+  const jobRef = useRef();
+
   const {
     access,
     setAccess,
@@ -82,53 +89,89 @@ export const CreateUser = () => {
                   value={firstName}
                   onChangeText={(value) => setFistName(value)}
                   mb="2"
+                  returnKeyType="next"
+                  onSubmitEditing={() => {
+                    lastNameRef.current.focus();
+                  }}
+                  blurOnSubmit={false}
                 />
                 <FormControl.Label justifyContent="center">
                   Last Name
                 </FormControl.Label>
                 <Input
+                  ref={lastNameRef}
                   value={lastName}
                   onChangeText={(value) => setLastName(value)}
                   mb="2"
+                  returnKeyType="next"
+                  onSubmitEditing={() => {
+                    emailRef.current.focus();
+                  }}
+                  blurOnSubmit={false}
                 />
                 <FormControl.Label justifyContent="center">
                   Email
                 </FormControl.Label>
                 <Input
+                  ref={emailRef}
                   value={email}
                   keyboardType={"email-address"}
                   onChangeText={(value) => setEmail(value)}
                   mb="2"
+                  returnKeyType="next"
+                  onSubmitEditing={() => {
+                    passwordRef.current.focus();
+                  }}
+                  blurOnSubmit={false}
                 />
                 <FormControl.Label justifyContent="center">
                   Password
                 </FormControl.Label>
                 <Input
+                  ref={passwordRef}
                   value={password}
                   onChangeText={(value) => setPassword(value)}
                   mb="2"
+                  returnKeyType="next"
+                  onSubmitEditing={() => {
+                    countryRef.current.focus();
+                  }}
+                  blurOnSubmit={false}
                 />
                 <FormControl.Label justifyContent="center">
                   Country
                 </FormControl.Label>
                 <Input
+                  ref={countryRef}
                   value={country}
                   onChangeText={(value) => setCountry(value)}
                   mb="2"
+                  returnKeyType="next"
+                  onSubmitEditing={() => {
+                    phoneRef.current.focus();
+                  }}
+                  blurOnSubmit={false}
                 />
                 <FormControl.Label justifyContent="center">
                   Phone Number
                 </FormControl.Label>
                 <Input
+                  ref={phoneRef}
                   value={phone}
-                  keyboardType="number-pad"
+                  keyboardType="phone-pad"
                   onChangeText={(value) => setPhone(value)}
                   mb="2"
+                  returnKeyType="next"
+                  onSubmitEditing={() => {
+                    jobRef.current.focus();
+                  }}
+                  blurOnSubmit={false}
                 />
                 <FormControl.Label justifyContent="center">
                   Job
                 </FormControl.Label>
                 <Input
+                  ref={jobRef}
                   value={job}
                   onChangeText={(value) => setJob(value)}
                   mb="2"
