@@ -21,6 +21,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import SearchBarWorkspace from "../components/SearchBar/searchWorkspace";
 import { setWorkSpaceValue } from "../store/searchbar/searchValue";
+import { setWorkspace } from "../store/workSpaceReducer"
 import { useDispatch, useSelector } from "react-redux";
 
 export const WorkSpaces = () => {
@@ -31,13 +32,17 @@ export const WorkSpaces = () => {
   const WorkSpacesById = useSelector((state) => state.WorkSpacesById);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const navigateWS = ()=>{
-    navigation.navigate("workSpaceIndividual")
-  }
+  
 
   useEffect(() => {
     dispatch(setWorkSpaceValue(""));
   }, []);
+
+  const navigateWS =async (WsId)=>{
+    console.log("QUE ONDA ID", WsId)
+    await dispatch(setWorkspace(WsId))
+    navigation.navigate("workSpaceIndividual")
+  }
 
   return (
     <View>
@@ -49,9 +54,11 @@ export const WorkSpaces = () => {
         <List>
           {floor.workspaces.map((ws, i) => {
             console.log("WSSS??", ws);
+            const WsId = ws.id
+            console.log("ID=========>", WsId)
             return (
               <View>
-              <List.Item key={i} onPress={()=>navigateWS()}>
+              <List.Item key={i} onPress={(id)=>navigateWS(WsId)}>
                 <HStack space={3} justifyContent="space-between">
                   <Avatar
                     size="48px"
@@ -145,7 +152,7 @@ export const WorkSpaces = () => {
               );
             })
           ) : (
-            <List.Item key={1}>
+            <List.Item key={i}>
               <Text>
                 No Match
                </Text>

@@ -7,6 +7,7 @@ import { ProfileReducer } from "./profileReducer";
 import { searchBranchReducer } from "./searchBranch/searchBranchReducer";
 import { FloorReducer, FloorIdReducer } from "./floorReducer";
 import { workspacesByFloorReducer } from "./searchbar/searchWorkSpaceByFloor"
+import { WorkspaceReducer } from "./workSpaceReducer"
 
 const store = configureStore({
   /* middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),  */
@@ -21,6 +22,7 @@ const store = configureStore({
     selectedFloor: FloorReducer,
     selectedFloorId: FloorIdReducer,
     WorkSpacesById: workspacesByFloorReducer,
+    singleWorkspace: WorkspaceReducer
   },
 });
 

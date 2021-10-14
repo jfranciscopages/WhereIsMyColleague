@@ -4,7 +4,7 @@ const router = express.Router();
 const { Op } = require("sequelize");
 const { User_Profile } = require("../models");
 
-router.get("/findWorkspace", function(req,res,next){
+router.get("/findWorkspace/:id", function(req,res,next){
   const id = req.params.id
   Workspaces.findByPk(id,{
     include:{
@@ -20,7 +20,7 @@ router.post("/findWorkspace", function (req, res, next) {
   Workspaces.findAll({
     where: {
       [Op.and]: {
-        floorId: floorId,
+        floorId: floorId, 
         name: {
           [Op.iLike]: `%${name}%`,
         },
