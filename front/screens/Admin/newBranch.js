@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   FormControl,
@@ -22,6 +22,13 @@ export default function newBranch() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [imageAttached, setImageAttached] = useState(null);
+  const cityRef = useRef();
+  const addressRef = useRef();
+  const postalRef = useRef();
+  const latRef = useRef();
+  const longRef = useRef();
+  const phoneRef = useRef();
+  const imgRef = useRef();
 
   const [branch, setBranch] = useState({
     country: "",
@@ -120,28 +127,59 @@ export default function newBranch() {
               <FormControl.Label justifyContent="center">
                 Country
               </FormControl.Label>
-              <Input onChangeText={(value) => inputHandler("country", value)} />
+              <Input
+                onChangeText={(value) => inputHandler("country", value)}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  cityRef.current.focus();
+                }}
+                blurOnSubmit={false}
+              />
             </FormControl>
 
             <FormControl mb="2">
               <FormControl.Label justifyContent="center">
                 City
               </FormControl.Label>
-              <Input onChangeText={(value) => inputHandler("city", value)} />
+              <Input
+                ref={cityRef}
+                onChangeText={(value) => inputHandler("city", value)}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  addressRef.current.focus();
+                }}
+                blurOnSubmit={false}
+              />
             </FormControl>
 
             <FormControl mb="2">
               <FormControl.Label justifyContent="center">
                 Address
               </FormControl.Label>
-              <Input onChangeText={(value) => inputHandler("address", value)} />
+              <Input
+                ref={addressRef}
+                onChangeText={(value) => inputHandler("address", value)}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  postalRef.current.focus();
+                }}
+                blurOnSubmit={false}
+              />
             </FormControl>
 
             <FormControl mb="2">
               <FormControl.Label justifyContent="center">
                 Postal Code
               </FormControl.Label>
-              <Input onChangeText={(value) => inputHandler("cp", value)} />
+              <Input
+                ref={postalRef}
+                onChangeText={(value) => inputHandler("cp", value)}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  latRef.current.focus();
+                }}
+                blurOnSubmit={false}
+              />
             </FormControl>
 
             <FormControl mb="2">
@@ -149,7 +187,13 @@ export default function newBranch() {
                 Latitude
               </FormControl.Label>
               <Input
+                ref={latRef}
                 onChangeText={(value) => inputHandler("latitude", value)}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  longRef.current.focus();
+                }}
+                blurOnSubmit={false}
               />
             </FormControl>
 
@@ -158,7 +202,13 @@ export default function newBranch() {
                 Longitude
               </FormControl.Label>
               <Input
+                ref={longRef}
                 onChangeText={(value) => inputHandler("longitude", value)}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  phoneRef.current.focus();
+                }}
+                blurOnSubmit={false}
               />
             </FormControl>
 
@@ -166,7 +216,16 @@ export default function newBranch() {
               <FormControl.Label justifyContent="center">
                 Phone
               </FormControl.Label>
-              <Input onChangeText={(value) => inputHandler("phone", value)} />
+              <Input
+                ref={phoneRef}
+                onChangeText={(value) => inputHandler("phone", value)}
+                returnKeyType="next"
+                keyboardType="phone-pad"
+                onSubmitEditing={() => {
+                  imgRef.current.focus();
+                }}
+                blurOnSubmit={false}
+              />
             </FormControl>
 
             <FormControl mb="2">
@@ -174,6 +233,8 @@ export default function newBranch() {
                 Image
               </FormControl.Label>
               <Input
+                ref={imgRef}
+                returnKeyType="done"
                 onChangeText={(value) =>
                   inputHandler("image", imageAttached ? imageAttached : value)
                 }
