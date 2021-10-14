@@ -23,14 +23,14 @@ export default function DrawerContainer() {
         name="SearchColleague"
         component={SearchColleague}
         options={{
-          headerTitle: "",
+          headerTitle: "Find Colleague",
         }}
       />
       <Drawer.Screen
         name="BranchesList"
         component={BranchesList}
         options={{
-          headerTitle: "",
+          headerTitle: "Branches",
         }}
       />
       <Drawer.Screen

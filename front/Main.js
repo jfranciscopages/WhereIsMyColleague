@@ -18,7 +18,6 @@ import WorkspaceIndividual from "./screens/WorkspaceIndividual";
 
 /* import { FloorDetails } from "./screens/FloorDetails"; */
 
-
 const Stack = createNativeStackNavigator();
 
 export default function Main() {
@@ -34,9 +33,7 @@ export default function Main() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-
               options={{ headerShown: false, headerTitle: "Ellabro" }}
-
               name="Home"
               component={Home}
             />
@@ -45,8 +42,17 @@ export default function Main() {
 
             <Stack.Screen name="CreateFloor" component={CreateFloor} />
             <Stack.Screen name="WorkSpaces" component={WorkSpaces} />
-            <Stack.Screen name="WorkSpaceIndividual" component={WorkspaceIndividual} />
-            <Stack.Screen name="EditFloor" component={EditFloor} />
+            <Stack.Screen
+              name="WorkSpaceIndividual"
+              component={WorkspaceIndividual}
+            />
+            <Stack.Screen
+              name="EditFloor"
+              component={EditFloor}
+              options={{
+                headerTitle: "",
+              }}
+            />
             <Stack.Screen name="EditUser" component={EditUser} />
             <Stack.Screen
               name="userinfo"
