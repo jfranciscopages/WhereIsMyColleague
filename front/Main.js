@@ -14,7 +14,7 @@ import { CreateFloor } from "./screens/CreateFloor";
 import { EditFloor } from "./screens/EditFloor";
 import { EditUser } from "./screens/Admin/EditUser";
 import { WorkSpaces } from "./screens/WorkSpaces";
-import WorkspaceIndividual from "./screens/WorkspaceIndividual";
+import  WorkspaceIndividual  from "./screens/WorkspaceIndividual";
 
 /* import { FloorDetails } from "./screens/FloorDetails"; */
 
@@ -42,6 +42,7 @@ export default function Main() {
 
             <Stack.Screen name="CreateFloor" component={CreateFloor} />
             <Stack.Screen name="WorkSpaces" component={WorkSpaces} />
+
             <Stack.Screen
               name="WorkSpaceIndividual"
               component={WorkspaceIndividual}

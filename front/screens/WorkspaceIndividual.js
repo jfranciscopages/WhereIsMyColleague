@@ -12,7 +12,7 @@ import {
   Button,
 } from "native-base";
 
-function WorkspaceIndividual(){
+export default function WorkspaceIndividual(){
     return(
         <Text>
             ESTO ES WS INDIVIDUAL
@@ -20,4 +20,3 @@ function WorkspaceIndividual(){
     )
 }
 
-export default WorkspaceIndividual
