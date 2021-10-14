@@ -131,10 +131,10 @@ export default function Branches() {
                     <Text
                       fontSize="xs"
                       _light={{
-                        color: "violet.500",
+                        color: "#39B54A",
                       }}
                       _dark={{
-                        color: "violet.400",
+                        color: "#39B54A",
                       }}
                       fontWeight="500"
                       ml="-0.5"
