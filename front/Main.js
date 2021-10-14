@@ -18,8 +18,6 @@ import WorkspaceIndividual from "./screens/WorkspaceIndividual";
 
 /* import { FloorDetails } from "./screens/FloorDetails"; */
 
-import { EditUser } from "./screens/EditUser";
-
 
 const Stack = createNativeStackNavigator();
 

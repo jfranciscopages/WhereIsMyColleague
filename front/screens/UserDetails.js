@@ -15,7 +15,6 @@ import {
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { singleBranch } from "../store/BranchReducer";
-import { Avatar } from "native-base";
 import { Entypo } from "@expo/vector-icons";
 import { Linking, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
@@ -73,21 +72,6 @@ function UserDetails() {
         >
           <Box>
 
-            <AspectRatio ratio={16 / 9}>
-              <Avatar
-              alignSelf='center'
-            marginTop={10}
-                bg="purple.600"
-                size="2xl"
-                source={{
-                  uri: "https://pbs.twimg.com/profile_images/1320985200663293952/lE_Kg6vr_400x400.jpg",
-                }}
-              >
-                RB
-              </Avatar>
-              
-
-          
             <View style={styles.avatar}>
               <Avatar
                 style={styles.avatarImg}
@@ -95,15 +79,10 @@ function UserDetails() {
                 source={{
                   uri: "https://pbs.twimg.com/profile_images/1177303899243343872/B0sUJIH0_400x400.jpg",
                 }}
-
                 alt="image"
-             
-            </AspectRatio>
-
-              
-              </Avatar>
+              />
             </View>
-        
+
 
           </Box>
           <Stack p="4" space={3}>
@@ -205,11 +184,12 @@ function UserDetails() {
           <Button bg="#A6CE39" onPress={() => editUser()}>
             Edit
           </Button>
-        </Box>
+        </Box >
       ) : (
         <Spinner color="danger.500" />
-      )}
-    </View>
+      )
+      }
+    </View >
   );
 }
 

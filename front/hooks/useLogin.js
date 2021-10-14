@@ -14,9 +14,9 @@ const useLogin = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-  const user = useSelector(state=> state.profile.user)
-  
-  const handleSubmit = () => {
+  const user = useSelector(state => state.profile.user)
+
+  const handleSubmit = async () => {
     dispatch(loggedIn({ loginEmail, loginPassword }));
     // success(`logged user ${data.data}`);
   };
