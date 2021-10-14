@@ -29,9 +29,9 @@ export default function FloorList() {
     return state.branches.singleBranch.floors;
   });
 
-    useEffect(() => {
-        setLoading(false);
-    }, []);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   const goToUser = (id) => {
     dispatch(userById(id));

@@ -1,5 +1,5 @@
 const { User_Profile, Branches, Floors, Workspaces } = require("./models");
-const faker = require('faker')
+const faker = require("faker");
 
 const Branchs = [
   {

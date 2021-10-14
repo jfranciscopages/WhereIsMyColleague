@@ -3,7 +3,7 @@ const db = require("../db/db");
 const crypto = require(`bcrypt`);
 
 //-- User Model
-class User_Profile extends Sequelize.Model { }
+class User_Profile extends Sequelize.Model {}
 User_Profile.init(
   {
     access: {
@@ -73,10 +73,6 @@ User_Profile.addHook(`beforeCreate`, function (user) {
 User_Profile.prototype.hashPass = function (password, salt) {
   return crypto.hash(password, salt);
 };
-
-// User_Profile.prototype.validPassword = function (password) {
-//   return crypto.compareSync(password, this.password);
-// };
 
 User_Profile.prototype.validPassword = function (password, salt) {
   return this.hashPass(password, salt).then((pass) => {

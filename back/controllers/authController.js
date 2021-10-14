@@ -1,42 +1,27 @@
 const { User_Profile } = require(`../models/index`);
-// const jwt = require("jsonwebtoken");
-
-// const checkJWT = (req, res, next) => {
-//   if (!req.headers.authorization) return res.status(401).send("No autorizado");
-
-//   const token = req.headers.authorization.split(" ")[1];
-//   const data = jwt.verify(token, "ClaveSecreta", (err, decoded) => {
-//     if (err) res.status(401).send("No permitido");
-//     return decoded;
-//   });
-//   if (data) {
-//     User_Profile.findByPk(data.id).then((user) => {
-//       req.user = data;
-//       next();
-//     });
-//   }
-// };
-
-// module.exports = checkJWT;
 
 const auth_controller = {
-  login: (req, res, next) => {
-    const user = {
-      access: req.user.access,
-      email: req.user.email,
-      address: req.user.address,
-      firstName: req.user.firstName,
-      lastName: req.user.lastName,
-      country: req.user.country,
-      city: req.user.city,
-      phone: req.user.phone,
-      job: req.user.job,
-      latitude: req.user.latitude,
-      longitude: req.user.longitude,
-      id: req.user.id,
-    };
+  login: async (req, res, next) => {
+    const { email } = req.body;
     try {
-      return res.status(200).json(user);
+      const user = await User_Profile.findOne({
+        where: { email },
+      });
+      const userLogged = {
+        access: user.access,
+        email: user.email,
+        address: user.address,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        country: user.country,
+        city: user.city,
+        phone: user.phone,
+        job: user.job,
+        latitude: user.latitude,
+        longitude: user.longitude,
+        id: user.id,
+      };
+      return res.status(200).json(userLogged);
     } catch (err) {
       next(err);
     }
