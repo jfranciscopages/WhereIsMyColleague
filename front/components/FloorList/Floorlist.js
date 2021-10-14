@@ -20,7 +20,7 @@ import { singleBranch } from "../../store/BranchReducer";
 import expoLocalHost from "../../localHost";
 export default function FloorList() {
   const branch = useSelector((state) => state.branches.singleBranch);
-  const profile = useSelector((state) => state.profile);
+  const profile = useSelector((state) => state.profile.user);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
@@ -29,9 +29,9 @@ export default function FloorList() {
     return state.branches.singleBranch.floors;
   });
 
-    useEffect(() => {
-        setLoading(false);
-    }, []);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   const goToUser = (id) => {
     dispatch(userById(id));

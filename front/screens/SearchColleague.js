@@ -49,7 +49,7 @@ export default function Home() {
           {inputValue.length > 2 && limited === true ? (
             usersByTitle.length > 0 && inputValue.length > 2 ? (
               limitUserBy5.map((user, i) => (
-                <View>
+                <View key={i}>
                   <ListItem
                     onPress={() => {
                       console.log(`USUARIO`, user);
@@ -72,7 +72,7 @@ export default function Home() {
           {inputValue.length > 2 && limited === false ? (
             usersByTitle.length > 0 && inputValue.length > 2 ? (
               usersByTitle.map((user, i) => (
-                <View>
+                <View key={i}>
                   <ListItem
                     onPress={() => {
                       console.log(`USUARIO`, user);

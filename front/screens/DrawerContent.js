@@ -1,35 +1,52 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setProfile } from "../store/profileReducer";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loggedOut, setProfile } from "../store/profileReducer";
 import { View, StyleSheet } from "react-native";
 import { useTheme, Avatar, Title, Caption, Drawer } from "react-native-paper";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
+import { userById } from "../store/usersReducer";
+import * as ImagePicker from "expo-image-picker";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/core";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function DrawerContent(props) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const paperTheme = useTheme();
-  const [perfil, setPerfil] = useState({
-    branchId: "1",
-    workspaceId: "1",
-    firstName: "Ramiro",
-    lastName: "Arias",
-    email: "ramiroarias@globant.com",
-    password: "1234",
-    country: "Argentina",
-    city: "Buenos Aires",
-    phone: "+54 11 4109-1700",
-    job: "Front-End Developer",
-    latitude: "-34.54100703942528",
-    longitude: "-58.47279831729628",
-    https: "//i.pravatar.cc/150?img=62",
-  });
+  const user = useSelector((state) => state.profile.user);
+  const [imageAttached, setImageAttached] = useState(null);
 
   const handleLogout = () => {
-    dispatch(setProfile({}));
+    dispatch(loggedOut());
+  };
+
+  const handleUser = async (id) => {
+    await dispatch(userById(id));
+    navigation.navigate("userinfo");
+  };
+
+  useEffect(() => {
+    (async () => {
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted")
+        alert("Sorry, we need camera roll permissions to make this work!");
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImageAttached(result.uri);
+    }
   };
 
   return (
@@ -38,26 +55,33 @@ export default function DrawerContent(props) {
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
             <View style={{ flexDirection: "row", marginTop: 15 }}>
-              <Avatar.Image
-                source={{
-                  uri: "https://i.pravatar.cc/150?img=62",
-                }}
-                size={50}
-              />
-              <View style={{ marginLeft: 15, flexDirection: "column" }}>
-                <Title style={styles.title}>{perfil.firstName}</Title>
-                <Caption style={styles.caption}>{perfil.email}</Caption>
-              </View>
+              <TouchableOpacity onPress={pickImage}>
+                <Avatar.Image
+                  source={{
+                    uri: imageAttached
+                      ? imageAttached
+                      : "https://i.pravatar.cc/150?img=62",
+                  }}
+                  size={50}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{ marginLeft: 15, flexDirection: "column" }}
+                onPress={() => handleUser(user.id)}
+              >
+                <Title style={styles.title}>{user.firstName}</Title>
+                <Caption style={styles.caption}>{user.email}</Caption>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.row}>
               {/* <View style={styles.section}>
                                 
-                                <Caption style={styles.caption}>{perfil.email}</Caption>
+                                <Caption style={styles.caption}>{user.email}</Caption>
                             </View> */}
               <View style={styles.section}>
                 {/* <Paragraph style={[styles.paragraph, styles.caption]}>Tel:</Paragraph> */}
-                <Caption style={styles.caption}>{perfil.job}</Caption>
+                <Caption style={styles.caption}>{user.job}</Caption>
               </View>
             </View>
           </View>

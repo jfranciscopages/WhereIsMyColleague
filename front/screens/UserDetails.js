@@ -10,11 +10,11 @@ import {
   View,
   Spinner,
   Button,
+  Avatar,
 } from "native-base";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { singleBranch } from "../store/BranchReducer";
-import { Avatar } from "native-base";
 import { Entypo } from "@expo/vector-icons";
 import { Linking, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
@@ -71,7 +71,7 @@ function UserDetails() {
           _dark={{ backgroundColor: "gray.700" }}
         >
           <Box>
-            {/* <AspectRatio ratio={10 / 9}> */}
+
             <View style={styles.avatar}>
               <Avatar
                 style={styles.avatarImg}
@@ -79,21 +79,11 @@ function UserDetails() {
                 source={{
                   uri: "https://pbs.twimg.com/profile_images/1177303899243343872/B0sUJIH0_400x400.jpg",
                 }}
-              >
-                GG
-              </Avatar>
+                alt="image"
+              />
             </View>
-            {/* </AspectRatio> */}
-            {/* <Center
-              bg="violet.500"
-              _text={{ color: "white", fontWeight: "700", fontSize: "xs" }}
-              position="absolute"
-              bottom={0}
-              px="3"
-              py="1.5"
-            >
-              PROFILE
-            </Center> */}
+
+
           </Box>
           <Stack p="4" space={3}>
             <Stack space={2}>
@@ -194,11 +184,12 @@ function UserDetails() {
           <Button bg="#A6CE39" onPress={() => editUser()}>
             Edit
           </Button>
-        </Box>
+        </Box >
       ) : (
         <Spinner color="danger.500" />
-      )}
-    </View>
+      )
+      }
+    </View >
   );
 }
 

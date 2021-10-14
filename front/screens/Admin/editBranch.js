@@ -10,6 +10,7 @@ import {
   Box,
   Button,
   WarningOutlineIcon,
+  Center,
 } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -17,9 +18,7 @@ import { allBranches, editedBranch } from "../../store/BranchReducer";
 import { useNavigation } from "@react-navigation/native";
 import { byCountry } from "../../store/BranchReducer";
 
-
 import axios from "axios";
-
 
 export default function editBranch() {
   const navigation = useNavigation();
@@ -31,6 +30,8 @@ export default function editBranch() {
     city: "",
     address: "",
     CP: "",
+    latitude: "",
+    longitude: "",
     phone: "",
     image: "",
   });
@@ -49,6 +50,12 @@ export default function editBranch() {
       case "cp":
         setBranch({ ...branch, CP: value });
         return;
+      case "latitude":
+        setBranch({ ...branch, latitude: value });
+        return;
+      case "longitude":
+        setBranch({ ...branch, longitude: value });
+        return;
       case "phone":
         setBranch({ ...branch, phone: value });
         return;
@@ -63,41 +70,38 @@ export default function editBranch() {
   const updateHandler = async (id) => {
     await dispatch(editedBranch({ id, branch }));
     await dispatch(byCountry(branch.country));
-    // navigation.navigate("BranchesList");
   };
 
   const backHandler = () => {
     dispatch(allBranches());
     navigation.navigate("BranchesList");
-  }
+  };
 
   const CreateFloorHandlePress = () => {
-    navigation.navigate('CreateFloor')
-  }
+    navigation.navigate("CreateFloor");
+  };
 
-
-    return (
+  return (
+    <Center>
       <ScrollView
         w={{
           base: "90%",
           md: "90%",
         }}
       >
-
         <Stack
           space={2.5}
+          mt="5"
           alignSelf="center"
-          px="4"
-          safeArea
-          mt="4"
+          px="8"
           w={{
             base: "100%",
             md: "25%",
           }}
         >
           <Box>
-            <Text bold fontSize="xl" mb="4">
-              Branch
+            <Text alignSelf="center" bold fontSize="xl" mb="4">
+              Edit Branch
             </Text>
 
             <FormControl mb="2" isRequired>
@@ -115,7 +119,6 @@ export default function editBranch() {
                 Required
               </FormControl.ErrorMessage>
             </FormControl>
-            <Divider height={1} marginBottom={3} />
 
             <FormControl mb="2">
               <FormControl.Label justifyContent="center">
@@ -127,9 +130,8 @@ export default function editBranch() {
                 onChangeText={(value) => inputHandler("city", value)}
               />
             </FormControl>
-            <Divider height={1} marginBottom={3} />
 
-            <FormControl mb="5">
+            <FormControl mb="2">
               <FormControl.Label justifyContent="center">
                 Address
               </FormControl.Label>
@@ -139,9 +141,8 @@ export default function editBranch() {
                 onChangeText={(value) => inputHandler("address", value)}
               />
             </FormControl>
-            <Divider />
 
-            <FormControl mb="5">
+            <FormControl mb="2">
               <FormControl.Label justifyContent="center">
                 Postal Code
               </FormControl.Label>
@@ -151,9 +152,30 @@ export default function editBranch() {
                 onChangeText={(value) => inputHandler("cp", value)}
               />
             </FormControl>
-            <Divider />
 
-            <FormControl mb="5">
+            <FormControl mb="2">
+              <FormControl.Label justifyContent="center">
+                Latitude
+              </FormControl.Label>
+              <Input
+                value={branch.latitude}
+                // placeholder={singleBranch.latitude}
+                onChangeText={(value) => inputHandler("latitude", value)}
+              />
+            </FormControl>
+
+            <FormControl mb="2">
+              <FormControl.Label justifyContent="center">
+                Longitude
+              </FormControl.Label>
+              <Input
+                value={branch.longitude}
+                // placeholder={singleBranch.longitude}
+                onChangeText={(value) => inputHandler("longitude", value)}
+              />
+            </FormControl>
+
+            <FormControl mb="2">
               <FormControl.Label justifyContent="center">
                 Phone
               </FormControl.Label>
@@ -163,9 +185,8 @@ export default function editBranch() {
                 onChangeText={(value) => inputHandler("phone", value)}
               />
             </FormControl>
-            <Divider />
 
-            <FormControl mb="5">
+            <FormControl mb="2">
               <FormControl.Label justifyContent="center">
                 Image
               </FormControl.Label>
@@ -174,17 +195,52 @@ export default function editBranch() {
                 placeholder={singleBranch.image}
                 onChangeText={(value) => inputHandler("image", value)}
               />
-
-              <Button onPress={() => updateHandler(singleBranch.id)}>
-                Update Branch
-              </Button>
-              <Button onPress={() => backHandler()}>Go Back</Button>
-              <Button onPress={CreateFloorHandlePress}>Add floor!</Button>
+              <View
+                style={{
+                  marginTop: 20,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  marginBottom: 20,
+                }}
+              >
+                <Button
+                  bg="#A6CE39"
+                  size="sm"
+                  /* variant="outline" */
+                  width={20}
+                  height={7}
+                  marginLeft={2}
+                  marginRight={2}
+                  onPress={() => updateHandler(singleBranch.id)}
+                >
+                  Update
+                </Button>
+                <Button
+                  bg="#A6CE39"
+                  size="sm"
+                  /* variant="outline" */ width={20}
+                  height={7}
+                  onPress={() => CreateFloorHandlePress()}
+                >
+                  Add floor
+                </Button>
+                <Button
+                  bg="#A6CE39"
+                  size="sm"
+                  /* variant="outline" */
+                  width={20}
+                  height={7}
+                  marginLeft={2}
+                  onPress={() => backHandler()}
+                >
+                  Go Back
+                </Button>
+              </View>
             </FormControl>
             <Divider />
           </Box>
         </Stack>
       </ScrollView>
-    );
-  };
-
+    </Center>
+  );
+}
