@@ -14,14 +14,14 @@ import { CreateFloor } from "./screens/CreateFloor";
 import { EditFloor } from "./screens/EditFloor";
 import { EditUser } from "./screens/Admin/EditUser";
 import { WorkSpaces } from "./screens/WorkSpaces";
-import  WorkspaceIndividual  from "./screens/WorkspaceIndividual";
+import WorkspaceIndividual from "./screens/WorkspaceIndividual";
 
 /* import { FloorDetails } from "./screens/FloorDetails"; */
 
 const Stack = createNativeStackNavigator();
 
 export default function Main() {
-  const profile = useSelector((state) => state.profile.user);
+  const profile = useSelector((state) => state.profile);
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="DrawerNavigator">

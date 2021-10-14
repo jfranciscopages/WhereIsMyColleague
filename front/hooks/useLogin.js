@@ -14,11 +14,20 @@ const useLogin = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-  const user = useSelector(state => state.profile.user)
+  const user = useSelector((state) => state.profile);
 
   const handleSubmit = async () => {
-    dispatch(loggedIn({ loginEmail, loginPassword }));
-    // success(`logged user ${data.data}`);
+    setLoading(true);
+    await axios
+      .post(`http://${expoLocalHost}/api/auth/login`, {
+        email: loginEmail,
+        password: loginPassword,
+      })
+      .then((r) => {
+        dispatch(setProfile(r.data));
+        navigation.navigate(`DrawerNavigator`);
+      })
+      .catch((err) => console.log(err));
   };
 
   return {

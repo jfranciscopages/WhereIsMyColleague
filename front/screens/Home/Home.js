@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { style } from "styled-system";
 
 export default function Home() {
-  const profile = useSelector((state) => state.profile.user);
+  const profile = useSelector((state) => state.profile);
   const navigation = useNavigation();
 
   return (
