@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { StyleSheet, /* Text ,*/ View } from "react-native";
 import {
   FormControl,
@@ -24,6 +24,13 @@ export default function editBranch() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const singleBranch = useSelector((state) => state.branches.singleBranch);
+  const cityRef = useRef();
+  const addressRef = useRef();
+  const postalRef = useRef();
+  const latRef = useRef();
+  const longRef = useRef();
+  const phoneRef = useRef();
+  const imgRef = useRef();
 
   const [branch, setBranch] = useState({
     country: "",
@@ -112,6 +119,11 @@ export default function editBranch() {
                 value={branch.country}
                 placeholder={singleBranch.country}
                 onChangeText={(value) => inputHandler("country", value)}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  cityRef.current.focus();
+                }}
+                blurOnSubmit={false}
               />
               <FormControl.ErrorMessage
                 leftIcon={<WarningOutlineIcon size="xs" />}
@@ -125,9 +137,15 @@ export default function editBranch() {
                 City
               </FormControl.Label>
               <Input
+                ref={cityRef}
                 value={branch.city}
                 placeholder={singleBranch.city}
                 onChangeText={(value) => inputHandler("city", value)}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  addressRef.current.focus();
+                }}
+                blurOnSubmit={false}
               />
             </FormControl>
 
@@ -136,9 +154,15 @@ export default function editBranch() {
                 Address
               </FormControl.Label>
               <Input
+                ref={addressRef}
                 value={branch.address}
                 placeholder={singleBranch.address}
                 onChangeText={(value) => inputHandler("address", value)}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  postalRef.current.focus();
+                }}
+                blurOnSubmit={false}
               />
             </FormControl>
 
@@ -147,9 +171,15 @@ export default function editBranch() {
                 Postal Code
               </FormControl.Label>
               <Input
+                ref={postalRef}
                 value={branch.CP}
                 placeholder={singleBranch.CP}
                 onChangeText={(value) => inputHandler("cp", value)}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  latRef.current.focus();
+                }}
+                blurOnSubmit={false}
               />
             </FormControl>
 
@@ -158,9 +188,15 @@ export default function editBranch() {
                 Latitude
               </FormControl.Label>
               <Input
+                ref={latRef}
                 value={branch.latitude}
                 // placeholder={singleBranch.latitude}
                 onChangeText={(value) => inputHandler("latitude", value)}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  longRef.current.focus();
+                }}
+                blurOnSubmit={false}
               />
             </FormControl>
 
@@ -169,9 +205,15 @@ export default function editBranch() {
                 Longitude
               </FormControl.Label>
               <Input
+                ref={longRef}
                 value={branch.longitude}
                 // placeholder={singleBranch.longitude}
                 onChangeText={(value) => inputHandler("longitude", value)}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  phoneRef.current.focus();
+                }}
+                blurOnSubmit={false}
               />
             </FormControl>
 
@@ -180,9 +222,16 @@ export default function editBranch() {
                 Phone
               </FormControl.Label>
               <Input
+                ref={phoneRef}
                 value={branch.phone}
                 placeholder={singleBranch.phone}
                 onChangeText={(value) => inputHandler("phone", value)}
+                returnKeyType="next"
+                keyboardType="phone-pad"
+                onSubmitEditing={() => {
+                  imgRef.current.focus();
+                }}
+                blurOnSubmit={false}
               />
             </FormControl>
 
@@ -191,6 +240,7 @@ export default function editBranch() {
                 Image
               </FormControl.Label>
               <Input
+                ref={imgRef}
                 value={branch.image}
                 placeholder={singleBranch.image}
                 onChangeText={(value) => inputHandler("image", value)}
