@@ -2,7 +2,7 @@ const Sequelize = require(`sequelize`);
 const db = require("../db/db");
 
 //-- User Model
-class Branches extends Sequelize.Model {}
+class Branches extends Sequelize.Model { }
 Branches.init(
   {
     address: {
@@ -30,7 +30,7 @@ Branches.init(
       allowNull: false,
     },
     image: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
       allowNull: false,
     },
     latitude: {

@@ -30,6 +30,10 @@ function WorkSpaceInd() {
   const SingleWS = singleWorkspace.singleWorkspace;
   const WsUser = SingleWS.user_profile;
   const [loading, setLoading] = useState(false);
+  const pictureHandler = (value) => {
+    picture = value;
+  };
+  const userLogged = useSelector(state => state.profile)
 
   useEffect(() => {
     setLoading(true);
@@ -121,41 +125,30 @@ function WorkSpaceInd() {
                       >
                         User Details
                       </Button>
-                      <Button
-                        overflow="hidden"
-                       /*  onPress={() => branchButtonHandlePress()} */
-                        variant="outline"
-                        style={styles.goToBranchButton}
-                      >
-                        Edit Workspace
-                      </Button>
-                      <Button
-                        overflow="hidden"
-                        /* onPress={() => branchButtonHandlePress()} */
-                        variant="outline"
-                        style={styles.goToBranchButton}
-                      >
-                        Create Workspace
-                      </Button>
+                      {userLogged.access === 'admin' ?
+                        <Button
+                          onPress={() => navigation.navigate('createWorkspace')}
+                          overflow="hidden"
+                          /* onPress={() => branchButtonHandlePress()} */
+                          variant="outline"
+                          style={styles.goToBranchButton}
+                        >
+                          Create Workspace
+                        </Button>
+                        : null}
                     </>
                   ) : (
                     <>
-                      <Button
-                        overflow="hidden"
-                        /* onPress={() => branchButtonHandlePress()} */
-                        variant="outline"
-                        style={styles.goToBranchButton}
-                      >
-                        Edit Workspace
-                      </Button>
-                      <Button
-                        overflow="hidden"
-                        /* onPress={() => branchButtonHandlePress()} */
-                        variant="outline"
-                        style={styles.goToBranchButton}
-                      >
-                        Create Workspace
-                      </Button>
+                      {userLogged.access === 'admin' ?
+                        <Button
+                          overflow="hidden"
+                          /* onPress={() => branchButtonHandlePress()} */
+                          variant="outline"
+                          style={styles.goToBranchButton}
+                        >
+                          Create Workspace
+                        </Button>
+                        : null}
                     </>
                   )}
                 </HStack>

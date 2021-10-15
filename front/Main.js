@@ -15,6 +15,7 @@ import { EditFloor } from "./screens/EditFloor";
 import { EditUser } from "./screens/Admin/EditUser";
 import { WorkSpaces } from "./screens/WorkSpaces";
 import WorkspaceIndividual from "./screens/WorkspaceIndividual";
+import { createWorkspace } from "./screens/createWorkspace";
 
 /* import { FloorDetails } from "./screens/FloorDetails"; */
 

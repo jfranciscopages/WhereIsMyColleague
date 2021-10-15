@@ -23,6 +23,7 @@ function Branch() {
   const dispatch = useDispatch();
   const branch = useSelector((state) => state.branches.singleBranch);
   const [loading, setLoading] = useState(false);
+  const userLogged = useSelector(state => state.profile)
 
   useEffect(() => {
     setLoading(true);

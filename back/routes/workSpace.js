@@ -4,15 +4,15 @@ const router = express.Router();
 const { Op } = require("sequelize");
 const { User_Profile } = require("../models");
 
-router.get("/findWorkspace/:id", function(req,res,next){
+router.get("/findWorkspace/:id", function (req, res, next) {
   const id = req.params.id
-  Workspaces.findByPk(id,{
-    include:{
-      model:User_Profile
+  Workspaces.findByPk(id, {
+    include: {
+      model: User_Profile
     }
   })
-  .then((workspace)=>res.status(200).json(workspace))
-  .catch((err) => next(err));
+    .then((workspace) => res.status(200).json(workspace))
+    .catch((err) => next(err));
 })
 router.post("/findWorkspace", function (req, res, next) {
   const { floorId, name } = req.body;
@@ -20,7 +20,7 @@ router.post("/findWorkspace", function (req, res, next) {
   Workspaces.findAll({
     where: {
       [Op.and]: {
-        floorId: floorId, 
+        floorId: floorId,
         name: {
           [Op.iLike]: `%${name}%`,
         },
@@ -40,14 +40,16 @@ router.post("/findWorkspace", function (req, res, next) {
 
 
 router.post("/createWorkSpace/:id", (req, res, next) => {
-  Workspaces.create({
-    floorId: req.params.id,
-    name: req.body.name,
-  })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((e) => console.log(e));
+  console.log(req.body)
+  // Workspaces.create({
+  //   floorId: req.params.id,
+  //   name: req.body.name,
+  //   image: req.body.image
+  // })
+  //   .then((data) => {
+  //     res.send(data);
+  //   })
+  //   .catch((e) => console.log(e));
 });
 
 router.put("/editWorkSpace/:id", (req, res, next) => {
