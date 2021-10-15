@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import expoLocalHost from "../localHost";
@@ -48,8 +49,7 @@ export const editedBranch = createAsyncThunk(
   ({ id, branch }) => {
     return axios
       .put(`http://${expoLocalHost}/api/branches/editBranch/${id}`, branch)
-      .then((r) => (r.data))
-      .catch((e) => console.log(e))
+      .then((r) => ("BRANCH EDITADA", r.data))
   }
 );
 

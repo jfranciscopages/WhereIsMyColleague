@@ -74,7 +74,10 @@ router.put("/editBranch/:id", (req, res, next) => {
     }
   )
     .then(([n, editedBranch]) => res.status(201).send(editedBranch))
-    .catch((e) => console.log(e))
+    .catch((e) => {
+      next(e);
+      console.log(e);
+    });
 });
 
 router.delete("/deleteBranch/:id", (req, res, next) => {

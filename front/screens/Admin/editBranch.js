@@ -1,6 +1,9 @@
 import React, { useState, useRef } from "react";
 import { StyleSheet, /* Text ,*/ View } from "react-native";
+import expoLocalHost from "../../localHost";
+import axios from "axios";
 import {
+  useToast,
   FormControl,
   Input,
   Stack,
@@ -19,9 +22,9 @@ import { allBranches, editedBranch } from "../../store/BranchReducer";
 import { useNavigation } from "@react-navigation/native";
 import { byCountry } from "../../store/BranchReducer";
 
-import axios from "axios";
-
 export default function editBranch() {
+  const toast = useToast();
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const singleBranch = useSelector((state) => state.branches.singleBranch);
@@ -75,38 +78,45 @@ export default function editBranch() {
         setBranch({});
     }
   };
+  const updateHandler = async () => {
+    setLoading(true);
+    // dispatch(editedBranch({ id, branch }));
+    // dispatch(byCountry(branch.country));
+    // setLoading(false);
+    await axios
+      .put(
+        `http://${expoLocalHost}/api/branches/editBranch/${singleBranch.id}`,
+        branch
+      )
+      .then(() => {
+        toast.show({
+          placement: "top",
+          render: () => {
+            return (
+              <Box bg="emerald.500" px="2" py="4" rounded="sm" mt={50}>
+                Branch edited successfully!
+              </Box>
+            );
+          },
+        });
 
-  const updateHandler = async (id) => {
-    const branchel = await dispatch(editedBranch({ id, branch }))
-    const braanch = await dispatch(byCountry(branch.country))
-    toast.show({
-      placement: "top",
-      render: () => {
-        return (
-          <Box bg="green.500" px="2" py="4" rounded="sm" mt={70}>
-            Branch edited succesfully!
-          </Box> back/seed.js
-front/hooks/useLogin.js
-front/localHost.js
-front/screens/Admin/editBranch.js
-front/screens/Admin/newBranch.js
-front/screens/BranchesList.js
-front/screens/CreateFloor.js
-front/screens/UserDetails.js 
-        )
-      }
-    })
-    toast.show({
-      placement: "top",
-      render: () => {
-        return (
-          <Box bg="red.500" px="2" py="4" rounded="sm" mt={70}>
-            Can't Log In! Try another email or password...
-          </Box>
-        )
-      }
-    })
-  }
+        navigation.navigate(`BranchesList`);
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast.show({
+          placement: "top",
+          render: () => {
+            return (
+              <Box bg="red.500" px="2" py="4" rounded="sm" mt={50}>
+                Can't edit branch.
+              </Box>
+            );
+          },
+        });
+        console.log(err);
+      });
+  };
 
   const backHandler = () => {
     dispatch(allBranches());
@@ -218,8 +228,8 @@ front/screens/UserDetails.js
               </FormControl.Label>
               <Input
                 ref={latRef}
-                value={branch.latitude}
-                // placeholder={singleBranch.latitude}
+                value={singleBranch.latitude}
+                //placeholder={singleBranch.latitude}
                 onChangeText={(value) => inputHandler("latitude", value)}
                 returnKeyType="next"
                 onSubmitEditing={() => {
@@ -235,7 +245,7 @@ front/screens/UserDetails.js
               </FormControl.Label>
               <Input
                 ref={longRef}
-                value={branch.longitude}
+                value={singleBranch.longitude}
                 // placeholder={singleBranch.longitude}
                 onChangeText={(value) => inputHandler("longitude", value)}
                 returnKeyType="next"
@@ -270,8 +280,8 @@ front/screens/UserDetails.js
               </FormControl.Label>
               <Input
                 ref={imgRef}
-                value={branch.image}
-                placeholder={singleBranch.image}
+                value={singleBranch.image}
+                // placeholder={singleBranch.image}
                 onChangeText={(value) => inputHandler("image", value)}
               />
               <View
@@ -282,18 +292,32 @@ front/screens/UserDetails.js
                   marginBottom: 20,
                 }}
               >
-                <Button
-                  bg="#A6CE39"
-                  size="sm"
-                  /* variant="outline" */
-                  width={20}
-                  height={7}
-                  marginLeft={2}
-                  marginRight={2}
-                  onPress={() => updateHandler(singleBranch.id)}
-                >
-                  Update
-                </Button>
+                {loading ? (
+                  <Button
+                    bg="#A6CE39"
+                    isLoading
+                    size="sm"
+                    width={20}
+                    height={7}
+                    marginLeft={2}
+                    marginRight={2}
+                  >
+                    wait...
+                  </Button>
+                ) : (
+                  <Button
+                    bg="#A6CE39"
+                    size="sm"
+                    /* variant="outline" */
+                    width={20}
+                    height={7}
+                    marginLeft={2}
+                    marginRight={2}
+                    onPress={() => updateHandler(singleBranch.id)}
+                  >
+                    Update
+                  </Button>
+                )}
                 <Button
                   bg="#A6CE39"
                   size="sm"
