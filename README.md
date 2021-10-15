@@ -1,5 +1,6 @@
 # Where Is My Colleague?
-Mobile app made with React Native as professional practice for [Globant](https://www.globant.com/)
+Mobile app made with React Native as professional practice for [Globant](https://www.globant.com/).
+
 Its functions include searching for colleagues, contact them, look for branch offices all over the world with maps, and editing all the data by running the app as Administrator.
 
 ## TEAM:
