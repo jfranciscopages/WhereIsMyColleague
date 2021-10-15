@@ -60,7 +60,7 @@ export default function Branches() {
 
   const singleBranchHandler = (id) => {
     dispatch(singleBranch(id));
-    navigation.navigate("editBranch");
+    navigation.navigate("Edit Branch");
   };
 
   useEffect(() => {

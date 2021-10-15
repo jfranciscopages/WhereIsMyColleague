@@ -10,16 +10,30 @@ import * as ImagePicker from "expo-image-picker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/core";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Box, useToast } from "native-base";
 
 export default function DrawerContent(props) {
   const navigation = useNavigation();
+  const toast = useToast();
   const dispatch = useDispatch();
   const paperTheme = useTheme();
   const user = useSelector((state) => state.profile);
   const [imageAttached, setImageAttached] = useState(null);
+  const userLogged = useSelector(state => state.profile)
+
 
   const handleLogout = () => {
     dispatch(setProfile({}));
+    toast.show({
+      placement: "top",
+      render: () => {
+        return (
+          <Box bg="green.500" px="2" py="4" rounded="sm" mt={70}>
+            Good bye!
+          </Box>
+        )
+      }
+    })
   };
 
   const handleUser = async (id) => {
@@ -107,26 +121,30 @@ export default function DrawerContent(props) {
                 props.navigation.navigate("SearchColleague");
               }}
             />
-            <DrawerItem
-              icon={({ color, size }) => (
-                <Icon name="folder-plus" color={color} size={size} />
-              )}
-              pressColor="#A6CE39"
-              label="Create Branch"
-              onPress={() => {
-                props.navigation.navigate("createBranch");
-              }}
-            />
-            <DrawerItem
-              icon={({ color, size }) => (
-                <Icon name="home-group" color={color} size={size} />
-              )}
-              pressColor="#A6CE39"
-              label="Branch List"
-              onPress={() => {
-                props.navigation.navigate("BranchesList");
-              }}
-            />
+            {userLogged.access === 'admin' ?
+              <DrawerItem
+                icon={({ color, size }) => (
+                  <Icon name="folder-plus" color={color} size={size} />
+                )}
+                pressColor="#A6CE39"
+                label="Create Branch"
+                onPress={() => {
+                  props.navigation.navigate("createBranch");
+                }}
+              />
+              : null}
+            {userLogged.access === 'admin' ?
+              <DrawerItem
+                icon={({ color, size }) => (
+                  <Icon name="home-group" color={color} size={size} />
+                )}
+                pressColor="#A6CE39"
+                label="Branch List"
+                onPress={() => {
+                  props.navigation.navigate("BranchesList");
+                }}
+              />
+              : null}
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon name="map-marker-multiple" color={color} size={size} />
@@ -205,7 +223,7 @@ export default function DrawerContent(props) {
           label="Sign Out"
           pressColor="#A6CE39"
           onPress={() => handleLogout()}
-          /* onPress={() => {}} */
+        /* onPress={() => {}} */
         />
       </Drawer.Section>
     </View>

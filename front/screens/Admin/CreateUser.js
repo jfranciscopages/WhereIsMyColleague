@@ -1,3 +1,5 @@
+import { allBranches } from "../../store/BranchReducer";
+
 import React, { useEffect, useRef } from "react";
 import { View } from "react-native";
 import {
@@ -11,13 +13,39 @@ import {
   Center,
   Select,
   CheckIcon,
+  imageAttached,
+  AddIcon,
 } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
 import useCreateUser from "../../hooks/useCreateUser";
-import { SelectBranch } from "../../components/SelectBranch/SelectBranch";
-import { useForm, Controller } from "react-hook-form";
+import * as ImagePicker from "expo-image-picker";
 
 export const CreateUser = () => {
+  const dispatch = useDispatch();
+  const branches = useSelector((state) => state.branches.allBranches);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
+  useEffect(() => {
+    dispatch(allBranches());
+    (async () => {
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted")
+        alert("Sorry, we need camera roll permissions to make this work!");
+    })();
+  }, []);
   const params = useCreateUser();
   const lastNameRef = useRef();
   const emailRef = useRef();
@@ -25,6 +53,7 @@ export const CreateUser = () => {
   const countryRef = useRef();
   const phoneRef = useRef();
   const jobRef = useRef();
+  const imgRef = useRef();
 
   const {
     access,
@@ -46,6 +75,15 @@ export const CreateUser = () => {
     nameValidation,
     createUser,
     loading,
+    searchFloor,
+    branch,
+    floorsOk,
+    floor,
+    searchWorkspace,
+    workspacesOk,
+    setWorkspace,
+    setImage,
+    image,
   } = params;
 
   return (
@@ -139,6 +177,26 @@ export const CreateUser = () => {
                   blurOnSubmit={false}
                 />
                 <FormControl.Label justifyContent="center">
+                  Image
+                </FormControl.Label>
+                <Input
+                  ref={imgRef}
+                  returnKeyType="done"
+                  value={image}
+                  InputRightElement={
+                    <Button
+                      ml={1}
+                      backgroundColor="#999999"
+                      roundedLeft={0}
+                      roundedRight="md"
+                      onPress={pickImage}
+                    >
+                      <AddIcon size="6" />
+                    </Button>
+                  }
+                />
+
+                <FormControl.Label justifyContent="center">
                   Country
                 </FormControl.Label>
                 <Input
@@ -176,7 +234,92 @@ export const CreateUser = () => {
                   onChangeText={(value) => setJob(value)}
                   mb="2"
                 />
-                <SelectBranch />
+                <FormControl.Label alignSelf="center">
+                  Select Branch
+                </FormControl.Label>
+                <Select
+                  minWidth="200"
+                  placeholder="Choose Branch"
+                  _selectedItem={{
+                    bg: "teal.600",
+                    endIcon: <CheckIcon size={5} />,
+                  }}
+                  mt="1"
+                  mb="2"
+                  onValueChange={(itemValue) => searchFloor(itemValue)}
+                >
+                  {branches
+                    ? branches.map((branch) => {
+                        return (
+                          <Select.Item
+                            key={branch.id}
+                            label={branch.city}
+                            value={branch.id}
+                          />
+                        );
+                      })
+                    : null}
+                </Select>
+                <FormControl.Label alignSelf="center">
+                  Select Floor
+                </FormControl.Label>
+                <Select
+                  minWidth="200"
+                  placeholder="Choose Branch"
+                  _selectedItem={{
+                    bg: "teal.600",
+                    endIcon: <CheckIcon size={5} />,
+                  }}
+                  mt="1"
+                  mb="2"
+                  onValueChange={(itemValue) => searchWorkspace(itemValue)}
+                >
+                  {floorsOk ? (
+                    branch.floors.map((floor) => {
+                      return (
+                        <Select.Item
+                          key={floor.id}
+                          label={floor.name}
+                          value={floor.id}
+                        />
+                      );
+                    })
+                  ) : (
+                    <Select.Item />
+                  )}
+                </Select>
+                <FormControl.Label alignSelf="center">
+                  Select Workspace
+                </FormControl.Label>
+                <Select
+                  minWidth="200"
+                  placeholder="Choose Branch"
+                  _selectedItem={{
+                    bg: "teal.600",
+                    endIcon: <CheckIcon size={5} />,
+                  }}
+                  mt="1"
+                  mb="4"
+                  onValueChange={(itemValue) => setWorkspace(itemValue)}
+                >
+                  {workspacesOk ? (
+                    floor.workspaces.map((workspace) => {
+                      return (
+                        <Select.Item
+                          key={workspace.id}
+                          label={
+                            workspace.user_profile
+                              ? `${workspace.name} (Ocuppied)`
+                              : `${workspace.name} (Free)`
+                          }
+                          value={workspace.id}
+                        />
+                      );
+                    })
+                  ) : (
+                    <Select.Item />
+                  )}
+                </Select>
               </FormControl>
             </Box>
             <Button

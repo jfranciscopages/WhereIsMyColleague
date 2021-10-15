@@ -4,6 +4,7 @@ import expoLocalHost from "../localHost";
 import { useToast, Box } from "native-base";
 import { useNavigation } from "@react-navigation/core";
 import { useSelector } from "react-redux";
+import { image } from "faker";
 
 const useCreateUser = () => {
   const toast = useToast();
@@ -14,6 +15,7 @@ const useCreateUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [country, setCountry] = useState("");
+  const [image, setImage] = useState("");
   const [city, setCity] = useState("");
   const [job, setJob] = useState("");
 
@@ -91,6 +93,7 @@ const useCreateUser = () => {
       lastName: lastName,
       email: email,
       password: password,
+      profilePhoto: image,
       phone: phone,
       country: country,
       city: city,
@@ -166,7 +169,7 @@ const useCreateUser = () => {
           render: () => {
             return (
               <Box bg="red.500" px="2" py="4" rounded="sm" mt={70}>
-                Error user can't update!
+                Error, user can't update!
               </Box>
             );
           },
@@ -205,6 +208,8 @@ const useCreateUser = () => {
     createUser,
     loading,
     submitEditUser,
+    setImage,
+    image,
   };
 };
 
