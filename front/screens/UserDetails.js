@@ -92,7 +92,6 @@ function UserDetails() {
               <Text
                 fontSize="md"
                 _light={{ color: "#39B54A" }}
-                _dark={{ color: "#39B54A" }}
                 fontWeight="500"
                 ml="-0.5"
                 mt="-1"
@@ -181,7 +180,9 @@ function UserDetails() {
           ) : null}
         </Box>
       ) : (
-        <Spinner color="danger.500" />
+        <Center mt="20">
+          <Spinner size="lg" color="#A6CE39" />
+        </Center>
       )}
     </View>
   );

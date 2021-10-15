@@ -77,14 +77,15 @@ export default function newBranch() {
 
   const submitHandler = async () => {
     const branchel = await dispatch(createBranch({ branch }));
+    console.log(branchel);
     dispatch(allBranches());
-    typeof branchel !== "object"
+    typeof branchel == "object"
       ? toast.show({
           placement: "top",
           render: () => {
             return (
-              <Box bg="green.500" px="2" py="4" rounded="sm" mt={70}>
-                Branch edited succesfully!
+              <Box bg="emerald.500" px="2" py="4" rounded="sm" mt={70}>
+                Branch created succesfully!
               </Box>
             );
           },
@@ -94,13 +95,13 @@ export default function newBranch() {
           render: () => {
             return (
               <Box bg="red.500" px="2" py="4" rounded="sm" mt={70}>
-                Can't Log In! Try another email or password...
+                Can't create a new Branch...
               </Box>
             );
           },
         });
+    navigation.navigate("DrawerNavigator");
   };
-  // navigation.navigate('BranchesList')
 
   useEffect(() => {
     (async () => {
@@ -121,6 +122,7 @@ export default function newBranch() {
 
     if (!result.cancelled) {
       setImageAttached(result.uri);
+      inputHandler("image", result.uri);
     }
   };
 
@@ -147,7 +149,7 @@ export default function newBranch() {
               Create Branch
             </Text>
 
-            <FormControl mb="2">
+            <FormControl mb="2" isRequired>
               <FormControl.Label justifyContent="center">
                 Country
               </FormControl.Label>
@@ -161,7 +163,7 @@ export default function newBranch() {
               />
             </FormControl>
 
-            <FormControl mb="2">
+            <FormControl mb="2" isRequired>
               <FormControl.Label justifyContent="center">
                 City
               </FormControl.Label>
@@ -206,7 +208,7 @@ export default function newBranch() {
               />
             </FormControl>
 
-            <FormControl mb="2">
+            <FormControl mb="2" isRequired>
               <FormControl.Label justifyContent="center">
                 Latitude
               </FormControl.Label>
@@ -221,7 +223,7 @@ export default function newBranch() {
               />
             </FormControl>
 
-            <FormControl mb="2">
+            <FormControl mb="2" isRequired>
               <FormControl.Label justifyContent="center">
                 Longitude
               </FormControl.Label>
@@ -252,17 +254,14 @@ export default function newBranch() {
               />
             </FormControl>
 
-            <FormControl mb="2">
+            <FormControl mb="2" isRequired>
               <FormControl.Label justifyContent="center">
                 Image
               </FormControl.Label>
               <Input
                 ref={imgRef}
-                returnKeyType="done"
-                onChangeText={(value) =>
-                  inputHandler("image", imageAttached ? imageAttached : value)
-                }
                 value={imageAttached}
+                onChangeText={(value) => inputHandler("image", imageAttached)}
                 InputRightElement={
                   <Button
                     ml={1}

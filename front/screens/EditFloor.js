@@ -10,17 +10,23 @@ import {
   Box,
   Button,
   WarningOutlineIcon,
+  AddIcon,
 } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import expoLocalHost from "../localHost";
 import axios from "axios";
 import { singleBranch } from "../store/BranchReducer";
+import * as ImagePicker from "expo-image-picker";
 
 export const EditFloor = () => {
+  const imgRef = useRef();
   let floorsName;
+  const [picture, setPicture] = useState("");
+  const [imageAttached, setImageAttached] = useState("");
+  const [workSpaceName, setWorkSpaceName] = useState("");
+
   let siteMap;
-  let workSpaceName;
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const selectedBranch = useSelector((state) => {
@@ -28,6 +34,21 @@ export const EditFloor = () => {
     return state.branches.singleBranch;
   });
   const siteMapRef = useRef();
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setPicture(result.uri);
+    }
+  };
+  // const pictureHandler = (value) => {
+  //   setPicture(value)
+  // };
 
   const floorId = useSelector((state) => state.selectedFloorId);
   console.log(selectedBranch);
@@ -38,13 +59,10 @@ export const EditFloor = () => {
   const siteMapHandler = (value) => {
     siteMap = value;
   };
-  const workSpaceNameHandler = (value) => {
-    workSpaceName = value;
-  };
   const editFloorPress = () => {
     axios
       .put(`http://${expoLocalHost}/api/floors/editFloor/${floorId}`, {
-        name: floorsName,
+        name: workSpaceName,
         image: siteMap,
       })
       .then((data) => {
@@ -55,12 +73,14 @@ export const EditFloor = () => {
       })
       .catch((e) => console.log("falla en la edicion", e));
   };
+
   const createWorkSpaceHAndler = () => {
     axios
       .post(
         `http://${expoLocalHost}/api/workSpace/createWorkSpace/${floorId}`,
         {
           name: workSpaceName,
+          image: picture,
         }
       )
       .then((data) => {
@@ -70,9 +90,9 @@ export const EditFloor = () => {
       })
       .catch((e) => console.log(e));
   };
-
+  workSpaceName;
   return (
-    <View>
+    <View style={styles.container}>
       {
         <ScrollView
           w={{
@@ -130,7 +150,7 @@ export const EditFloor = () => {
               <Divider height={1} marginBottom={3} />
               <Divider />
             </Box>
-            <Button bg="#aecf53" onPress={() => editFloorPress()}>
+            <Button bg="#A6CE39" onPress={() => editFloorPress()}>
               Edit Floor
             </Button>
             <Divider height={1} marginBottom={3} />
@@ -143,7 +163,7 @@ export const EditFloor = () => {
               </FormControl.Label>
               <Input
                 placeholder="Set work space name"
-                onChangeText={(value) => workSpaceNameHandler(value)}
+                onChangeText={(value) => setWorkSpaceName(value)}
               />
               <FormControl.ErrorMessage
                 leftIcon={<WarningOutlineIcon size="xs" />}
@@ -151,7 +171,30 @@ export const EditFloor = () => {
                 Required
               </FormControl.ErrorMessage>
             </FormControl>
-            <Button bg="#aecf53" onPress={() => createWorkSpaceHAndler()}>
+            <FormControl.Label justifyContent="center">
+              Workspace image
+            </FormControl.Label>
+            <Input
+              ref={imgRef}
+              placeholder="Upload Workspace image"
+              returnKeyType="done"
+              // onChangeText={(value) =>
+              //   setPicture(value)
+              // }
+              value={picture}
+              InputRightElement={
+                <Button
+                  ml={1}
+                  backgroundColor="#A6CE39"
+                  roundedLeft={0}
+                  roundedRight="md"
+                  onPress={pickImage}
+                >
+                  <AddIcon size="6" />
+                </Button>
+              }
+            />
+            <Button bg="#A6CE39" onPress={() => createWorkSpaceHAndler()}>
               Create Workspace
             </Button>
           </Stack>
@@ -160,3 +203,11 @@ export const EditFloor = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+  },
+});

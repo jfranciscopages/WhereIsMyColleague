@@ -32,6 +32,7 @@ export default function Branches() {
   const branches = useSelector((state) => state.branches.allBranches);
   const countrySelected = useSelector((state) => state.branches.byCountry);
   const [isOpen, setIsOpen] = useState(false);
+  const userLogged = useSelector((state) => state.profile);
 
   const onClose = () => setIsOpen(false);
 
@@ -163,26 +164,30 @@ export default function Branches() {
                   >
                     View
                   </Button>
-                  <Button
-                    bg="#A6CE39"
-                    size="sm"
-                    /* variant="outline" */ width={20}
-                    height={7}
-                    onPress={() => singleBranchHandler(id)}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    bg="#A6CE39"
-                    size="sm"
-                    /* variant="outline" */
-                    width={20}
-                    height={7}
-                    marginLeft={2}
-                    onPress={() => setIsOpen(!isOpen)}
-                  >
-                    Delete
-                  </Button>
+                  {userLogged.access === "admin" ? (
+                    <Button
+                      bg="#A6CE39"
+                      size="sm"
+                      /* variant="outline" */ width={20}
+                      height={7}
+                      onPress={() => singleBranchHandler(id)}
+                    >
+                      Edit
+                    </Button>
+                  ) : null}
+                  {userLogged.access === "admin" ? (
+                    <Button
+                      bg="#A6CE39"
+                      size="sm"
+                      /* variant="outline" */
+                      width={20}
+                      height={7}
+                      marginLeft={2}
+                      onPress={() => setIsOpen(!isOpen)}
+                    >
+                      Delete
+                    </Button>
+                  ) : null}
                   <AlertDialog isOpen={isOpen} onClose={onClose}>
                     <AlertDialog.Content>
                       <AlertDialog.CloseButton />

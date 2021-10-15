@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -28,15 +27,15 @@ const useLogin = () => {
         dispatch(setProfile(r.data));
         navigation.navigate(`DrawerNavigator`);
         toast.show({
-          placement: "top",
+          placement: "bottom",
           render: () => {
             return (
               <Box bg="emerald.500" px="2" py="4" rounded="sm" mt={70}>
-                Hello!
+                Logged in!
               </Box>
-            )
-          }
-        })
+            );
+          },
+        });
       })
       .catch((err) => {
         success(`logged user ${r.data}`);

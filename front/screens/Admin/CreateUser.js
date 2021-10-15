@@ -104,7 +104,7 @@ export const CreateUser = () => {
               <Text bold fontSize="xl" mb="4" alignSelf="center">
                 Create User
               </Text>
-              <FormControl mb="2" isRequired>
+              <FormControl mb="2">
                 <Select
                   minWidth="200"
                   placeholder="Select Access"
@@ -120,7 +120,7 @@ export const CreateUser = () => {
                   <Select.Item label="user" value="user" />
                   <Select.Item label="admin" value="admin" />
                 </Select>
-                <FormControl.Label justifyContent="center">
+                <FormControl.Label justifyContent="center" isRequired>
                   First Name
                 </FormControl.Label>
                 <Input
@@ -133,7 +133,7 @@ export const CreateUser = () => {
                   }}
                   blurOnSubmit={false}
                 />
-                <FormControl.Label justifyContent="center">
+                <FormControl.Label justifyContent="center" isRequired>
                   Last Name
                 </FormControl.Label>
                 <Input
@@ -147,7 +147,7 @@ export const CreateUser = () => {
                   }}
                   blurOnSubmit={false}
                 />
-                <FormControl.Label justifyContent="center">
+                <FormControl.Label justifyContent="center" isRequired>
                   Email
                 </FormControl.Label>
                 <Input
@@ -162,7 +162,7 @@ export const CreateUser = () => {
                   }}
                   blurOnSubmit={false}
                 />
-                <FormControl.Label justifyContent="center">
+                <FormControl.Label justifyContent="center" isRequired>
                   Password
                 </FormControl.Label>
                 <Input
@@ -176,7 +176,7 @@ export const CreateUser = () => {
                   }}
                   blurOnSubmit={false}
                 />
-                <FormControl.Label justifyContent="center">
+                <FormControl.Label justifyContent="center" isRequired>
                   Image
                 </FormControl.Label>
                 <Input
@@ -234,7 +234,7 @@ export const CreateUser = () => {
                   onChangeText={(value) => setJob(value)}
                   mb="2"
                 />
-                <FormControl.Label alignSelf="center">
+                <FormControl.Label alignSelf="center" isRequired>
                   Select Branch
                 </FormControl.Label>
                 <Select
@@ -260,7 +260,7 @@ export const CreateUser = () => {
                       })
                     : null}
                 </Select>
-                <FormControl.Label alignSelf="center">
+                <FormControl.Label alignSelf="center" isRequired>
                   Select Floor
                 </FormControl.Label>
                 <Select
@@ -288,7 +288,7 @@ export const CreateUser = () => {
                     <Select.Item />
                   )}
                 </Select>
-                <FormControl.Label alignSelf="center">
+                <FormControl.Label alignSelf="center" isRequired>
                   Select Workspace
                 </FormControl.Label>
                 <Select

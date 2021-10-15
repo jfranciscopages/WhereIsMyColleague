@@ -8,6 +8,16 @@ export const allBranches = createAsyncThunk("ALL_BRANCHES", () => {
   return axios.get(`http://${expoLocalHost}/api/branches/`).then((r) => r.data);
 });
 
+export const byCity = createAsyncThunk("BY_CITY", (city) => {
+  return axios
+    .get(`http://${expoLocalHost}/api/branches/byCity/${city}`)
+    .then((r) => {
+      console.log("********************");
+      console.log("DATA DEL BACK", r.data);
+      return r.data;
+    });
+});
+
 export const byCountry = createAsyncThunk("BY_COUNTRY", (country) => {
   return axios
     .get(`http://${expoLocalHost}/api/branches/byCountry/${country}`)
@@ -22,20 +32,20 @@ export const createBranch = createAsyncThunk("NEW_BRANCH", ({ branch }) => {
   return axios
     .post(`http://${expoLocalHost}/api/branches/newBranch`, branch)
     .then((r) => {
-      r.data
+      r.data;
     })
     .catch((e) => {
-      console.log(e)
-    })
+      console.log(e);
+    });
 });
 
 export const deleteBranch = createAsyncThunk("DEL_BRANCH", (id) => {
   return axios
     .delete(`http://${expoLocalHost}/api/branches/deleteBranch/${id}`)
     .then((r) => {
-      return ('eliminado')
+      return "eliminado";
     })
-    .catch(e => console.log(e))
+    .catch((e) => console.log(e));
 });
 
 export const singleBranch = createAsyncThunk("SINGLE_BRANCH", (id) => {
@@ -49,12 +59,13 @@ export const editedBranch = createAsyncThunk(
   ({ id, branch }) => {
     return axios
       .put(`http://${expoLocalHost}/api/branches/editBranch/${id}`, branch)
-      .then((r) => ("BRANCH EDITADA", r.data))
+      .then((r) => ("BRANCH EDITADA", r.data));
   }
 );
 
 const initState = {
   allBranches: [],
+  byCity: [],
   byCountry: [],
   singleBranch: {},
 };
@@ -62,6 +73,9 @@ const initState = {
 export const BranchReducer = createReducer(initState, {
   [allBranches.fulfilled]: (state, action) => {
     state.allBranches = action.payload;
+  },
+  [byCity.fulfilled]: (state, action) => {
+    state.byCity = action.payload;
   },
   [byCountry.fulfilled]: (state, action) => {
     state.byCountry = action.payload;

@@ -21,7 +21,7 @@ const useCreateUser = () => {
 
   const [branch, setBranch] = useState({});
   const [floor, setFloor] = useState({});
-  const [workspaceId, setWorkspaceId] = useState("");
+  const [workspaceId, setWorkspaceId] = useState(0);
 
   const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState("");
@@ -68,7 +68,7 @@ const useCreateUser = () => {
         `http://${expoLocalHost}/api/users/findUserInWorkspace/${workspaceId}`
       )
       .then((data) => {
-        setWorkspaceId(workspaceId);
+        setWorkspaceId({ workspaceId: parseInt(workspaceId, 10) });
       })
       .catch((err) => {
         toast.show({
@@ -113,7 +113,7 @@ const useCreateUser = () => {
             );
           },
         });
-        navigation.navigate("DrawerNavigator");
+        navigation.navigate("userinfo");
       })
       .catch((err) => {
         setLoading(false);
@@ -141,6 +141,7 @@ const useCreateUser = () => {
       lastName: lastName,
       email: email,
       password: password,
+      profilePhoto: image,
       phone: phone,
       country: country,
       city: city,
@@ -160,7 +161,7 @@ const useCreateUser = () => {
             );
           },
         });
-        navigation.navigate("DrawerNavigator");
+        navigation.navigate("userinfo");
       })
       .catch((err) => {
         setLoading(false);

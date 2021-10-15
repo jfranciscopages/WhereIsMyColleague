@@ -3,7 +3,7 @@ const db = require("../db/db");
 const crypto = require(`bcrypt`);
 
 //-- User Model
-class User_Profile extends Sequelize.Model {}
+class User_Profile extends Sequelize.Model { }
 User_Profile.init(
   {
     access: {
@@ -45,7 +45,7 @@ User_Profile.init(
       allowNull: false,
     },
     profilePhoto: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
       allowNull: false,
     },
     salt: {

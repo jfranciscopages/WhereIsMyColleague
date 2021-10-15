@@ -21,7 +21,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import SearchBarWorkspace from "../components/SearchBar/searchWorkspace";
 import { setWorkSpaceValue } from "../store/searchbar/searchValue";
-import { setWorkspace } from "../store/workSpaceReducer"
+import { setWorkspace } from "../store/workSpaceReducer";
 import { useDispatch, useSelector } from "react-redux";
 
 export const WorkSpaces = () => {
@@ -32,17 +32,16 @@ export const WorkSpaces = () => {
   const WorkSpacesById = useSelector((state) => state.WorkSpacesById);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  
 
   useEffect(() => {
     dispatch(setWorkSpaceValue(""));
   }, []);
 
-  const navigateWS =async (WsId)=>{
-    console.log("QUE ONDA ID", WsId)
-    await dispatch(setWorkspace(WsId))
-    navigation.navigate("workSpaceIndividual")
-  }
+  const navigateWS = async (WsId) => {
+    console.log("QUE ONDA ID", WsId);
+    await dispatch(setWorkspace(WsId));
+    navigation.navigate("Personal workspace");
+  };
 
   return (
     <View>
@@ -54,51 +53,51 @@ export const WorkSpaces = () => {
         <List>
           {floor.workspaces.map((ws, i) => {
             console.log("WSSS??", ws);
-            const WsId = ws.id
-            console.log("ID=========>", WsId)
+            const WsId = ws.id;
+            console.log("ID=========>", WsId);
             return (
               <View>
-              <List.Item key={i} onPress={(id)=>navigateWS(WsId)}>
-                <HStack space={3} justifyContent="space-between">
-                  <Avatar
-                    size="48px"
-                    source={{
-                      uri: `${ws.image}`,
-                    }}
-                  />
-                  <VStack>
-                    <Text
-                      _dark={{
-                        color: "warmGray.50",
+                <List.Item key={i} onPress={(id) => navigateWS(WsId)} key={i}>
+                  <HStack space={3} justifyContent="space-between">
+                    <Avatar
+                      size="48px"
+                      source={{
+                        uri: `${ws.image}`,
                       }}
-                      color="coolGray.800"
-                      bold
-                    >
-                      {ws.name}
-                    </Text>
-                    {ws.user_profile !== null ? (
+                    />
+                    <VStack>
                       <Text
-                        color="coolGray.600"
                         _dark={{
-                          color: "warmGray.200",
+                          color: "warmGray.50",
                         }}
+                        color="coolGray.800"
+                        bold
                       >
-                        {`${ws.user_profile.firstName} ${ws.user_profile.lastName} `}
+                        {ws.name}
                       </Text>
-                    ) : (
-                      <Text
-                        color="coolGray.600"
-                        _dark={{
-                          color: "warmGray.200",
-                        }}
-                      >
-                        {`Non-associated employee`}
-                      </Text>
-                    )}
-                  </VStack>
-                  <Spacer />
-                </HStack>
-              </List.Item>
+                      {ws.user_profile !== null ? (
+                        <Text
+                          color="coolGray.600"
+                          _dark={{
+                            color: "warmGray.200",
+                          }}
+                        >
+                          {`${ws.user_profile.firstName} ${ws.user_profile.lastName} `}
+                        </Text>
+                      ) : (
+                        <Text
+                          color="coolGray.600"
+                          _dark={{
+                            color: "warmGray.200",
+                          }}
+                        >
+                          {`Non-associated employee`}
+                        </Text>
+                      )}
+                    </VStack>
+                    <Spacer />
+                  </HStack>
+                </List.Item>
               </View>
             );
           })}
@@ -109,56 +108,54 @@ export const WorkSpaces = () => {
             WorkSpacesById.map((ws, i) => {
               return (
                 <List.Item key={i}>
-                 <HStack space={3} justifyContent="space-between">
-                  <Avatar
-                    size="48px"
-                    source={{
-                      uri: `${ws.user_profile}`,
-                    }}
-                  />
-                  <VStack>
-                    <Text
-                      _dark={{
-                        color: "warmGray.50",
+                  <HStack space={3} justifyContent="space-between">
+                    <Avatar
+                      size="48px"
+                      source={{
+                        uri: `${ws.user_profile}`,
                       }}
-                      color="coolGray.800"
-                      bold
-                    >
-                      {ws.name}
-                    </Text>
-                    {ws.user_profile !== null ? (
+                    />
+                    <VStack>
                       <Text
-                        color="coolGray.600"
                         _dark={{
-                          color: "warmGray.200",
+                          color: "warmGray.50",
                         }}
+                        color="coolGray.800"
+                        bold
                       >
-                        {`${ws.user_profile.firstName} ${ws.user_profile.lastName} `}
+                        {ws.name}
                       </Text>
-                    ) : (
-                      <Text
-                        color="coolGray.600"
-                        _dark={{
-                          color: "warmGray.200",
-                        }}
-                      >
-                        {`Non-associated employee`}
-                      </Text>
-                    )}
-                  </VStack>
-                  <Spacer />
-                </HStack>
+                      {ws.user_profile !== null ? (
+                        <Text
+                          color="coolGray.600"
+                          _dark={{
+                            color: "warmGray.200",
+                          }}
+                        >
+                          {`${ws.user_profile.firstName} ${ws.user_profile.lastName} `}
+                        </Text>
+                      ) : (
+                        <Text
+                          color="coolGray.600"
+                          _dark={{
+                            color: "warmGray.200",
+                          }}
+                        >
+                          {`Non-associated employee`}
+                        </Text>
+                      )}
+                    </VStack>
+                    <Spacer />
+                  </HStack>
                 </List.Item>
               );
             })
           ) : (
             <List.Item key={i}>
-              <Text>
-                No Match
-               </Text>
+              <Text>No Match</Text>
             </List.Item>
           )}
-       </List>
+        </List>
       )}
     </View>
   );

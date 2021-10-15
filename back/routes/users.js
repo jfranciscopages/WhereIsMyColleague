@@ -72,9 +72,11 @@ router.put("/editUser", (req, res, next) => {
         User_Profile.update(user, {
           where: { id: user.id },
           returning: true,
-        }).then(([n, data]) => {
-          return res.status(201).send(data);
-        });
+        })
+          .then(([n, data]) => {
+            return res.status(201).send(data);
+          })
+          .catch((e) => next(e));
     })
     .catch((e) => next(e));
 });
