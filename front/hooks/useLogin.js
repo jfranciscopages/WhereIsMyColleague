@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Box, useToast } from "native-base";
@@ -14,11 +14,34 @@ const useLogin = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-  const user = useSelector(state => state.profile.user)
+  const user = useSelector((state) => state.profile);
 
   const handleSubmit = async () => {
-    dispatch(loggedIn({ loginEmail, loginPassword }));
-    // success(`logged user ${data.data}`);
+    setLoading(true);
+    await axios
+      .post(`http://${expoLocalHost}/api/auth/login`, {
+        email: loginEmail,
+        password: loginPassword,
+      })
+      .then((r) => {
+        dispatch(setProfile(r.data));
+        navigation.navigate(`DrawerNavigator`);
+        success(`logged user ${r.data}`);
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast.show({
+          placement: "top",
+          render: () => {
+            return (
+              <Box bg="red.500" px="2" py="4" rounded="sm" mt={50}>
+                You have entered an invalid username or password.
+              </Box>
+            );
+          },
+        });
+        console.log(err);
+      });
   };
 
   return {

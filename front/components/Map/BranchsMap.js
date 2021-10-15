@@ -53,8 +53,8 @@ export default function BranchsMap() {
         onPress={() => setBlur(false)}
         style={styles.map}
         initialRegion={{
-          latitude: 40.45206561667841,
-          longitude: -3.6915253170713465,
+          latitude: -34.61083857975935,
+          longitude: -58.366013518182754,
           latitudeDelta: 0.01,
           longitudeDelta: 140.01999999999,
         }}
@@ -70,12 +70,7 @@ export default function BranchsMap() {
                     }}
                     image={require("../../assets/Gmarker.png")}
                     onPress={() => markerHandler(country)}
-                  >
-                    {/* <Callout>
-                      <Text style={styles.calloutText}>{country}</Text>
-                      <Text>{city}</Text>
-                    </Callout> */}
-                  </Marker>
+                  ></Marker>
                   <Circle
                     center={{
                       latitude,
@@ -99,23 +94,7 @@ export default function BranchsMap() {
             md: "25%",
           }}
         />
-        {/* <SearchIcon size="4" /> */}
       </View>
-
-      {/* <ScrollView
-        horizontal
-        scrollEventThrottle={1}
-        showsHorizontalScrollIndicator={false}
-        style={styles.topScrollView}
-        height={50}
-        contentContainerStyle={{ paddingRight: 20 }}
-      >
-        {uniqueSet.map((country, i) => (
-          <TouchableOpacity key={i} style={styles.countryScrollView}>
-            <Text>{country}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView> */}
 
       <Animated.ScrollView
         horizontal
@@ -192,22 +171,7 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     backgroundColor: "#fff",
-    // flex: 1,
   },
-  // topScrollView: {
-  //   position: "absolute",
-  //   paddingHorizontal: 10,
-  //   marginTop: 65,
-  // },
-  // countryScrollView: {
-  //   flexDirection: "row",
-  //   backgroundColor: "#fff",
-  //   borderRadius: 20,
-  //   padding: 8,
-  //   paddingHorizontal: 20,
-  //   marginHorizontal: 10,
-  //   height: 35,
-  // },
   bottomScrollView: {
     position: "absolute",
     bottom: 0,
@@ -241,8 +205,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   branchBtn: {
-    /*  marginTop: 40, */
-
     borderRadius: 10,
     alignItems: "center",
     backgroundColor: "#A6CE39",

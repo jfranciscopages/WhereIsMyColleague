@@ -15,11 +15,11 @@ export default function DrawerContent(props) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const paperTheme = useTheme();
-  const user = useSelector((state) => state.profile.user);
+  const user = useSelector((state) => state.profile);
   const [imageAttached, setImageAttached] = useState(null);
 
   const handleLogout = () => {
-    dispatch(loggedOut());
+    dispatch(setProfile({}));
   };
 
   const handleUser = async (id) => {
@@ -205,7 +205,7 @@ export default function DrawerContent(props) {
           label="Sign Out"
           pressColor="#A6CE39"
           onPress={() => handleLogout()}
-        /* onPress={() => {}} */
+          /* onPress={() => {}} */
         />
       </Drawer.Section>
     </View>

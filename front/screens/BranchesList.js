@@ -123,18 +123,18 @@ export default function Branches() {
                     />
                   </AspectRatio>
                 </Box>
-                <Stack p="4" space={3}>
-                  <Stack space={2}>
+                <Stack p="4">
+                  <Stack>
                     <Heading size="md" ml="-1">
                       {city}
                     </Heading>
                     <Text
                       fontSize="xs"
                       _light={{
-                        color: "violet.500",
+                        color: "#39B54A",
                       }}
                       _dark={{
-                        color: "violet.400",
+                        color: "#39B54A",
                       }}
                       fontWeight="500"
                       ml="-0.5"
@@ -144,20 +144,11 @@ export default function Branches() {
                       {/* {floor.length > 0 ? floor : null} */}
                     </Text>
                   </Stack>
-                  <Text fontWeight="400">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </Text>
                   <HStack
                     alignItems="center"
                     space={4}
                     justifyContent="space-between"
-                  >
-                    <HStack alignItems="center"></HStack>
-                  </HStack>
+                  ></HStack>
                 </Stack>
                 <View style={styles.Btns}>
                   <Button
@@ -230,6 +221,6 @@ const styles = StyleSheet.create({
   Btns: {
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 10,
+    marginBottom: 20,
   },
 });

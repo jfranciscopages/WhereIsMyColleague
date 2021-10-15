@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, /* Text ,*/ View, Image } from "react-native";
+import { StyleSheet, View } from "react-native";
 import {
   Box,
   Avatar,
@@ -10,10 +10,18 @@ import {
   Accordion,
   Flex,
   Button,
+  Container,
+  Content,
+  List,
+  ListItem,
+  Thumbnail,
+  Image,
 } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 import SearchBarWorkspace from "../components/SearchBar/searchWorkspace";
 import { setWorkSpaceValue } from "../store/searchbar/searchValue";
+import { setWorkspace } from "../store/workSpaceReducer"
 import { useDispatch, useSelector } from "react-redux";
 
 export const WorkSpaces = () => {
@@ -22,136 +30,135 @@ export const WorkSpaces = () => {
   const workSpacesById = useSelector((state) => state.WorkSpacesById);
   const selectedFloor = useSelector((state) => state.selectedFloor);
   const WorkSpacesById = useSelector((state) => state.WorkSpacesById);
+  const navigation = useNavigation();
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(setWorkSpaceValue(""));
   }, []);
 
+  const navigateWS =async (WsId)=>{
+    console.log("QUE ONDA ID", WsId)
+    await dispatch(setWorkspace(WsId))
+    navigation.navigate("workSpaceIndividual")
+  }
+
   return (
     <View>
-      {console.log("LLEGA BIEN DEL BACK==>", WorkSpacesById)}
       <View>
         <SearchBarWorkspace />
       </View>
       <Spacer></Spacer>
       {value == "" ? (
-        <Accordion allowMultiple w="sm">
+        <List>
           {floor.workspaces.map((ws, i) => {
+            console.log("WSSS??", ws);
+            const WsId = ws.id
+            console.log("ID=========>", WsId)
             return (
-              <Accordion.Item key={i}>
-                <Accordion.Summary>
-                  {ws.name}
-                  <Accordion.Icon />
-                  {console.log("ESTE SII==>", ws)}
-                </Accordion.Summary>
-                <Accordion.Details>
-                  <HStack space={3} justifyContent="space-between">
-                    <Avatar
-                      size="48px"
-                      source={{
-                        uri: `${ws.user_profile}`,
+              <View>
+              <List.Item key={i} onPress={(id)=>navigateWS(WsId)}>
+                <HStack space={3} justifyContent="space-between">
+                  <Avatar
+                    size="48px"
+                    source={{
+                      uri: `${ws.user_profile}`,
+                    }}
+                  />
+                  <VStack>
+                    <Text
+                      _dark={{
+                        color: "warmGray.50",
                       }}
-                    />
-                    <VStack>
+                      color="coolGray.800"
+                      bold
+                    >
+                      {ws.name}
+                    </Text>
+                    {ws.user_profile !== null ? (
                       <Text
+                        color="coolGray.600"
                         _dark={{
-                          color: "warmGray.50",
+                          color: "warmGray.200",
                         }}
-                        color="coolGray.800"
-                        bold
                       >
-                        {ws.name}
+                        {`${ws.user_profile.firstName} ${ws.user_profile.lastName} `}
                       </Text>
-                      {ws.user_profile !== null ? (
-                        <Text
-                          color="coolGray.600"
-                          _dark={{
-                            color: "warmGray.200",
-                          }}
-                        >
-                          {`${ws.user_profile.firstName} ${ws.user_profile.lastName} `}
-                        </Text>
-                      ) : (
-                        <Text
-                          color="coolGray.600"
-                          _dark={{
-                            color: "warmGray.200",
-                          }}
-                        >
-                          {`Non-associated employee`}
-                        </Text>
-                      )}
-                    </VStack>
-                    <Spacer />
-                  </HStack>
-                </Accordion.Details>
-              </Accordion.Item>
+                    ) : (
+                      <Text
+                        color="coolGray.600"
+                        _dark={{
+                          color: "warmGray.200",
+                        }}
+                      >
+                        {`Non-associated employee`}
+                      </Text>
+                    )}
+                  </VStack>
+                  <Spacer />
+                </HStack>
+              </List.Item>
+              </View>
             );
           })}
-        </Accordion>
+        </List>
       ) : (
-        <Accordion allowMultiple w="sm">
-          {WorkSpacesById.length > 0
-            ? WorkSpacesById.map((ws, i) => {
-                return (
-                  <Accordion.Item key={i}>
-                    <Accordion.Summary>
+        <List>
+          {WorkSpacesById.length > 0 ? (
+            WorkSpacesById.map((ws, i) => {
+              return (
+                <List.Item key={i}>
+                 <HStack space={3} justifyContent="space-between">
+                  <Avatar
+                    size="48px"
+                    source={{
+                      uri: `${ws.user_profile}`,
+                    }}
+                  />
+                  <VStack>
+                    <Text
+                      _dark={{
+                        color: "warmGray.50",
+                      }}
+                      color="coolGray.800"
+                      bold
+                    >
                       {ws.name}
-                      <Accordion.Icon />
-                    </Accordion.Summary>
-                    <Accordion.Details>
-                      <HStack space={3} justifyContent="space-between">
-                        <Avatar
-                          size="48px"
-                          source={{
-                            uri: `${ws.user_profile}`,
-                          }}
-                        />
-                        <VStack>
-                          <Text
-                            _dark={{
-                              color: "warmGray.50",
-                            }}
-                            color="coolGray.800"
-                            bold
-                          >
-                            {ws.name}
-                          </Text>
-                          {ws.user_profile !== null ? (
-                            <Text
-                              color="coolGray.600"
-                              _dark={{
-                                color: "warmGray.200",
-                              }}
-                            >
-                              {`${ws.user_profile.firstName} ${ws.user_profile.lastName} `}
-                            </Text>
-                          ) : (
-                            <Text
-                              color="coolGray.600"
-                              _dark={{
-                                color: "warmGray.200",
-                              }}
-                            >
-                              {`Non-associated employee `}
-                            </Text>
-                          )}
-                        </VStack>
-                        <Spacer />
-                      </HStack>
-                    </Accordion.Details>
-                  </Accordion.Item>
-                );
-              })
-            : (<Accordion.Item key={1}>
-              <Accordion.Summary>
-                      No Match
-                      <Accordion.Icon />
-                    </Accordion.Summary>
-
-            </Accordion.Item>)}
-        </Accordion>
+                    </Text>
+                    {ws.user_profile !== null ? (
+                      <Text
+                        color="coolGray.600"
+                        _dark={{
+                          color: "warmGray.200",
+                        }}
+                      >
+                        {`${ws.user_profile.firstName} ${ws.user_profile.lastName} `}
+                      </Text>
+                    ) : (
+                      <Text
+                        color="coolGray.600"
+                        _dark={{
+                          color: "warmGray.200",
+                        }}
+                      >
+                        {`Non-associated employee`}
+                      </Text>
+                    )}
+                  </VStack>
+                  <Spacer />
+                </HStack>
+                </List.Item>
+              );
+            })
+          ) : (
+            <List.Item key={i}>
+              <Text>
+                No Match
+               </Text>
+            </List.Item>
+          )}
+       </List>
       )}
     </View>
   );

@@ -1,5 +1,3 @@
-const expoLocalHost = "192.168.0.120:3001";
-
-
+const expoLocalHost = "192.168.1.8:3001";
 
 export default expoLocalHost;
