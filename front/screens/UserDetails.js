@@ -57,7 +57,7 @@ function UserDetails() {
 
   const editUser = () => {
     dispatch(userById(user.id));
-    navigation.navigate("EditUser");
+    navigation.navigate("Edit User");
   };
 
   return (

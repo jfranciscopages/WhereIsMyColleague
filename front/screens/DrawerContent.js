@@ -18,14 +18,15 @@ export default function DrawerContent(props) {
   const user = useSelector((state) => state.profile);
   const userLogged = useSelector((state) => state.profile);
   const [loading, setLoading] = useState(true);
+
   const handleLogout = () => {
     dispatch(setProfile({}));
     toast.show({
       placement: "top",
       render: () => {
         return (
-          <Box bg="green.500" px="2" py="4" rounded="sm" mt={70}>
-            Good bye!
+          <Box bg="emerald.500" px="2" py="4" rounded="sm" mt={70}>
+            Goodbye!
           </Box>
         );
       },
@@ -78,7 +79,6 @@ export default function DrawerContent(props) {
                 </View>
               </View>
             </View>
-
             <Drawer.Section style={styles.drawerSection}>
               <DrawerItem
                 icon={({ color, size }) => (
@@ -109,7 +109,7 @@ export default function DrawerContent(props) {
                   label="Create Branch"
                   onPress={() => {
                     props.navigation.navigate("createBranch");
-                  }}
+                  }}         
                 />
               ) : null}
               {userLogged.access === "admin" ? (
