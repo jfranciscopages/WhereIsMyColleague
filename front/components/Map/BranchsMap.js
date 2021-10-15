@@ -14,11 +14,7 @@ import {
 } from "react-native";
 
 import MapView, { Callout, Circle, Marker } from "react-native-maps";
-import {
-  allBranches,
-  singleBranch,
-  byCountry,
-} from "../../store/BranchReducer";
+import { allBranches, singleBranch, byCity } from "../../store/BranchReducer";
 import { Input, SearchIcon } from "native-base";
 
 const { width, height } = Dimensions.get("window");
@@ -27,7 +23,7 @@ export default function BranchsMap() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const branches = useSelector((state) => state.branches.allBranches);
-  const countrySelected = useSelector((state) => state.branches.byCountry);
+  const citySelected = useSelector((state) => state.branches.byCity);
   const [blur, setBlur] = useState(false);
 
   let uniqueMap = branches.map(({ country }) => country);
@@ -42,9 +38,9 @@ export default function BranchsMap() {
     navigation.navigate("Branch");
   };
 
-  const markerHandler = (country) => {
+  const markerHandler = (city) => {
     setBlur(true);
-    dispatch(byCountry(country));
+    dispatch(byCity(city));
   };
 
   return (
@@ -69,7 +65,7 @@ export default function BranchsMap() {
                       longitude,
                     }}
                     image={require("../../assets/Gmarker.png")}
-                    onPress={() => markerHandler(country)}
+                    onPress={() => markerHandler(city)}
                   ></Marker>
                   <Circle
                     center={{
@@ -103,8 +99,8 @@ export default function BranchsMap() {
         style={styles.bottomScrollView}
         contentContainerStyle={{ paddingRight: 30 }}
       >
-        {countrySelected
-          ? countrySelected.map(({ id, city, address, image, CP }) => (
+        {citySelected
+          ? citySelected.map(({ id, city, address, image, CP }) => (
               <View key={id}>
                 {blur ? (
                   <View

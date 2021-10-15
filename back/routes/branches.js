@@ -24,6 +24,14 @@ router.get("/byCountry/:country", (req, res, next) => {
     .catch((e) => console.log(e));
 });
 
+router.get("/byCity/:city", (req, res, next) => {
+  Branches.findAll({
+    where: { city: req.params.city },
+  })
+    .then((citys) => res.send(citys))
+    .catch((e) => console.log(e));
+});
+
 router.post("/newBranch", (req, res, next) => {
   const {
     country,

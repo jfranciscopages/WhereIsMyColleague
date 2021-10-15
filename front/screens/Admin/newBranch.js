@@ -33,7 +33,6 @@ export default function newBranch() {
   const phoneRef = useRef();
   const imgRef = useRef();
 
-
   const [branch, setBranch] = useState({
     country: "",
     city: "",
@@ -79,29 +78,28 @@ export default function newBranch() {
   const submitHandler = async () => {
     const branchel = await dispatch(createBranch({ branch }));
     dispatch(allBranches());
-    typeof branchel !== 'object' ?
-      toast.show({
-        placement: "top",
-        render: () => {
-          return (
-            <Box bg="green.500" px="2" py="4" rounded="sm" mt={70}>
-              Branch edited succesfully!
-            </Box>
-          )
-        }
-      })
-      :
-      toast.show({
-        placement: "top",
-        render: () => {
-          return (
-            <Box bg="red.500" px="2" py="4" rounded="sm" mt={70}>
-              Can't Log In! Try another email or password...
-            </Box>
-          )
-        }
-      })
-  }
+    typeof branchel !== "object"
+      ? toast.show({
+          placement: "top",
+          render: () => {
+            return (
+              <Box bg="emerald.500" px="2" py="4" rounded="sm" mt={70}>
+                Branch edited succesfully!
+              </Box>
+            );
+          },
+        })
+      : toast.show({
+          placement: "top",
+          render: () => {
+            return (
+              <Box bg="red.500" px="2" py="4" rounded="sm" mt={70}>
+                Can't Log In! Try another email or password...
+              </Box>
+            );
+          },
+        });
+  };
   // navigation.navigate('BranchesList')
 
   useEffect(() => {

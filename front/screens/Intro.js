@@ -8,7 +8,7 @@ export default function Intro() {
   const navigation = useNavigation();
   setTimeout(() => {
     navigation.navigate("Login");
-  }, 1000);
+  }, 2000);
 
   return (
     <SafeAreaView style={styles.view}>

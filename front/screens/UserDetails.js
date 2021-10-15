@@ -22,15 +22,13 @@ import { useNavigation } from "@react-navigation/core";
 import { userById } from "../store/usersReducer";
 // const faker = require("faker");
 
-
 function UserDetails() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const branch = useSelector((state) => state.branches.singleBranch);
   const [loading, setLoading] = useState(true);
   const user = useSelector((state) => state.users.userById);
-  const userLogged = useSelector(state => state.profile)
-
+  const userLogged = useSelector((state) => state.profile);
 
   useEffect(() => {
     dispatch(singleBranch(user.branchId));
@@ -59,7 +57,7 @@ function UserDetails() {
 
   const editUser = () => {
     dispatch(userById(user.id));
-    navigation.navigate("EditUser");
+    navigation.navigate("Edit User");
   };
 
   return (
@@ -180,8 +178,8 @@ function UserDetails() {
             <Button bg="#A6CE39" onPress={() => editUser()}>
               Edit
             </Button>
-            : null}
-        </Box >
+          ) : null}
+        </Box>
       ) : (
         <Spinner color="danger.500" />
       )}

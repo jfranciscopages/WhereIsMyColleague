@@ -61,7 +61,7 @@ export default function Branches() {
 
   const singleBranchHandler = (id) => {
     dispatch(singleBranch(id));
-    navigation.navigate("editBranch");
+    navigation.navigate("Edit Branch");
   };
 
   useEffect(() => {
@@ -87,8 +87,8 @@ export default function Branches() {
           >
             {branches
               ? uniqueSet.map((country, i) => (
-                <Select.Item key={i} label={country} value={country} />
-              ))
+                  <Select.Item key={i} label={country} value={country} />
+                ))
               : null}
           </Select>
         </VStack>
@@ -174,8 +174,6 @@ export default function Branches() {
                   >
                     Edit
                   </Button>
-                  : null}
-                {userLogged.access === 'admin' ?
                   <Button
                     bg="#A6CE39"
                     size="sm"
@@ -187,27 +185,26 @@ export default function Branches() {
                   >
                     Delete
                   </Button>
-                  : null}
-                <AlertDialog isOpen={isOpen} onClose={onClose}>
-                  <AlertDialog.Content>
-                    <AlertDialog.CloseButton />
-                    <AlertDialog.Header>Are you sure?</AlertDialog.Header>
-                    <AlertDialog.Body>
-                      This will remove all data relating to the branch.
-                    </AlertDialog.Body>
-                    <AlertDialog.Footer>
-                      <Button
-                        colorScheme="danger"
-                        onPress={() => deleteHandler(id)}
-                      >
-                        Delete branch
-                      </Button>
-                    </AlertDialog.Footer>
-                  </AlertDialog.Content>
-                </AlertDialog>
-              </View>
-            </Box>
-          ))
+                  <AlertDialog isOpen={isOpen} onClose={onClose}>
+                    <AlertDialog.Content>
+                      <AlertDialog.CloseButton />
+                      <AlertDialog.Header>Are you sure?</AlertDialog.Header>
+                      <AlertDialog.Body>
+                        This will remove all data relating to the branch.
+                      </AlertDialog.Body>
+                      <AlertDialog.Footer>
+                        <Button
+                          colorScheme="danger"
+                          onPress={() => deleteHandler(id)}
+                        >
+                          Delete branch
+                        </Button>
+                      </AlertDialog.Footer>
+                    </AlertDialog.Content>
+                  </AlertDialog>
+                </View>
+              </Box>
+            ))
           : null}
       </View>
     </ScrollView>

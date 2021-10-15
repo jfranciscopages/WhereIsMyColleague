@@ -39,19 +39,21 @@ export default function Main() {
               component={Home}
             />
             <Stack.Screen name="Branch" component={Branch} />
-            <Stack.Screen name="editBranch" component={editBranch} />
+            <Stack.Screen name="Edit Branch" component={editBranch} />
 
             <Stack.Screen name="CreateFloor" component={CreateFloor} />
-            <Stack.Screen name="WorkSpaces" component={WorkSpaces} />
-            <Stack.Screen name="workSpaceIndividual" component={WorkspaceIndividual} />
-            <Stack.Screen name="createWorkspace" component={createWorkspace} />
-            <Stack.Screen name="EditFloor" component={EditFloor} />
-            <Stack.Screen name="EditUser" component={EditUser} />
+            <Stack.Screen name="Workspaces" component={WorkSpaces} />
+            <Stack.Screen
+              name="Personal workspace"
+              component={WorkspaceIndividual}
+            />
+            <Stack.Screen name="Edit Floor" component={EditFloor} />
+            <Stack.Screen name="Edit User" component={EditUser} />
             <Stack.Screen
               name="userinfo"
               component={UserDetails}
               options={{
-                headerTitle: "Colleague",
+                headerTitle: "",
               }}
             />
 

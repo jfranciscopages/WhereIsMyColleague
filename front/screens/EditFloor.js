@@ -116,8 +116,8 @@ export const EditFloor = () => {
             }}
           >
             <Box>
-              <Text bold fontSize="xl" mb="4">
-                Branch
+              <Text bold fontSize="xl" mb="4" alignSelf="center">
+                Edit Floor
               </Text>
 
               <FormControl mb="2" isRequired>
@@ -157,7 +157,7 @@ export const EditFloor = () => {
             <Button bg="#A6CE39" onPress={() => editFloorPress()}>Edit Floor</Button>
             <Divider height={1} marginBottom={3} />
             <Box>
-              <Text>Wanna' add a work space?</Text>
+              <Text>Want to add a work space?</Text>
             </Box>
             <FormControl mb="2" isRequired>
               <FormControl.Label justifyContent="center">
