@@ -141,6 +141,7 @@ const useCreateUser = () => {
       lastName: lastName,
       email: email,
       password: password,
+      profilePhoto: image,
       phone: phone,
       country: country,
       city: city,
