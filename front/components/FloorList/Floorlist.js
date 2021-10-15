@@ -24,8 +24,7 @@ export default function FloorList() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
-  const userLogged = useSelector(state => state.profile)
-
+  const userLogged = useSelector((state) => state.profile);
 
   const singleBranchFloors = useSelector((state) => {
     return state.branches.singleBranch.floors;
@@ -41,11 +40,11 @@ export default function FloorList() {
   };
   const handlePressEditFloor = (value) => {
     dispatch(setSelectedFloorId(value));
-    navigation.navigate("EditFloor");
+    navigation.navigate("Edit Floor");
   };
   const handlePressViewFloor = (value) => {
     dispatch(setSelectedFloor(value));
-    navigation.navigate("WorkSpaces");
+    navigation.navigate("Workspaces");
   };
 
   return (
@@ -97,7 +96,7 @@ export default function FloorList() {
                         >
                           View
                         </Button>
-                        {userLogged.access === 'admin' ?
+                        {userLogged.access === "admin" ? (
                           <Button
                             borderRadius="xl"
                             bg="#A6CE39"
@@ -108,7 +107,7 @@ export default function FloorList() {
                           >
                             Edit
                           </Button>
-                          : null}
+                        ) : null}
                       </Flex>
                     ) : (
                       <Flex display="flex" flexDirection="row">
