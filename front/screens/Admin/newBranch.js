@@ -22,7 +22,6 @@ import * as ImagePicker from "expo-image-picker";
 export default function newBranch() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [imageAttached, setImageAttached] = useState(null);
   const toast = useToast();
 
   const [imageAttached, setImageAttached] = useState("");

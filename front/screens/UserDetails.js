@@ -175,7 +175,7 @@ function UserDetails() {
             >
               <HStack alignItems="center"></HStack>
             </HStack>
-          </Stack
+          </Stack>
           {userLogged.access === 'admin' ?
             <Button bg="#A6CE39" onPress={() => editUser()}>
               Edit
