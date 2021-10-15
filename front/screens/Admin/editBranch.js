@@ -11,6 +11,7 @@ import {
   Button,
   WarningOutlineIcon,
   Center,
+  useToast,
 } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -24,6 +25,7 @@ export default function editBranch() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const singleBranch = useSelector((state) => state.branches.singleBranch);
+  const toast = useToast();
 
   const [branch, setBranch] = useState({
     country: "",
@@ -68,9 +70,29 @@ export default function editBranch() {
   };
 
   const updateHandler = async (id) => {
-    await dispatch(editedBranch({ id, branch }));
-    await dispatch(byCountry(branch.country));
-  };
+    const branchel = await dispatch(editedBranch({ id, branch }))
+    const braanch = await dispatch(byCountry(branch.country))
+    toast.show({
+      placement: "top",
+      render: () => {
+        return (
+          <Box bg="green.500" px="2" py="4" rounded="sm" mt={70}>
+            Branch edited succesfully!
+          </Box>
+        )
+      }
+    })
+    toast.show({
+      placement: "top",
+      render: () => {
+        return (
+          <Box bg="red.500" px="2" py="4" rounded="sm" mt={70}>
+            Can't Log In! Try another email or password...
+          </Box>
+        )
+      }
+    })
+  }
 
   const backHandler = () => {
     dispatch(allBranches());

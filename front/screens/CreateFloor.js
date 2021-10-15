@@ -51,7 +51,7 @@ export const CreateFloor = () => {
 
 
     return (
-        <View>
+        <View style={styles.screen}>
             {<ScrollView
                 w={{
                     base: "90%",
@@ -70,10 +70,6 @@ export const CreateFloor = () => {
                     }}
                 >
                     <Box>
-                        <Text bold fontSize="xl" mb="4">
-                            Branch
-                        </Text>
-
                         <FormControl mb="2" isRequired>
                             <FormControl.Label justifyContent='center'>Floor's Name</FormControl.Label>
                             <Input
@@ -95,8 +91,8 @@ export const CreateFloor = () => {
                         </FormControl>
                         <Divider height={1} marginBottom={3} />
                         <Divider />
-                    </Box>
-                    <Button onPress={() => createFloorPress(selectedBranch.id)}>
+                    </Box >
+                    <Button bg="#A6CE39" onPress={() => createFloorPress(selectedBranch.id)}>
                         Create Floor
                     </Button>
                 </Stack>
@@ -104,3 +100,11 @@ export const CreateFloor = () => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    screen: {
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center"
+    }
+})

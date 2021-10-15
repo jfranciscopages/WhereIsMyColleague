@@ -12,6 +12,7 @@ import {
   WarningOutlineIcon,
   AddIcon,
   Center,
+  useToast,
 } from "native-base";
 import { useDispatch } from "react-redux";
 import { createBranch, allBranches } from "../../store/BranchReducer";
@@ -22,6 +23,7 @@ export default function newBranch() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [imageAttached, setImageAttached] = useState(null);
+  const toast = useToast();
 
   const [branch, setBranch] = useState({
     country: "",
@@ -66,10 +68,32 @@ export default function newBranch() {
   };
 
   const submitHandler = async () => {
-    await dispatch(createBranch({ branch }));
-    await dispatch(allBranches());
-    // navigation.navigate('BranchesList')
-  };
+    const branchel = await dispatch(createBranch({ branch }));
+    dispatch(allBranches());
+    typeof branchel !== 'object' ?
+      toast.show({
+        placement: "top",
+        render: () => {
+          return (
+            <Box bg="green.500" px="2" py="4" rounded="sm" mt={70}>
+              Branch edited succesfully!
+            </Box>
+          )
+        }
+      })
+      :
+      toast.show({
+        placement: "top",
+        render: () => {
+          return (
+            <Box bg="red.500" px="2" py="4" rounded="sm" mt={70}>
+              Can't Log In! Try another email or password...
+            </Box>
+          )
+        }
+      })
+  }
+  // navigation.navigate('BranchesList')
 
   useEffect(() => {
     (async () => {

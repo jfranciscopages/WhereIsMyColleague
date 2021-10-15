@@ -32,6 +32,8 @@ export default function Branches() {
   const branches = useSelector((state) => state.branches.allBranches);
   const countrySelected = useSelector((state) => state.branches.byCountry);
   const [isOpen, setIsOpen] = useState(false);
+  const userLogged = useSelector(state => state.profile)
+
 
   const onClose = () => setIsOpen(false);
 
@@ -86,8 +88,8 @@ export default function Branches() {
           >
             {branches
               ? uniqueSet.map((country, i) => (
-                  <Select.Item key={i} label={country} value={country} />
-                ))
+                <Select.Item key={i} label={country} value={country} />
+              ))
               : null}
           </Select>
         </VStack>
@@ -95,83 +97,84 @@ export default function Branches() {
       <View style={styles.cityCard}>
         {countrySelected
           ? countrySelected.map(({ id, city, address, image, CP, phone }) => (
-              <Box
-                key={id}
-                rounded="lg"
-                overflow="hidden"
-                borderColor="coolGray.200"
-                borderWidth="1"
-                _dark={{
-                  borderColor: "coolGray.600",
-                  backgroundColor: "gray.700",
-                }}
-                _web={{
-                  shadow: 2,
-                  borderWidth: 0,
-                }}
-                _light={{
-                  backgroundColor: "gray.50",
-                }}
-              >
-                <Box>
-                  <AspectRatio ratio={16 / 9}>
-                    <Image
-                      source={{
-                        uri: image,
-                      }}
-                      alt="image"
-                    />
-                  </AspectRatio>
-                </Box>
-                <Stack p="4" space={3}>
-                  <Stack space={2}>
-                    <Heading size="md" ml="-1">
-                      {city}
-                    </Heading>
-                    <Text
-                      fontSize="xs"
-                      _light={{
-                        color: "#39B54A",
-                      }}
-                      _dark={{
-                        color: "#39B54A",
-                      }}
-                      fontWeight="500"
-                      ml="-0.5"
-                      mt="-1"
-                    >
-                      {`${address}, ${CP}`}
-                      {/* {floor.length > 0 ? floor : null} */}
-                    </Text>
-                  </Stack>
-                  <Text fontWeight="400">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
+            <Box
+              key={id}
+              rounded="lg"
+              overflow="hidden"
+              borderColor="coolGray.200"
+              borderWidth="1"
+              _dark={{
+                borderColor: "coolGray.600",
+                backgroundColor: "gray.700",
+              }}
+              _web={{
+                shadow: 2,
+                borderWidth: 0,
+              }}
+              _light={{
+                backgroundColor: "gray.50",
+              }}
+            >
+              <Box>
+                <AspectRatio ratio={16 / 9}>
+                  <Image
+                    source={{
+                      uri: image,
+                    }}
+                    alt="image"
+                  />
+                </AspectRatio>
+              </Box>
+              <Stack p="4" space={3}>
+                <Stack space={2}>
+                  <Heading size="md" ml="-1">
+                    {city}
+                  </Heading>
+                  <Text
+                    fontSize="xs"
+                    _light={{
+                      color: "#39B54A",
+                    }}
+                    _dark={{
+                      color: "#39B54A",
+                    }}
+                    fontWeight="500"
+                    ml="-0.5"
+                    mt="-1"
+                  >
+                    {`${address}, ${CP}`}
+                    {/* {floor.length > 0 ? floor : null} */}
                   </Text>
-                  <HStack
-                    alignItems="center"
-                    space={4}
-                    justifyContent="space-between"
-                  >
-                    <HStack alignItems="center"></HStack>
-                  </HStack>
                 </Stack>
-                <View style={styles.Btns}>
-                  <Button
-                    bg="#A6CE39"
-                    size="sm"
-                    /* variant="outline" */
-                    width={20}
-                    height={7}
-                    marginLeft={2}
-                    marginRight={2}
-                    onPress={() => individualBranchHandler(id)}
-                  >
-                    View
-                  </Button>
+                <Text fontWeight="400">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a
+                  type specimen book.
+                </Text>
+                <HStack
+                  alignItems="center"
+                  space={4}
+                  justifyContent="space-between"
+                >
+                  <HStack alignItems="center"></HStack>
+                </HStack>
+              </Stack>
+              <View style={styles.Btns}>
+                <Button
+                  bg="#A6CE39"
+                  size="sm"
+                  /* variant="outline" */
+                  width={20}
+                  height={7}
+                  marginLeft={2}
+                  marginRight={2}
+                  onPress={() => individualBranchHandler(id)}
+                >
+                  View
+                </Button>
+                {userLogged.access === 'admin' ?
                   <Button
                     bg="#A6CE39"
                     size="sm"
@@ -181,6 +184,8 @@ export default function Branches() {
                   >
                     Edit
                   </Button>
+                  : null}
+                {userLogged.access === 'admin' ?
                   <Button
                     bg="#A6CE39"
                     size="sm"
@@ -192,26 +197,27 @@ export default function Branches() {
                   >
                     Delete
                   </Button>
-                  <AlertDialog isOpen={isOpen} onClose={onClose}>
-                    <AlertDialog.Content>
-                      <AlertDialog.CloseButton />
-                      <AlertDialog.Header>Are you sure?</AlertDialog.Header>
-                      <AlertDialog.Body>
-                        This will remove all data relating to the branch.
-                      </AlertDialog.Body>
-                      <AlertDialog.Footer>
-                        <Button
-                          colorScheme="danger"
-                          onPress={() => deleteHandler(id)}
-                        >
-                          Delete branch
-                        </Button>
-                      </AlertDialog.Footer>
-                    </AlertDialog.Content>
-                  </AlertDialog>
-                </View>
-              </Box>
-            ))
+                  : null}
+                <AlertDialog isOpen={isOpen} onClose={onClose}>
+                  <AlertDialog.Content>
+                    <AlertDialog.CloseButton />
+                    <AlertDialog.Header>Are you sure?</AlertDialog.Header>
+                    <AlertDialog.Body>
+                      This will remove all data relating to the branch.
+                    </AlertDialog.Body>
+                    <AlertDialog.Footer>
+                      <Button
+                        colorScheme="danger"
+                        onPress={() => deleteHandler(id)}
+                      >
+                        Delete branch
+                      </Button>
+                    </AlertDialog.Footer>
+                  </AlertDialog.Content>
+                </AlertDialog>
+              </View>
+            </Box>
+          ))
           : null}
       </View>
     </ScrollView>

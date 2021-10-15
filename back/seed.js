@@ -109,7 +109,7 @@ const Workspace = [
   },
   {
     floorId: "2",
-    name: "Office 1",
+    name: "Office ",
     image: "https://i.ytimg.com/vi/wwx-mju-gN0/maxresdefault.jpg",
   },
   {
@@ -134,12 +134,43 @@ const Workspace = [
     floorId: "6",
     name: "Office 1",
     image:
-      "https://resizer.iproimg.com/unsafe/880x/filters:format(webp)/https://assets.iproup.com/assets/jpg/2021/07/20529.jpg?7.1.0",
+      "https://i2.wp.com/www.ebizlatam.com/wp-content/uploads/2021/05/Globant-Bariloche.jpg?fit=787%2C524",
+  },
+  {
+    floorId: "1",
+    name: "Office 7",
+    image:
+      "https://images.squarespace-cdn.com/content/v1/598b56ce1e5b6cbabca9322f/1531930573013-LKHW0IC6Z2ELF5TEUB4H/globant5.jpg",
+  },
+  {
+    floorId: "1",
+    name: "Office 8",
+    image:
+      "https://www.icapglobal.com/arg/wp-content/uploads/2019/12/globant_portada.jpg",
+  },
+  {
+    floorId: "1",
+    name: "Office 9",
+    image:
+      "https://media.ambito.com/p/cfdb0224582f810a918572feb386ad17/adjuntos/239/imagenes/038/594/0038594437/globantjpg.jpg",
+  },
+  {
+    floorId: "1",
+    name: "Office 10",
+    image:
+      "https://phantom-expansion.unidadeditorial.es/1f32052d2c9668cc69bdcc7ed19fd480/crop/0x0/700x467/f/jpg/assets/multimedia/imagenes/2021/03/10/16153737474238.jpg",
+  },
+  {
+    floorId: "1",
+    name: "Office 11",
+    image:
+      "https://assets.iproup.com/assets/jpg/2020/07/11134.jpg?5.6.4",
   },
 ];
 
 const Users = [
   {
+    workspaceId: "1",
     firstName: "Ramiro",
     branchId: 1,
     lastName: "Arias",
@@ -150,9 +181,10 @@ const Users = [
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
     profilePhoto:
-      "https://upload.wikimedia.org/wikipedia/commons/b/be/Perfil-Berna.jpg",
+      faker.image.avatar(),
   },
   {
+    workspaceId: "2",
     firstName: "Caterina",
     lastName: "Jones",
     branchId: 2,
@@ -163,7 +195,7 @@ const Users = [
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
     profilePhoto:
-      "https://socialtools.me/wp-content/uploads/2016/04/foto-de-perfil.jpg",
+      faker.image.avatar(),
   },
   {
     workspaceId: "3",
@@ -177,7 +209,7 @@ const Users = [
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
     profilePhoto:
-      "https://cdn.domestika.org/c_limit,dpr_auto,f_auto,q_auto,w_820/v1576497340/content-items/003/518/329/_MG_5442-original.jpg?1576497340",
+      faker.image.avatar(),
   },
   {
     workspaceId: "4",
@@ -191,7 +223,7 @@ const Users = [
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
     profilePhoto:
-      "https://www.rutanmedellin.org/images/1pruebas/foto-persona.jpg",
+      faker.image.avatar(),
   },
   {
     workspaceId: "5",
@@ -205,7 +237,7 @@ const Users = [
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
     profilePhoto:
-      "https://dam.muyinteresante.com.mx/wp-content/uploads/2018/05/extranos-pueden-elegir-mejores-fotos-de-perfil.jpg",
+      faker.image.avatar(),
   },
   {
     workspaceId: "7",
@@ -219,14 +251,15 @@ const Users = [
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
     profilePhoto:
-      "https://www.dzoom.org.es/wp-content/uploads/2020/02/portada-foto-perfil-redes-sociales-consejos.jpg",
+      faker.image.avatar(),
   },
   {
+    workspaceId: "8",
     firstName: "Ignacio ",
     lastName: "Perez ",
-    email: "tessi222sehills@globant.com",
+    email: "iperez@globant.com",
     password: "1234",
-    branchId: 2,
+    branchId: 1,
     country: "Spain",
     city: "Madrid",
     phone: "+54 11 4109-1700",
@@ -234,29 +267,31 @@ const Users = [
     latitude: "40.45206561667841",
     longitude: "-3.6915253170713465",
     profilePhoto:
-      "https://www.rutanmedellin.org/images/1pruebas/foto-persona.jpg",
+      faker.image.avatar(),
   },
   {
+    workspaceId: "9",
     firstName: "Ignacio ",
     lastName: "Camar ",
-    email: "tessi22s2ehiwlls@globant.com",
+    email: "icamar@globant.com",
     password: "1234",
     country: "Spain",
-    branchId: 3,
+    branchId: 1,
     city: "Madrid",
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
     latitude: "40.45206561667841",
     longitude: "-3.6915253170713465",
     profilePhoto:
-      "http://www.labsaenzrenauld.com/wp-content/uploads/2020/10/Perfil-hombre-ba%CC%81sico_738242395.jpg",
+      faker.image.avatar(),
   },
   {
+    workspaceId: "10",
     firstName: "Ignacio ",
     lastName: "Lopez ",
-    email: "tessi222swehills@globant.com",
+    email: "ilopez@globant.com",
     password: "1234",
-    branchId: 4,
+    branchId: 1,
     country: "Spain",
     city: "Madrid",
     phone: "+54 11 4109-1700",
@@ -264,29 +299,31 @@ const Users = [
     latitude: "40.45206561667841",
     longitude: "-3.6915253170713465",
     profilePhoto:
-      "https://muhimu.es/wp-content/uploads/2017/04/FRENTE-NITIDA.jpg",
+      faker.image.avatar(),
   },
   {
+    workspaceId: "11",
     firstName: "Ignacio ",
     lastName: "Totor ",
-    email: "tessis222ehwills@globant.com",
+    email: "itotor@globant.com",
     password: "1234",
     country: "Spain",
-    branchId: 5,
+    branchId: 1,
     city: "Madrid",
     phone: "+54 11 4109-1700",
     job: "Front-End Developer",
     latitude: "40.45206561667841",
     longitude: "-3.6915253170713465",
     profilePhoto:
-      "https://i0.wp.com/thehappening.com/wp-content/uploads/2017/07/foto-perfil-5.jpg?resize=1024%2C694&ssl=1",
+      faker.image.avatar(),
   },
   {
+    workspaceId: "12",
     firstName: "Ignacio ",
     lastName: "Martinez ",
-    email: "tessi222ehillws@globant.com",
+    email: "imartinez@globant.com",
     password: "1234",
-    branchId: 2,
+    branchId: 1,
     country: "Spain",
     city: "Madrid",
     phone: "+54 11 4109-1700",
@@ -294,7 +331,7 @@ const Users = [
     latitude: "40.45206561667841",
     longitude: "-3.6915253170713465",
     profilePhoto:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5OPxZwwFmuCMsU9O5LspMidHDim3ZeQ56L0f_3keEjo7tkl2CUvNuUy_izpwZzM1Y94Q&usqp=CAU",
+      faker.image.avatar(),
   },
 ];
 
@@ -316,12 +353,12 @@ Branches.bulkCreate(Branchs).then(() => {
           phone: "+54 11 4109-1700",
           job: "Front-End Developer",
           profilePhoto:
-            "https://www.rutanmedellin.org/images/1pruebas/foto-persona.jpg",
+            faker.image.avatar(),
         }).then(() =>
           User_Profile.create({
             branchId: "1",
-            workspaceId: "6",
-            access: "admin",
+            workspaceId: "1",
+            access: "user",
             firstName: "Augusto",
             lastName: "Rosello",
             email: "admin2@globant.com",
@@ -331,7 +368,7 @@ Branches.bulkCreate(Branchs).then(() => {
             phone: "+54 11 4109-1700",
             job: "Front-End Developer",
             profilePhoto:
-              "https://eststatic.com/2015/conversions/virtudes-de-una-persona-large.jpg",
+              faker.image.avatar(),
           }).then(() => console.log("    ✓ Admin stage 1 seeded successfully!"))
         )
       );

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import expoLocalHost from "../localHost";
+import { useToast } from "native-base";
 
 export const allBranches = createAsyncThunk("ALL_BRANCHES", () => {
   return axios.get(`http://${expoLocalHost}/api/branches/`).then((r) => r.data);
@@ -19,13 +20,21 @@ export const byCountry = createAsyncThunk("BY_COUNTRY", (country) => {
 export const createBranch = createAsyncThunk("NEW_BRANCH", ({ branch }) => {
   return axios
     .post(`http://${expoLocalHost}/api/branches/newBranch`, branch)
-    .then((r) => r.data);
+    .then((r) => {
+      r.data
+    })
+    .catch((e) => {
+      console.log(e)
+    })
 });
 
 export const deleteBranch = createAsyncThunk("DEL_BRANCH", (id) => {
   return axios
     .delete(`http://${expoLocalHost}/api/branches/deleteBranch/${id}`)
-    .then((r) => console.log("BRANCH BORRADA", r.data));
+    .then((r) => {
+      return ('eliminado')
+    })
+    .catch(e => console.log(e))
 });
 
 export const singleBranch = createAsyncThunk("SINGLE_BRANCH", (id) => {
@@ -39,7 +48,8 @@ export const editedBranch = createAsyncThunk(
   ({ id, branch }) => {
     return axios
       .put(`http://${expoLocalHost}/api/branches/editBranch/${id}`, branch)
-      .then((r) => ("BRANCH EDITADA", r.data));
+      .then((r) => (r.data))
+      .catch((e) => console.log(e))
   }
 );
 

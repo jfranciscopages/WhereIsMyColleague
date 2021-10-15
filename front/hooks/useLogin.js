@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Box, useToast } from "native-base";
@@ -26,8 +27,32 @@ const useLogin = () => {
       .then((r) => {
         dispatch(setProfile(r.data));
         navigation.navigate(`DrawerNavigator`);
+        toast.show({
+          placement: "top",
+          render: () => {
+            return (
+              <Box bg="green.500" px="2" py="4" rounded="sm" mt={70}>
+                Hello!
+              </Box>
+            )
+          }
+        })
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toast.show({
+          placement: "top",
+          render: () => {
+            return (
+              <Box bg="red.500" px="2" py="4" rounded="sm" mt={70}>
+                Can't Log In! Try another email or password...
+              </Box>
+            )
+          }
+        })
+        console.log(err)
+        setLoading(false);
+        return
+      });
   };
 
   return {
