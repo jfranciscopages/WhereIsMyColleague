@@ -14,6 +14,7 @@ import {
   Button,
   WarningOutlineIcon,
   Center,
+  useToast,
 } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -27,6 +28,7 @@ export default function editBranch() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const singleBranch = useSelector((state) => state.branches.singleBranch);
+  const toast = useToast();
   const cityRef = useRef();
   const addressRef = useRef();
   const postalRef = useRef();
@@ -76,7 +78,6 @@ export default function editBranch() {
         setBranch({});
     }
   };
-
   const updateHandler = async () => {
     setLoading(true);
     // dispatch(editedBranch({ id, branch }));

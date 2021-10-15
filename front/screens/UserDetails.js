@@ -20,6 +20,8 @@ import { Linking, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
 import { userById } from "../store/usersReducer";
+// const faker = require("faker");
+
 
 function UserDetails() {
   const navigation = useNavigation();
@@ -27,6 +29,8 @@ function UserDetails() {
   const branch = useSelector((state) => state.branches.singleBranch);
   const [loading, setLoading] = useState(true);
   const user = useSelector((state) => state.users.userById);
+  const userLogged = useSelector(state => state.profile)
+
 
   useEffect(() => {
     dispatch(singleBranch(user.branchId));
@@ -76,7 +80,7 @@ function UserDetails() {
                 style={styles.avatarImg}
                 size="2xl"
                 source={{
-                  uri: "https://pbs.twimg.com/profile_images/1177303899243343872/B0sUJIH0_400x400.jpg",
+                  uri: `${user.profilePhoto}`,
                 }}
                 alt="image"
               />
@@ -171,11 +175,13 @@ function UserDetails() {
             >
               <HStack alignItems="center"></HStack>
             </HStack>
-          </Stack>
-          <Button bg="#A6CE39" onPress={() => editUser()}>
-            Edit
-          </Button>
-        </Box>
+          </Stack
+          {userLogged.access === 'admin' ?
+            <Button bg="#A6CE39" onPress={() => editUser()}>
+              Edit
+            </Button>
+            : null}
+        </Box >
       ) : (
         <Spinner color="danger.500" />
       )}
