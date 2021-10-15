@@ -12,7 +12,7 @@ import {
   Image,
   Center,
   Stack,
-  SafeAreaView,
+  Divider,
   ScrollView,
 } from "native-base";
 import axios from "axios";
@@ -76,7 +76,13 @@ function Branch() {
                     {`It’s located in ${branch.country}.`}
                   </Text>
                 </Stack>
-                <Text fontWeight="400">{`${branch.description}`}</Text>
+                <Text fontWeight="400">
+                  Today, we have more than 40 Globant offices around the globe,
+                  with more than 9000 Globers! You might say we are everywhere,
+                  and also that we share a taste for fun offices.{"\n"}You can
+                  find the location of your colleagues located in this branch
+                  below.
+                </Text>
                 <HStack
                   alignItems="center"
                   space={4}

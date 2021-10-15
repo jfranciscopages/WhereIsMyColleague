@@ -18,11 +18,6 @@ export default function Home() {
   const [limited, setLimited] = useState(true);
   const limitUserBy5 = usersByTitle.slice(0, 5);
 
-  const mapHandler = (id) => {
-    dispatch(userById(id));
-    navigation.navigate("map");
-  };
-
   useEffect(() => {
     dispatch(setSearchValue(""));
     setLimited(true);
@@ -45,22 +40,28 @@ export default function Home() {
         <View style={styles.search}>
           <SearchBar />
         </View>
-        <View style={styles.listUsers}>
+        <View>
           {inputValue.length > 2 && limited === true ? (
             usersByTitle.length > 0 && inputValue.length > 2 ? (
               limitUserBy5.map((user, i) => (
                 <View key={i}>
                   <ListItem
+                    style={{
+                      margin: 5,
+                      marginTop: 5,
+                      borderStyle: "solid",
+                      borderRadius: 10,
+                      borderWidth: 1,
+                      borderColor: "#A6CE39",
+                      overflow: "hidden",
+                    }}
                     onPress={() => {
-                      console.log(`USUARIO`, user);
                       dispatch(userById(user.id));
                       navigation.navigate("userinfo");
                     }}
                   >
-                    <ListItem.Title>{user.firstName}</ListItem.Title>
-                    <ListItem.Subtitle>{user.lastName}</ListItem.Subtitle>
+                    <ListItem.Title>{`${user.firstName} ${user.lastName}`}</ListItem.Title>
                   </ListItem>
-                  <Divider my="1" />
                 </View>
               ))
             ) : (

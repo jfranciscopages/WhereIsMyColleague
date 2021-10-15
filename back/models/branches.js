@@ -12,9 +12,6 @@ Branches.init(
     country: {
       type: Sequelize.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
     },
     description: {
       type: Sequelize.TEXT,
