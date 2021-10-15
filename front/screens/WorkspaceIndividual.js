@@ -37,7 +37,6 @@ function WorkSpaceInd() {
       setLoading(false);
     }, 1500);
   }, []);
-  
 
   return (
     <View>
@@ -99,59 +98,66 @@ function WorkSpaceInd() {
                 </Stack>
                 {WsUser !== null ? (
                   <Text fontWeight="400">
-                    {`${WsUser.firstName} ${WsUser.lastName} is currently working at this workspace as ${WsUser.job}.`}
+                    {`${WsUser.firstName} ${WsUser.lastName} is currently working in this workspace as ${WsUser.job}.`}
                   </Text>
                 ) : (
                   <Text fontWeight="400">
                     {`There is no employee associated to this workspace.`}
                   </Text>
                 )}
-
               </Stack>
               <Box>
                 <HStack>
-                  {WsUser !== null ? (<><Button
-                    overflow="hidden"
-                    onPress={() => {
-                      dispatch(userById(WsUser.id));
-                      navigation.navigate("userinfo");
-                    }}
-                    variant="outline"
-                    style={styles.goToBranchButton}
-                  >
-                    User Details
-                  </Button>
-                  <Button
-                    overflow="hidden"
-                    onPress={() => branchButtonHandlePress()}
-                    variant="outline"
-                    style={styles.goToBranchButton}
-                  >
-                    Edit Workspace
-                  </Button>
-                  <Button
-                    overflow="hidden"
-                    onPress={() => branchButtonHandlePress()}
-                    variant="outline"
-                    style={styles.goToBranchButton}
-                  >
-                    Create Workspace
-                  </Button></>) : (<><Button
-                    overflow="hidden"
-                    onPress={() => branchButtonHandlePress()}
-                    variant="outline"
-                    style={styles.goToBranchButton}
-                  >
-                    Edit Workspace
-                  </Button>
-                  <Button
-                    overflow="hidden"
-                    onPress={() => branchButtonHandlePress()}
-                    variant="outline"
-                    style={styles.goToBranchButton}
-                  >
-                    Create Workspace
-                  </Button></>)}
+                  {WsUser !== null ? (
+                    <>
+                      <Button
+                        overflow="hidden"
+                        onPress={() => {
+                          dispatch(userById(WsUser.id));
+                          navigation.navigate("userinfo");
+                        }}
+                        variant="outline"
+                        style={styles.goToBranchButton}
+                      >
+                        User Details
+                      </Button>
+                      <Button
+                        overflow="hidden"
+                       /*  onPress={() => branchButtonHandlePress()} */
+                        variant="outline"
+                        style={styles.goToBranchButton}
+                      >
+                        Edit Workspace
+                      </Button>
+                      <Button
+                        overflow="hidden"
+                        /* onPress={() => branchButtonHandlePress()} */
+                        variant="outline"
+                        style={styles.goToBranchButton}
+                      >
+                        Create Workspace
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                        overflow="hidden"
+                        /* onPress={() => branchButtonHandlePress()} */
+                        variant="outline"
+                        style={styles.goToBranchButton}
+                      >
+                        Edit Workspace
+                      </Button>
+                      <Button
+                        overflow="hidden"
+                        /* onPress={() => branchButtonHandlePress()} */
+                        variant="outline"
+                        style={styles.goToBranchButton}
+                      >
+                        Create Workspace
+                      </Button>
+                    </>
+                  )}
                 </HStack>
               </Box>
             </Box>
