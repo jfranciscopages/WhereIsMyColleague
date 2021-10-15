@@ -63,7 +63,7 @@ export const WorkSpaces = () => {
                   <Avatar
                     size="48px"
                     source={{
-                      uri: `${ws.user_profile}`,
+                      uri: `${ws.image}`,
                     }}
                   />
                   <VStack>
