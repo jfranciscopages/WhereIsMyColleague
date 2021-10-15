@@ -21,7 +21,7 @@ import * as ImagePicker from "expo-image-picker";
 export default function newBranch() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [imageAttached, setImageAttached] = useState(null);
+  const [imageAttached, setImageAttached] = useState("");
 
   const [branch, setBranch] = useState({
     country: "",
@@ -177,6 +177,7 @@ export default function newBranch() {
                 onChangeText={(value) =>
                   inputHandler("image", imageAttached ? imageAttached : value)
                 }
+                value={imageAttached}
                 InputRightElement={
                   <Button
                     ml={1}

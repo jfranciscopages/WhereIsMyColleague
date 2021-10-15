@@ -27,9 +27,7 @@ function SearchBar() {
           py="3"
           px="1"
           fontSize="14"
-          _web={{
-            _focus: { borderColor: "muted.300", style: { boxShadow: "none" } },
-          }}
+          _focus={{ boxShadow: "none", borderColor: "#A6CE39" }}
           onChangeText={(e) => handleChangeSearchBar(e)}
           InputLeftElement={
             <Icon
