@@ -14,7 +14,6 @@ import {
   Button,
   WarningOutlineIcon,
   Center,
-  useToast,
 } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -23,7 +22,6 @@ import { useNavigation } from "@react-navigation/native";
 import { byCountry } from "../../store/BranchReducer";
 
 export default function editBranch() {
-  const toast = useToast();
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const dispatch = useDispatch();

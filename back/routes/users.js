@@ -44,9 +44,11 @@ router.post("/create", (req, res, next) => {
     .then((data) => {
       if (data) res.sendStatus(404);
       else
-        User_Profile.create(user).then((data) => {
-          return res.status(200).send(data);
-        });
+        User_Profile.create(user)
+          .then((data) => {
+            return res.status(200).send(data);
+          })
+          .catch((e) => next(e));
     })
     .catch((e) => next(e));
 });

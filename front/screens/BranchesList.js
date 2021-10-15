@@ -32,8 +32,6 @@ export default function Branches() {
   const branches = useSelector((state) => state.branches.allBranches);
   const countrySelected = useSelector((state) => state.branches.byCountry);
   const [isOpen, setIsOpen] = useState(false);
-  const userLogged = useSelector(state => state.profile)
-
 
   const onClose = () => setIsOpen(false);
 
@@ -88,8 +86,8 @@ export default function Branches() {
           >
             {branches
               ? uniqueSet.map((country, i) => (
-                <Select.Item key={i} label={country} value={country} />
-              ))
+                  <Select.Item key={i} label={country} value={country} />
+                ))
               : null}
           </Select>
         </VStack>
@@ -152,35 +150,19 @@ export default function Branches() {
                     justifyContent="space-between"
                   ></HStack>
                 </Stack>
-                <Text fontWeight="400">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a
-                  type specimen book.
-                </Text>
-                <HStack
-                  alignItems="center"
-                  space={4}
-                  justifyContent="space-between"
-                >
-                  <HStack alignItems="center"></HStack>
-                </HStack>
-              </Stack>
-              <View style={styles.Btns}>
-                <Button
-                  bg="#A6CE39"
-                  size="sm"
-                  /* variant="outline" */
-                  width={20}
-                  height={7}
-                  marginLeft={2}
-                  marginRight={2}
-                  onPress={() => individualBranchHandler(id)}
-                >
-                  View
-                </Button>
-                {userLogged.access === 'admin' ?
+                <View style={styles.Btns}>
+                  <Button
+                    bg="#A6CE39"
+                    size="sm"
+                    /* variant="outline" */
+                    width={20}
+                    height={7}
+                    marginLeft={2}
+                    marginRight={2}
+                    onPress={() => individualBranchHandler(id)}
+                  >
+                    View
+                  </Button>
                   <Button
                     bg="#A6CE39"
                     size="sm"
@@ -190,8 +172,6 @@ export default function Branches() {
                   >
                     Edit
                   </Button>
-                  : null}
-                {userLogged.access === 'admin' ?
                   <Button
                     bg="#A6CE39"
                     size="sm"
@@ -203,27 +183,26 @@ export default function Branches() {
                   >
                     Delete
                   </Button>
-                  : null}
-                <AlertDialog isOpen={isOpen} onClose={onClose}>
-                  <AlertDialog.Content>
-                    <AlertDialog.CloseButton />
-                    <AlertDialog.Header>Are you sure?</AlertDialog.Header>
-                    <AlertDialog.Body>
-                      This will remove all data relating to the branch.
-                    </AlertDialog.Body>
-                    <AlertDialog.Footer>
-                      <Button
-                        colorScheme="danger"
-                        onPress={() => deleteHandler(id)}
-                      >
-                        Delete branch
-                      </Button>
-                    </AlertDialog.Footer>
-                  </AlertDialog.Content>
-                </AlertDialog>
-              </View>
-            </Box>
-          ))
+                  <AlertDialog isOpen={isOpen} onClose={onClose}>
+                    <AlertDialog.Content>
+                      <AlertDialog.CloseButton />
+                      <AlertDialog.Header>Are you sure?</AlertDialog.Header>
+                      <AlertDialog.Body>
+                        This will remove all data relating to the branch.
+                      </AlertDialog.Body>
+                      <AlertDialog.Footer>
+                        <Button
+                          colorScheme="danger"
+                          onPress={() => deleteHandler(id)}
+                        >
+                          Delete branch
+                        </Button>
+                      </AlertDialog.Footer>
+                    </AlertDialog.Content>
+                  </AlertDialog>
+                </View>
+              </Box>
+            ))
           : null}
       </View>
     </ScrollView>
