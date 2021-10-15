@@ -57,7 +57,7 @@ export const WorkSpaces = () => {
             console.log("ID=========>", WsId);
             return (
               <View>
-                <List.Item key={i} onPress={(id) => navigateWS(WsId)}>
+                <List.Item key={i} onPress={(id) => navigateWS(WsId)} key={i}>
                   <HStack space={3} justifyContent="space-between">
                     <Avatar
                       size="48px"

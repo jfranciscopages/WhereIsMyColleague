@@ -22,10 +22,11 @@ import * as ImagePicker from "expo-image-picker";
 export const EditFloor = () => {
   const imgRef = useRef();
   let floorsName;
-  const [picture, setPicture] = useState('')
+  const [picture, setPicture] = useState("");
   const [imageAttached, setImageAttached] = useState("");
+  const [workSpaceName, setWorkSpaceName] = useState("");
+
   let siteMap;
-  let workSpaceName;
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const selectedBranch = useSelector((state) => {
@@ -49,7 +50,6 @@ export const EditFloor = () => {
   //   setPicture(value)
   // };
 
-
   const floorId = useSelector((state) => state.selectedFloorId);
   console.log(selectedBranch);
 
@@ -58,9 +58,6 @@ export const EditFloor = () => {
   };
   const siteMapHandler = (value) => {
     siteMap = value;
-  };
-  const workSpaceNameHandler = (value) => {
-    workSpaceName = value;
   };
   const editFloorPress = () => {
     axios
@@ -77,14 +74,13 @@ export const EditFloor = () => {
       .catch((e) => console.log("falla en la edicion", e));
   };
 
-
   const createWorkSpaceHAndler = () => {
     axios
       .post(
         `http://${expoLocalHost}/api/workSpace/createWorkSpace/${floorId}`,
         {
           name: workSpaceName,
-          image: picture
+          image: picture,
         }
       )
       .then((data) => {
@@ -94,7 +90,7 @@ export const EditFloor = () => {
       })
       .catch((e) => console.log(e));
   };
-  workSpaceName
+  workSpaceName;
   return (
     <View style={styles.container}>
       {
@@ -154,7 +150,9 @@ export const EditFloor = () => {
               <Divider height={1} marginBottom={3} />
               <Divider />
             </Box>
-            <Button bg="#A6CE39" onPress={() => editFloorPress()}>Edit Floor</Button>
+            <Button bg="#A6CE39" onPress={() => editFloorPress()}>
+              Edit Floor
+            </Button>
             <Divider height={1} marginBottom={3} />
             <Box>
               <Text>Want to add a work space?</Text>
@@ -165,7 +163,7 @@ export const EditFloor = () => {
               </FormControl.Label>
               <Input
                 placeholder="Set work space name"
-                onChangeText={(value) => workSpaceNameHandler(value)}
+                onChangeText={(value) => setWorkSpaceName(value)}
               />
               <FormControl.ErrorMessage
                 leftIcon={<WarningOutlineIcon size="xs" />}
@@ -178,7 +176,7 @@ export const EditFloor = () => {
             </FormControl.Label>
             <Input
               ref={imgRef}
-              placeholder='Upload Workspace image'
+              placeholder="Upload Workspace image"
               returnKeyType="done"
               // onChangeText={(value) =>
               //   setPicture(value)
@@ -196,7 +194,7 @@ export const EditFloor = () => {
                 </Button>
               }
             />
-            <Button onPress={() => createWorkSpaceHAndler()}>
+            <Button bg="#A6CE39" onPress={() => createWorkSpaceHAndler()}>
               Create Workspace
             </Button>
           </Stack>
@@ -210,6 +208,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignContent: "center",
-    alignItems: "center"
-  }
-})
+    alignItems: "center",
+  },
+});

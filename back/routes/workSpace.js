@@ -5,15 +5,15 @@ const { Op } = require("sequelize");
 const { User_Profile } = require("../models");
 
 router.get("/findWorkspace/:id", function (req, res, next) {
-  const id = req.params.id
+  const id = req.params.id;
   Workspaces.findByPk(id, {
     include: {
-      model: User_Profile
-    }
+      model: User_Profile,
+    },
   })
     .then((workspace) => res.status(200).json(workspace))
     .catch((err) => next(err));
-})
+});
 router.post("/findWorkspace", function (req, res, next) {
   const { floorId, name } = req.body;
   console.log(name);
@@ -38,18 +38,16 @@ router.post("/findWorkspace", function (req, res, next) {
 /* router.put("/editWorkSpace", function (req, res, next) {
   Workspaces.update({}); */
 
-
 router.post("/createWorkSpace/:id", (req, res, next) => {
-  console.log(req.body)
-  // Workspaces.create({
-  //   floorId: req.params.id,
-  //   name: req.body.name,
-  //   image: req.body.image
-  // })
-  //   .then((data) => {
-  //     res.send(data);
-  //   })
-  //   .catch((e) => console.log(e));
+  Workspaces.create({
+    floorId: req.params.id,
+    name: req.body.name,
+    image: req.body.image,
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((e) => console.log(e));
 });
 
 router.put("/editWorkSpace/:id", (req, res, next) => {

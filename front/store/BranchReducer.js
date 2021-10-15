@@ -8,9 +8,19 @@ export const allBranches = createAsyncThunk("ALL_BRANCHES", () => {
   return axios.get(`http://${expoLocalHost}/api/branches/`).then((r) => r.data);
 });
 
-export const byCity = createAsyncThunk("BY_COUNTRY", (city) => {
+export const byCity = createAsyncThunk("BY_CITY", (city) => {
   return axios
     .get(`http://${expoLocalHost}/api/branches/byCity/${city}`)
+    .then((r) => {
+      console.log("********************");
+      console.log("DATA DEL BACK", r.data);
+      return r.data;
+    });
+});
+
+export const byCountry = createAsyncThunk("BY_COUNTRY", (country) => {
+  return axios
+    .get(`http://${expoLocalHost}/api/branches/byCountry/${country}`)
     .then((r) => {
       console.log("********************");
       console.log("DATA DEL BACK", r.data);
@@ -56,6 +66,7 @@ export const editedBranch = createAsyncThunk(
 const initState = {
   allBranches: [],
   byCity: [],
+  byCountry: [],
   singleBranch: {},
 };
 
@@ -65,6 +76,9 @@ export const BranchReducer = createReducer(initState, {
   },
   [byCity.fulfilled]: (state, action) => {
     state.byCity = action.payload;
+  },
+  [byCountry.fulfilled]: (state, action) => {
+    state.byCountry = action.payload;
   },
   [singleBranch.fulfilled]: (state, action) => {
     state.singleBranch = action.payload;

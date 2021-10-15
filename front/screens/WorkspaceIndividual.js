@@ -18,11 +18,10 @@ import {
   Button,
 } from "native-base";
 import { StyleSheet } from "react-native";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { singleBranch } from "../store/BranchReducer";
 import { useNavigation } from "@react-navigation/core";
 import { userById } from "../store/usersReducer";
+
 function WorkSpaceInd() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -30,10 +29,7 @@ function WorkSpaceInd() {
   const SingleWS = singleWorkspace.singleWorkspace;
   const WsUser = SingleWS.user_profile;
   const [loading, setLoading] = useState(false);
-  const pictureHandler = (value) => {
-    picture = value;
-  };
-  const userLogged = useSelector(state => state.profile)
+  const userLogged = useSelector((state) => state.profile);
 
   useEffect(() => {
     setLoading(true);
@@ -55,8 +51,8 @@ function WorkSpaceInd() {
               rounded="xl"
               overflow="hidden"
               shadow={1}
-              _light={{ backgroundColor: "gray.50" }}
-              _dark={{ backgroundColor: "gray.700" }}
+              _light={{ backgroundColor: "#fafafa" }}
+              _dark={{ backgroundColor: "#3f3f46" }}
             >
               <Box>
                 <AspectRatio ratio={16 / 9}>
@@ -125,9 +121,9 @@ function WorkSpaceInd() {
                       >
                         User Details
                       </Button>
-                      {userLogged.access === 'admin' ?
+                      {userLogged.access === "admin" ? (
                         <Button
-                          onPress={() => navigation.navigate('createWorkspace')}
+                          onPress={() => navigation.navigate("createWorkspace")}
                           overflow="hidden"
                           /* onPress={() => branchButtonHandlePress()} */
                           variant="outline"
@@ -135,11 +131,11 @@ function WorkSpaceInd() {
                         >
                           Create Workspace
                         </Button>
-                        : null}
+                      ) : null}
                     </>
                   ) : (
                     <>
-                      {userLogged.access === 'admin' ?
+                      {userLogged.access === "admin" ? (
                         <Button
                           overflow="hidden"
                           /* onPress={() => branchButtonHandlePress()} */
@@ -148,7 +144,7 @@ function WorkSpaceInd() {
                         >
                           Create Workspace
                         </Button>
-                        : null}
+                      ) : null}
                     </>
                   )}
                 </HStack>

@@ -112,18 +112,18 @@ export default function DrawerContent(props) {
                   }}
                 />
               ) : null}
-              {userLogged.access === "admin" ? (
-                <DrawerItem
-                  icon={({ color, size }) => (
-                    <Icon name="home-group" color={color} size={size} />
-                  )}
-                  pressColor="#A6CE39"
-                  label="Branch List"
-                  onPress={() => {
-                    props.navigation.navigate("BranchesList");
-                  }}
-                />
-              ) : null}
+
+              <DrawerItem
+                icon={({ color, size }) => (
+                  <Icon name="home-group" color={color} size={size} />
+                )}
+                pressColor="#A6CE39"
+                label="Branch List"
+                onPress={() => {
+                  props.navigation.navigate("BranchesList");
+                }}
+              />
+
               <DrawerItem
                 icon={({ color, size }) => (
                   <Icon name="map-marker-multiple" color={color} size={size} />
@@ -134,20 +134,22 @@ export default function DrawerContent(props) {
                   props.navigation.navigate("BranchsMap");
                 }}
               />
-              <DrawerItem
-                icon={({ color, size }) => (
-                  <Icon
-                    name="account-multiple-plus-outline"
-                    color={color}
-                    size={size}
-                  />
-                )}
-                pressColor="#A6CE39"
-                label="Create User"
-                onPress={() => {
-                  props.navigation.navigate("Create User");
-                }}
-              />
+              {userLogged.access === "admin" ? (
+                <DrawerItem
+                  icon={({ color, size }) => (
+                    <Icon
+                      name="account-multiple-plus-outline"
+                      color={color}
+                      size={size}
+                    />
+                  )}
+                  pressColor="#A6CE39"
+                  label="Create User"
+                  onPress={() => {
+                    props.navigation.navigate("Create User");
+                  }}
+                />
+              ) : null}
             </Drawer.Section>
           </View>
         ) : null}

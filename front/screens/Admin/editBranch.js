@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, /* Text ,*/ View } from "react-native";
 import expoLocalHost from "../../localHost";
 import axios from "axios";
@@ -14,12 +14,16 @@ import {
   Button,
   WarningOutlineIcon,
   Center,
+  imageAttached,
+  pickImage,
+  AddIcon,
 } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
 
 import { allBranches, editedBranch } from "../../store/BranchReducer";
 import { useNavigation } from "@react-navigation/native";
 import { byCountry } from "../../store/BranchReducer";
+import * as ImagePicker from "expo-image-picker";
 
 export default function editBranch() {
   const [loading, setLoading] = useState(false);
@@ -34,6 +38,30 @@ export default function editBranch() {
   const longRef = useRef();
   const phoneRef = useRef();
   const imgRef = useRef();
+  const [imageAttached, setImageAttached] = useState("");
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImageAttached(result.uri);
+      inputHandler("image", result.uri);
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted")
+        alert("Sorry, we need camera roll permissions to make this work!");
+    })();
+  }, []);
 
   const [branch, setBranch] = useState({
     country: "",
@@ -78,9 +106,6 @@ export default function editBranch() {
   };
   const updateHandler = async () => {
     setLoading(true);
-    // dispatch(editedBranch({ id, branch }));
-    // dispatch(byCountry(branch.country));
-    // setLoading(false);
     await axios
       .put(
         `http://${expoLocalHost}/api/branches/editBranch/${singleBranch.id}`,
@@ -97,8 +122,8 @@ export default function editBranch() {
             );
           },
         });
-
-        navigation.navigate(`BranchesList`);
+        navigation.navigate(`DrawerNavigator`);
+        setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
@@ -149,7 +174,7 @@ export default function editBranch() {
             </Text>
 
             <FormControl mb="2" isRequired>
-              <FormControl.Label justifyContent="center">
+              <FormControl.Label justifyContent="center" isRequired>
                 Country
               </FormControl.Label>
               <Input
@@ -170,7 +195,7 @@ export default function editBranch() {
             </FormControl>
 
             <FormControl mb="2">
-              <FormControl.Label justifyContent="center">
+              <FormControl.Label justifyContent="center" isRequired>
                 City
               </FormControl.Label>
               <Input
@@ -221,13 +246,12 @@ export default function editBranch() {
             </FormControl>
 
             <FormControl mb="2">
-              <FormControl.Label justifyContent="center">
+              <FormControl.Label justifyContent="center" isRequired>
                 Latitude
               </FormControl.Label>
               <Input
                 ref={latRef}
                 value={singleBranch.latitude}
-                //placeholder={singleBranch.latitude}
                 onChangeText={(value) => inputHandler("latitude", value)}
                 returnKeyType="next"
                 onSubmitEditing={() => {
@@ -238,13 +262,12 @@ export default function editBranch() {
             </FormControl>
 
             <FormControl mb="2">
-              <FormControl.Label justifyContent="center">
+              <FormControl.Label justifyContent="center" isRequired>
                 Longitude
               </FormControl.Label>
               <Input
                 ref={longRef}
                 value={singleBranch.longitude}
-                // placeholder={singleBranch.longitude}
                 onChangeText={(value) => inputHandler("longitude", value)}
                 returnKeyType="next"
                 onSubmitEditing={() => {
@@ -273,14 +296,24 @@ export default function editBranch() {
             </FormControl>
 
             <FormControl mb="2">
-              <FormControl.Label justifyContent="center">
+              <FormControl.Label justifyContent="center" isRequired>
                 Image
               </FormControl.Label>
               <Input
                 ref={imgRef}
-                value={singleBranch.image}
-                // placeholder={singleBranch.image}
-                onChangeText={(value) => inputHandler("image", value)}
+                value={imageAttached}
+                onChangeText={(value) => inputHandler("image", imageAttached)}
+                InputRightElement={
+                  <Button
+                    ml={1}
+                    backgroundColor="#999999"
+                    roundedLeft={0}
+                    roundedRight="md"
+                    onPress={pickImage}
+                  >
+                    <AddIcon size="6" />
+                  </Button>
+                }
               />
               <View
                 style={{
@@ -306,7 +339,6 @@ export default function editBranch() {
                   <Button
                     bg="#A6CE39"
                     size="sm"
-                    /* variant="outline" */
                     width={20}
                     height={7}
                     marginLeft={2}
@@ -319,7 +351,7 @@ export default function editBranch() {
                 <Button
                   bg="#A6CE39"
                   size="sm"
-                  /* variant="outline" */ width={20}
+                  width={20}
                   height={7}
                   onPress={() => CreateFloorHandlePress()}
                 >
@@ -328,7 +360,6 @@ export default function editBranch() {
                 <Button
                   bg="#A6CE39"
                   size="sm"
-                  /* variant="outline" */
                   width={20}
                   height={7}
                   marginLeft={2}
