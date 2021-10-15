@@ -43,7 +43,7 @@ export default function Main() {
             <Stack.Screen name="CreateFloor" component={CreateFloor} />
             <Stack.Screen name="Workspaces" component={WorkSpaces} />
             <Stack.Screen
-              name="workSpaceIndividual"
+              name="Personal workspace"
               component={WorkspaceIndividual}
             />
             <Stack.Screen name="Edit Floor" component={EditFloor} />
