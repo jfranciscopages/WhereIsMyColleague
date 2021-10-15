@@ -109,7 +109,7 @@ export default function DrawerContent(props) {
                   label="Create Branch"
                   onPress={() => {
                     props.navigation.navigate("createBranch");
-                  }}         
+                  }}
                 />
               ) : null}
               {userLogged.access === "admin" ? (
