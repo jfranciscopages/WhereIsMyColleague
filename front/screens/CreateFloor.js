@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { StyleSheet, /* Text ,*/ View } from "react-native";
 import {
-    FormControl,
-    Input,
-    Stack,
-    Text,
-    ScrollView,
-    Divider,
-    Box,
-    Button,
-    WarningOutlineIcon
+  FormControl,
+  Input,
+  Stack,
+  Text,
+  ScrollView,
+  Divider,
+  Box,
+  Button,
+  WarningOutlineIcon,
 } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,39 +17,39 @@ import axios from "axios";
 import expoLocalHost from "../localHost";
 import { singleBranch } from "../store/BranchReducer";
 
-
 export const CreateFloor = () => {
-    let floorsName;
-    let siteMap;
-    const navigation = useNavigation();
-    const dispatch = useDispatch()
-    const selectedBranch = useSelector((state) => {
-        console.log(state)
-        return state.branches.singleBranch
-    });
-    console.log(selectedBranch)
+  let floorsName;
+  let siteMap;
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const selectedBranch = useSelector((state) => {
+    console.log(state);
+    return state.branches.singleBranch;
+  });
+  console.log(selectedBranch);
 
-    const FloorsNameHandler = (value) => {
-        floorsName = value
-    }
-    const siteMapHandler = (value) => {
-        siteMap = value
-    }
-    const createFloorPress = () => {
-        axios.post(`http://${expoLocalHost}/api/floors/createFloor`, {
-            branchId: selectedBranch.id,
-            name: floorsName,
-            image: siteMap
-        })
-            .then((data) => {
-                dispatch(singleBranch(selectedBranch.id))
-                console.log('Creaste este floor', data.data)
-                navigation.navigate('Branch')
-            })
-            .catch((e) => console.log(e))
-    }
+  const siteMapRef = useRef();
 
-
+  const FloorsNameHandler = (value) => {
+    floorsName = value;
+  };
+  const siteMapHandler = (value) => {
+    siteMap = value;
+  };
+  const createFloorPress = () => {
+    axios
+      .post(`http://${expoLocalHost}/api/floors/createFloor`, {
+        branchId: selectedBranch.id,
+        name: floorsName,
+        image: siteMap,
+      })
+      .then((data) => {
+        dispatch(singleBranch(selectedBranch.id));
+        console.log("Creaste este floor", data.data);
+        navigation.navigate("Branch");
+      })
+      .catch((e) => console.log(e));
+  };
     return (
         <View style={styles.screen}>
             {<ScrollView

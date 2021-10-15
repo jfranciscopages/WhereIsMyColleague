@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, /* Text ,*/ View } from "react-native";
 import {
   FormControl,
@@ -27,43 +27,49 @@ export const EditFloor = () => {
     console.log(state);
     return state.branches.singleBranch;
   });
+  const siteMapRef = useRef();
 
   const floorId = useSelector((state) => state.selectedFloorId);
   console.log(selectedBranch);
 
-    const floorsNameHandler = (value) => {
-        floorsName = value
-    }
-    const siteMapHandler = (value) => {
-        siteMap = value
-    }
-    const workSpaceNameHandler = (value) => {
-        workSpaceName = value
-    }
-    const editFloorPress = () => {
-        axios.put(`http://${expoLocalHost}/api/floors/editFloor/${floorId}`, {
-            name: floorsName,
-            image: siteMap
-        })
-            .then((data) => {
-                dispatch(singleBranch(selectedBranch.id))
-                navigation.navigate('Branch')
-                console.log('ESTO ESTOY BUSCANDO AHORA', data.data)
-                return data.data
-            })
-            .catch((e) => console.log('falla en la edicion', e))
-    }
-    const createWorkSpaceHAndler = () => {
-        axios.post(`http://${expoLocalHost}/api/workSpace/createWorkSpace/${floorId}`, {
-            name: workSpaceName
-        })
-            .then((data) => {
-                dispatch(singleBranch(selectedBranch.id))
-                navigation.navigate('Branch')
-                return data.data
-            })
-            .catch((e) => console.log(e))
-    }
+  const floorsNameHandler = (value) => {
+    floorsName = value;
+  };
+  const siteMapHandler = (value) => {
+    siteMap = value;
+  };
+  const workSpaceNameHandler = (value) => {
+    workSpaceName = value;
+  };
+  const editFloorPress = () => {
+    axios
+      .put(`http://${expoLocalHost}/api/floors/editFloor/${floorId}`, {
+        name: floorsName,
+        image: siteMap,
+      })
+      .then((data) => {
+        dispatch(singleBranch(selectedBranch.id));
+        navigation.navigate("Branch");
+        console.log("ESTO ESTOY BUSCANDO AHORA", data.data);
+        return data.data;
+      })
+      .catch((e) => console.log("falla en la edicion", e));
+  };
+  const createWorkSpaceHAndler = () => {
+    axios
+      .post(
+        `http://${expoLocalHost}/api/workSpace/createWorkSpace/${floorId}`,
+        {
+          name: workSpaceName,
+        }
+      )
+      .then((data) => {
+        dispatch(singleBranch(selectedBranch.id));
+        navigation.navigate("Branch");
+        return data.data;
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
     <View>
@@ -97,6 +103,11 @@ export const EditFloor = () => {
                 <Input
                   placeholder="Set Floor Name"
                   onChangeText={(value) => floorsNameHandler(value)}
+                  returnKeyType="next"
+                  onSubmitEditing={() => {
+                    siteMapRef.current.focus();
+                  }}
+                  blurOnSubmit={false}
                 />
                 <FormControl.ErrorMessage
                   leftIcon={<WarningOutlineIcon size="xs" />}
@@ -106,40 +117,44 @@ export const EditFloor = () => {
               </FormControl>
               <Divider height={1} marginBottom={3} />
 
-
-                        <FormControl mb="2">
-                            <FormControl.Label justifyContent='center'>Site Map</FormControl.Label>
-                            <Input
-                                placeholder='Upload site map'
-                                onChangeText={(value) => siteMapHandler(value)}
-                            />
-                        </FormControl>
-                        <Divider height={1} marginBottom={3} />
-                        <Divider />
-                    </Box>
-                    <Button onPress={() => editFloorPress()}>
-                        Edit Floor
-                    </Button>
-                    <Divider height={1} marginBottom={3} />
-                    <Box>
-                        <Text>Wanna' add a work space?</Text>
-                    </Box>
-                    <FormControl mb="2" isRequired>
-                        <FormControl.Label justifyContent='center'>Work space name</FormControl.Label>
-                        <Input
-                            placeholder='Set work space name'
-                            onChangeText={(value) => workSpaceNameHandler(value)}
-                        />
-                        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-                            Required
-                        </FormControl.ErrorMessage>
-                    </FormControl>
-                    <Button onPress={() => createWorkSpaceHAndler()}>
-                        Create Workspace
-                    </Button>
-                </Stack>
-            </ScrollView>}
-        </View>
-    )
-}
-
+              <FormControl mb="2">
+                <FormControl.Label justifyContent="center">
+                  Site Map
+                </FormControl.Label>
+                <Input
+                  ref={siteMapRef}
+                  placeholder="Upload site map"
+                  onChangeText={(value) => siteMapHandler(value)}
+                />
+              </FormControl>
+              <Divider height={1} marginBottom={3} />
+              <Divider />
+            </Box>
+            <Button onPress={() => editFloorPress()}>Edit Floor</Button>
+            <Divider height={1} marginBottom={3} />
+            <Box>
+              <Text>Wanna' add a work space?</Text>
+            </Box>
+            <FormControl mb="2" isRequired>
+              <FormControl.Label justifyContent="center">
+                Work space name
+              </FormControl.Label>
+              <Input
+                placeholder="Set work space name"
+                onChangeText={(value) => workSpaceNameHandler(value)}
+              />
+              <FormControl.ErrorMessage
+                leftIcon={<WarningOutlineIcon size="xs" />}
+              >
+                Required
+              </FormControl.ErrorMessage>
+            </FormControl>
+            <Button onPress={() => createWorkSpaceHAndler()}>
+              Create Workspace
+            </Button>
+          </Stack>
+        </ScrollView>
+      }
+    </View>
+  );
+};

@@ -97,54 +97,60 @@ export default function Branches() {
       <View style={styles.cityCard}>
         {countrySelected
           ? countrySelected.map(({ id, city, address, image, CP, phone }) => (
-            <Box
-              key={id}
-              rounded="lg"
-              overflow="hidden"
-              borderColor="coolGray.200"
-              borderWidth="1"
-              _dark={{
-                borderColor: "coolGray.600",
-                backgroundColor: "gray.700",
-              }}
-              _web={{
-                shadow: 2,
-                borderWidth: 0,
-              }}
-              _light={{
-                backgroundColor: "gray.50",
-              }}
-            >
-              <Box>
-                <AspectRatio ratio={16 / 9}>
-                  <Image
-                    source={{
-                      uri: image,
-                    }}
-                    alt="image"
-                  />
-                </AspectRatio>
-              </Box>
-              <Stack p="4" space={3}>
-                <Stack space={2}>
-                  <Heading size="md" ml="-1">
-                    {city}
-                  </Heading>
-                  <Text
-                    fontSize="xs"
-                    _light={{
-                      color: "#39B54A",
-                    }}
-                    _dark={{
-                      color: "#39B54A",
-                    }}
-                    fontWeight="500"
-                    ml="-0.5"
-                    mt="-1"
-                  >
-                    {`${address}, ${CP}`}
-                    {/* {floor.length > 0 ? floor : null} */}
-                  </Text>
+              <Box
+                key={id}
+                rounded="lg"
+                overflow="hidden"
+                borderColor="coolGray.200"
+                borderWidth="1"
+                _dark={{
+                  borderColor: "coolGray.600",
+                  backgroundColor: "gray.700",
+                }}
+                _web={{
+                  shadow: 2,
+                  borderWidth: 0,
+                }}
+                _light={{
+                  backgroundColor: "gray.50",
+                }}
+              >
+                <Box>
+                  <AspectRatio ratio={16 / 9}>
+                    <Image
+                      source={{
+                        uri: image,
+                      }}
+                      alt="image"
+                    />
+                  </AspectRatio>
+                </Box>
+                <Stack p="4">
+                  <Stack>
+                    <Heading size="md" ml="-1">
+                      {city}
+                    </Heading>
+                    <Text
+                      fontSize="xs"
+                      _light={{
+                        color: "#39B54A",
+                      }}
+                      _dark={{
+                        color: "#39B54A",
+                      }}
+                      fontWeight="500"
+                      ml="-0.5"
+                      mt="-1"
+                    >
+                      {`${address}, ${CP}`}
+                      {/* {floor.length > 0 ? floor : null} */}
+                    </Text>
+                  </Stack>
+                  <HStack
+                    alignItems="center"
+                    space={4}
+                    justifyContent="space-between"
+                  ></HStack>
                 </Stack>
                 <Text fontWeight="400">
                   Lorem Ipsum is simply dummy text of the printing and
@@ -236,6 +242,6 @@ const styles = StyleSheet.create({
   Btns: {
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 10,
+    marginBottom: 20,
   },
 });

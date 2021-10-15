@@ -75,7 +75,6 @@ function UserDetails() {
           _dark={{ backgroundColor: "gray.700" }}
         >
           <Box>
-
             <View style={styles.avatar}>
               <Avatar
                 style={styles.avatarImg}
@@ -86,8 +85,6 @@ function UserDetails() {
                 alt="image"
               />
             </View>
-
-
           </Box>
           <Stack p="4" space={3}>
             <Stack space={2}>
@@ -96,8 +93,8 @@ function UserDetails() {
               </Heading>
               <Text
                 fontSize="md"
-                _light={{ color: "violet.500" }}
-                _dark={{ color: "violet.300" }}
+                _light={{ color: "#39B54A" }}
+                _dark={{ color: "#39B54A" }}
                 fontWeight="500"
                 ml="-0.5"
                 mt="-1"
@@ -114,8 +111,6 @@ function UserDetails() {
                 <Text
                   style={styles.text}
                   fontSize="md"
-                  _light={{ color: "rgb(65, 64, 102)" }}
-                  _dark={{ color: "violet.300" }}
                   fontWeight="500"
                   ml="-0.5"
                   mt="-1"
@@ -136,8 +131,6 @@ function UserDetails() {
                 <Text
                   style={styles.phoneText}
                   fontSize="md"
-                  _light={{ color: "rgb(65, 64, 102)" }}
-                  _dark={{ color: "violet.300" }}
                   fontWeight="500"
                   ml="-0.5"
                   mt="-1"
@@ -158,8 +151,6 @@ function UserDetails() {
                 <Text
                   style={styles.mailText}
                   fontSize="md"
-                  _light={{ color: "rgb(65, 64, 102)" }}
-                  _dark={{ color: "violet.300" }}
                   fontWeight="500"
                   ml="-0.5"
                   mt="-1"
@@ -184,7 +175,7 @@ function UserDetails() {
             >
               <HStack alignItems="center"></HStack>
             </HStack>
-          </Stack>
+          </Stack
           {userLogged.access === 'admin' ?
             <Button bg="#A6CE39" onPress={() => editUser()}>
               Edit
@@ -193,9 +184,8 @@ function UserDetails() {
         </Box >
       ) : (
         <Spinner color="danger.500" />
-      )
-      }
-    </View >
+      )}
+    </View>
   );
 }
 
@@ -236,9 +226,9 @@ const styles = StyleSheet.create({
     marginLeft: -20,
   },
   mailButton: {
-    height: 60,
+    height: 40,
     paddingBottom: 30,
-    width: 200,
+    width: 250,
   },
   placeIcon: {
     marginTop: 5,

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import React from "react";
+
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Box, useToast } from "native-base";
@@ -31,7 +31,7 @@ const useLogin = () => {
           placement: "top",
           render: () => {
             return (
-              <Box bg="green.500" px="2" py="4" rounded="sm" mt={70}>
+              <Box bg="emerald.500" px="2" py="4" rounded="sm" mt={70}>
                 Hello!
               </Box>
             )
@@ -39,19 +39,21 @@ const useLogin = () => {
         })
       })
       .catch((err) => {
+        success(`logged user ${r.data}`);
+      })
+      .catch((err) => {
+        setLoading(false);
         toast.show({
           placement: "top",
           render: () => {
             return (
-              <Box bg="red.500" px="2" py="4" rounded="sm" mt={70}>
-                Can't Log In! Try another email or password...
+              <Box bg="red.500" px="2" py="4" rounded="sm" mt={50}>
+                You have entered an invalid username or password.
               </Box>
-            )
-          }
-        })
-        console.log(err)
-        setLoading(false);
-        return
+            );
+          },
+        });
+        console.log(err);
       });
   };
 

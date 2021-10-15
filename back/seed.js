@@ -10,8 +10,8 @@ const Branchs = [
     phone: "+54 11 4109-1700",
     image:
       "https://www.globant.com/sites/default/files/styles/crop_center_335_224/public/2019-03/1%20%282%29.jpg?itok=Z8MucHhy",
-    latitude: "-34.54100703942528",
-    longitude: "-58.47279831729628",
+    latitude: "-34.61083857975935",
+    longitude: "-58.366013518182754",
   },
   {
     country: "Argentina",
@@ -21,8 +21,8 @@ const Branchs = [
     phone: "+54 11 4109-1700",
     image:
       "https://www.globant.com/sites/default/files/styles/crop_center_335_224/public/2018-09/Mar%20del%20Plata.jpg?itok=5k7_CvH5",
-    latitude: "-38.01078500106845",
-    longitude: "-57.535618144180674",
+    latitude: "-38.010905875787834",
+    longitude: "-57.53568198627993",
   },
   {
     country: "United Kingdom",
@@ -32,8 +32,8 @@ const Branchs = [
     phone: "+44 20 7979-1885",
     image:
       "https://www.globant.com/sites/default/files/styles/crop_center_335_224/public/2018-09/london1.jpg?itok=sVZb3IFJ",
-    latitude: "51.520321956776826",
-    longitude: "-0.10822237518363834",
+    latitude: "51.51955294772027",
+    longitude: "-0.1817608012679515",
   },
   {
     country: "Romania",
@@ -43,8 +43,8 @@ const Branchs = [
     phone: "+40-264-418-686",
     image:
       "https://www.globant.com/sites/default/files/styles/crop_center_335_224/public/2019-03/istockphoto-658396342-612x612.jpg?itok=OYNhIC4X",
-    latitude: "48.13159598006025",
-    longitude: "23.5873611",
+    latitude: "46.764848721891745",
+    longitude: "23.58737128474054",
   },
   {
     country: "Spain",
@@ -55,8 +55,8 @@ const Branchs = [
     phone: "+34 917 874 700",
     image:
       "https://www.globant.com/sites/default/files/styles/crop_center_335_224/public/2018-09/Madrid.jpg?itok=ahObQH3m",
-    latitude: "40.45206561667841",
-    longitude: "-3.6915253170713465",
+    latitude: "40.45173576983989",
+    longitude: "-3.691386472730997",
   },
 ];
 
@@ -104,8 +104,7 @@ const Workspace = [
   {
     floorId: "1",
     name: "Office 2",
-    image:
-      "https://www.globant.com/sites/default/files/styles/news_details/public/2021-07/Globant%20Web%20%286%29.JPG?itok=K27TD3rv",
+    image: "https://www.globant.com/sites/default/files/styles/news_details/public/2021-07/Globant%20Web%20%286%29.JPG?itok=K27TD3rv",
   },
   {
     floorId: "2",
@@ -115,8 +114,7 @@ const Workspace = [
   {
     floorId: "3",
     name: "Office 1",
-    image:
-      "https://fotos.perfil.com/2021/03/03/trim/1280/720/globant-20210303-1136704.jpg",
+    image: "https://fotos.perfil.com/2021/03/03/trim/1280/720/globant-20210303-1136704.jpg",
   },
   {
     floorId: "4",
@@ -127,8 +125,7 @@ const Workspace = [
   {
     floorId: "5",
     name: "Office 1",
-    image:
-      "https://www.infotechnology.com/files/image/98/98166/60eda138aad9e.jpg",
+    image: "https://www.infotechnology.com/files/image/98/98166/60eda138aad9e.jpg",
   },
   {
     floorId: "6",
@@ -375,3 +372,4 @@ Branches.bulkCreate(Branchs).then(() => {
     });
   });
 });
+
