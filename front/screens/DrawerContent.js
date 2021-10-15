@@ -19,8 +19,7 @@ export default function DrawerContent(props) {
   const paperTheme = useTheme();
   const user = useSelector((state) => state.profile);
   const [imageAttached, setImageAttached] = useState(null);
-  const userLogged = useSelector(state => state.profile)
-
+  const userLogged = useSelector((state) => state.profile);
 
   const handleLogout = () => {
     dispatch(setProfile({}));
@@ -28,12 +27,12 @@ export default function DrawerContent(props) {
       placement: "top",
       render: () => {
         return (
-          <Box bg="green.500" px="2" py="4" rounded="sm" mt={70}>
-            Good bye!
+          <Box bg="emerald.500" px="2" py="4" rounded="sm" mt={70}>
+            Goodbye!
           </Box>
-        )
-      }
-    })
+        );
+      },
+    });
   };
 
   const handleUser = async (id) => {
@@ -121,7 +120,7 @@ export default function DrawerContent(props) {
                 props.navigation.navigate("SearchColleague");
               }}
             />
-            {userLogged.access === 'admin' ?
+            {userLogged.access === "admin" ? (
               <DrawerItem
                 icon={({ color, size }) => (
                   <Icon name="folder-plus" color={color} size={size} />
@@ -132,8 +131,8 @@ export default function DrawerContent(props) {
                   props.navigation.navigate("createBranch");
                 }}
               />
-              : null}
-            {userLogged.access === 'admin' ?
+            ) : null}
+            {userLogged.access === "admin" ? (
               <DrawerItem
                 icon={({ color, size }) => (
                   <Icon name="home-group" color={color} size={size} />
@@ -144,7 +143,7 @@ export default function DrawerContent(props) {
                   props.navigation.navigate("BranchesList");
                 }}
               />
-              : null}
+            ) : null}
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon name="map-marker-multiple" color={color} size={size} />
@@ -223,7 +222,7 @@ export default function DrawerContent(props) {
           label="Sign Out"
           pressColor="#A6CE39"
           onPress={() => handleLogout()}
-        /* onPress={() => {}} */
+          /* onPress={() => {}} */
         />
       </Drawer.Section>
     </View>

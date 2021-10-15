@@ -83,7 +83,7 @@ export default function newBranch() {
           placement: "top",
           render: () => {
             return (
-              <Box bg="green.500" px="2" py="4" rounded="sm" mt={70}>
+              <Box bg="emerald.500" px="2" py="4" rounded="sm" mt={70}>
                 Branch edited succesfully!
               </Box>
             );
